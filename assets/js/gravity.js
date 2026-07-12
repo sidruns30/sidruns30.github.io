@@ -41,6 +41,7 @@
   var RS = 2 * MASS;              // px, Schwarzschild radius (event horizon)
   var MAX_LETTERS = 2200;         // performance cap on very content-heavy pages
   var VELOCITY_SCALE = 1 / 3;     // requested 3x reduction in initial kick
+  var TIME_SCALE = 3000;          // converts real seconds -> geometrized proper-time units
   var SPIN_UP_DURATION = 2000;    // ms, eased ramp-in so the handoff isn't abrupt
   var RESET_DURATION = 3200;      // ms, smooth-return tween length
   var HEIGHT_RECHECK_MS = 2000;   // throttle for expensive document-height reads
@@ -290,6 +291,7 @@
     // full speed the instant the button is pressed.
     var spinT = Math.min((now - startTimestamp) / SPIN_UP_DURATION, 1);
     var ramp = easeInOutCubic(spinT);
+    var dtau = dt * TIME_SCALE * ramp; // geometrized proper-time step
 
     for (var i = 0; i < letters.length; i++) {
       var L = letters[i];
@@ -309,9 +311,9 @@
       // d^2r/dtau^2 = ell^2/r^3 - rs/(2r^2) - (3/2) rs ell^2 / r^4
       var rAccel = ell2 / r3 - RS / (2 * r2) - (1.5 * RS * ell2) / r4;
 
-      L.vr += rAccel * dt * ramp;
-      L.r += L.vr * dt * ramp;
-      L.phi += (L.ell / r2) * dt * ramp;
+      L.vr += rAccel * dtau;
+      L.r += L.vr * dtau;
+      L.phi += (L.ell / r2) * dtau;
 
       if (L.r <= RS) {
         captureLetter(L);
