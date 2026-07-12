@@ -27,7 +27,7 @@
   }
 
   @include breakpoint($large) {
-    @include span(2 of 12 last);
+    @include span(3 of 12 last);
     opacity: 1;
     border-left: 1px solid #000;
     padding-left: 2.5em;
