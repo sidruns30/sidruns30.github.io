@@ -11,7 +11,7 @@
 
 (function () {
   var DISPLAY_MS = 5000;
-  var NUM_SLOTS = 4;
+  var NUM_SLOTS = 2;
 
   function shuffle(arr) {
     for (var i = arr.length - 1; i > 0; i--) {
