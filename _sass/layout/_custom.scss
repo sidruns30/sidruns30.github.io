@@ -21,6 +21,22 @@ body.gravity-mode *:not(.masthead, .masthead *, #gravity-controls, #gravity-cont
   background-color: #333;
 }
 
+/* Section headings: black in light mode, white in dark mode (so
+   "Siddhant Solanki", "About Me", "Research Interests", etc. stay
+   readable regardless of theme). */
+h1, h2, h3, h4, h5, h6 {
+  color: #000;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #fff;
+}
+
 /* Plot carousel: several stacked plot+caption slots in the reserved
    right-hand column (only shown at $large and up, where that column
    actually exists in the grid). No forced background on the image itself

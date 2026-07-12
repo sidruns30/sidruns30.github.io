@@ -10,7 +10,7 @@
    ========================================================================== */
 
 (function () {
-  var DISPLAY_MS = 5000;
+  var DISPLAY_MS = 15000;
   var NUM_SLOTS = 2;
 
   function shuffle(arr) {
