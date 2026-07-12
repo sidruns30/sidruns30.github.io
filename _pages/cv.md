@@ -69,14 +69,20 @@ Leadership and Outreach
 
 External Conferences and Presentations
 ======
-* SHIELD Plasma Summer School, Boston (2026) — School attendee
-* PLASMA Science Summer School, Porquerolles (2024) — School attendee
-* Les Houches Summer School in Plasma Physics (2023) — School attendee and poster presenter
-* International High Performance Computing Summer School (2023) — School attendee and poster presenter
-* Princeton Plasma Theory: Group Talk — Invited Speaker
-* Institute of Advanced Study: Coffee Talk — Invited Speaker
-* Center for Computational Astrophysics: SPA Talk — Invited Speaker
-* Kavli Institute of Theoretical Physics — Invited Grad Student
+
+**Invited Talks**
+
+* Kavli Institute for Theoretical Physics (KITP), UC Santa Barbara (2025) — Invited Graduate Student Visitor
+* Princeton Plasma Theory Group, Princeton University (2024) — Invited Seminar Speaker
+* Center for Computational Astrophysics, Flatiron Institute (2024) — SPA Seminar Speaker
+* Institute for Advanced Study (IAS), Princeton (2024) — Coffee Talk Speaker
+
+**Summer Schools & Workshops**
+
+* SHIELD Plasma Summer School, Boston (2026) — Participant
+* PLASMA Science Summer School, Porquerolles, France (2024) — Participant
+* Les Houches Summer School in Plasma Physics, France (2023) — Participant & Poster Presenter
+* International High Performance Computing Summer School (2023) — Participant & Poster Presenter
 
 In the News
 ======
