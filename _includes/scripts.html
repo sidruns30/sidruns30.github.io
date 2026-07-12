@@ -1,18 +1,22 @@
+{% if page.url == '/' or page.url == '/index.html' %}
 <script>
   window.PLOT_MANIFEST = [
     {% for f in site.static_files %}
       {% if f.path contains '/assets/plots/' %}
         {% case f.extname %}
           {% when '.jpg' or '.jpeg' or '.png' or '.gif' or '.webp' %}
-"{{ f.path | relative_url }}",
-          {% endcase %}
+            {% assign plot_key = f.path | remove_first: '/assets/plots/' %}
+            {% assign plot_caption = site.data.plot_captions[plot_key] | default: '' %}
+{"src": "{{ f.path | relative_url }}", "caption": {{ plot_caption | jsonify }}},
+        {% endcase %}
       {% endif %}
     {% endfor %}
   ];
 </script>
+<script src="{{ base_path }}/assets/js/plot-carousel.js"></script>
+{% endif %}
 <script type="module" src="{{ base_path }}/assets/js/main.min.js"></script>
 <script src="{{ base_path }}/assets/js/gravity.js"></script>
-<script src="{{ base_path }}/assets/js/plot-carousel.js"></script>
 
 {% include analytics.html %}
 

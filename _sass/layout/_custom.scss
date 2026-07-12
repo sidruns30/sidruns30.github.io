@@ -22,7 +22,10 @@ body.gravity-mode *:not(.masthead, .masthead *, #gravity-controls, #gravity-cont
 }
 
 /* Plot carousel: sits in the reserved right-hand column (only shown at
-   $large and up, where that column actually exists in the grid). */
+   $large and up, where that column actually exists in the grid). No
+   forced background — a plot with a light background should just show
+   on the page's normal background, not get inverted-looking against a
+   black box. */
 #plot-carousel {
   display: none;
 }
@@ -34,11 +37,15 @@ body.gravity-mode *:not(.masthead, .masthead *, #gravity-controls, #gravity-cont
     top: calc(#{$masthead-height} + 2em);
     right: 1.5em;
     width: 260px;
-    height: 260px;
-    overflow: hidden;
     z-index: 50;
-    background: #000;
   }
+}
+
+.plot-carousel__frame {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
 }
 
 .plot-carousel__img {
@@ -54,6 +61,14 @@ body.gravity-mode *:not(.masthead, .masthead *, #gravity-controls, #gravity-cont
 
 .plot-carousel__img.active {
   opacity: 1;
+}
+
+.plot-carousel__caption {
+  margin-top: 0.6em;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--global-text-color);
+  text-align: left;
 }
 .black-box {
   border: 1px solid #000;

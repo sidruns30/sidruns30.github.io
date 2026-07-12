@@ -1,0 +1,40 @@
+# Captions for the home-page plot carousel (assets/plots/).
+# Edit these directly on GitHub — click the pencil icon on this file — to
+# change what shows below each plot. Keys must match the image's path
+# relative to assets/plots/ (e.g. "hp_librae/plot_1.jpg").
+
+entity_pic/plot_1.jpg: "3D visualization of turbulent electromagnetic fields in a plasma simulation box."
+entity_pic/plot_2.jpg: "Vorticity structure in simulated plasma turbulence, showing swirling eddies."
+entity_pic/plot_3.jpg: "A time-frequency diagnostic from the Entity particle-in-cell code."
+
+fms_wave_decay/plot_1.jpg: "3D snapshot of electromagnetic field magnitude in a magnetar-magnetosphere simulation."
+fms_wave_decay/plot_2.jpg: "Fast magnetosonic wave structure partway through its nonlinear decay."
+fms_wave_decay/plot_3.jpg: "Later-time snapshot showing the wave pattern after further decay."
+
+frb_damping/plot_1.jpg: "Simulated electric and magnetic field waveforms as an FRB-like pulse propagates through a magnetar's magnetosphere."
+frb_damping/plot_2.jpg: "Comparison of wave amplitudes at the start and end of the simulation."
+frb_damping/plot_3.jpg: "Power spectrum of the wave in frequency and transverse wavenumber."
+
+heartbeat_binaries/plot_1.jpg: "Posterior parameter distributions from an MCMC fit to the heartbeat binary TIC 150284425."
+heartbeat_binaries/plot_2.jpg: "Model heartbeat light curves and orbit geometries across a range of orbital inclinations."
+heartbeat_binaries/plot_3.jpg: "Posterior parameter distributions from an MCMC fit to the heartbeat binary TIC 378275980."
+
+hp_librae/plot_1.jpg: "Lomb-Scargle periodogram of the K2 lightcurve, highlighting the precession and superhump frequencies."
+hp_librae/plot_2.jpg: "K2 lightcurve of HP Librae before and after subtracting the superhump signal."
+hp_librae/plot_3.jpg: "Sampling gaps in the K2 photometry as a function of time."
+
+m87_flares/plot_1.jpg: "Simulated plasma temperature and magnetization near M87* during a reconnection-powered flare."
+m87_flares/plot_2.jpg: "Radial velocity and Lorentz factor in the flaring region around M87* at three different times."
+m87_flares/plot_3.jpg: "Simulated photon count maps around M87* for different emission model parameters."
+
+sgra_inner_2pc/plot_1.jpg: "Time evolution of the midplane gas density in the circumnuclear disk around Sagittarius A*."
+sgra_inner_2pc/plot_2.jpg: "Circumnuclear disk density evolution including both the black hole and nuclear star cluster potential."
+sgra_inner_2pc/plot_3.jpg: "Circumnuclear disk density evolution using only the black hole potential, for comparison."
+
+sgra_stellar_wind/plot_1.jpg: "Simulated gas density and temperature near Sagittarius A* under different gravitational potential assumptions."
+sgra_stellar_wind/plot_2.jpg: "Accretion rate onto Sagittarius A* over time for three different model setups."
+sgra_stellar_wind/plot_3.jpg: "Radial profiles of density, velocity, and mass flux in the simulated accretion flow."
+
+tess_cnn/plot_1.jpg: "TESS lightcurve of a short-period variable, shown in time and folded on its orbital phase."
+tess_cnn/plot_2.jpg: "Another example TESS lightcurve of a short-period variable, in time and phase-folded."
+tess_cnn/plot_3.jpg: "Stellar radius vs. orbital period for the catalog of short-period variables, colored by temperature."
