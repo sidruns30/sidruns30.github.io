@@ -8,11 +8,13 @@ redirect_from:
 ---
 
 <div class="black-box" markdown="1">
+About Me
+======
 I am a graduate student in the Physics Department at Stanford University. My research focuses on plasma astrophysics and high-energy astrophysics, using theory and large-scale kinetic and fluid simulations to understand extreme environments around compact objects.
 </div>
 
 <div class="black-box" markdown="1">
-Research interests
+Research Interests
 ======
 My work spans a range of problems in high-energy plasma astrophysics, including:
 - Magnetic reconnection and particle acceleration near black holes and neutron stars

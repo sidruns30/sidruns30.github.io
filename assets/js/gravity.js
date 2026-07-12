@@ -1,25 +1,29 @@
 /* ==========================================================================
    GRAVITY MODE
-   "Let there be gravity" — turns every character of visible page text into
-   a small orbiting body around a central black hole.
+   "Turn on Gravity" — turns every character of visible page text into a
+   small orbiting body around a central black hole.
 
-   Physics: each letter is a test mass in the reduced two-body problem,
-   i.e. orbiting a fixed central point of mass M (valid when M >> m, the
-   standard limit used for planetary orbits). Given a small tangential
-   velocity kick, each letter traces a bound Kepler ellipse:
+   Physics: each letter is a test particle following a Schwarzschild
+   geodesic in the equatorial plane (i.e. genuine general-relativistic
+   orbital dynamics, not the Newtonian Kepler approximation). Using
+   geometrized units (G = c = 1) with black hole mass M and Schwarzschild
+   radius rs = 2M, the equatorial geodesic equations for a massive test
+   particle reduce to:
 
-       a = -GM * r_vec / (|r|^2 + eps^2)^1.5      (softened inverse-square law)
-       v += a * dt
-       r += v * dt
+       ell = r^2 dphi/dtau                (conserved specific angular momentum)
+       V_eff(r) = (1 - rs/r)(1 + ell^2/r^2)
+       d^2r/dtau^2 = -(1/2) V_eff'(r)
+                   = ell^2/r^3 - rs/(2 r^2) - (3/2) rs ell^2 / r^4
+       dphi/dtau = ell / r^2
+
+   A letter that crosses r = rs has crossed the event horizon and is
+   captured — this is the actual physical definition of the horizon, not
+   an arbitrary cutoff.
 
    Everything is simulated and rendered in PAGE (document) coordinates, not
    viewport coordinates, so scrolling is a pure Galilean shift of the
    viewing frame: the orbits themselves don't change, you're just looking
    at a different window onto the same fixed simulation.
-
-   Letters that wander inside the black hole's capture radius are removed
-   permanently — both the floating clone AND the source character in the
-   real underlying text — so they don't reappear on "Return to Normal".
    ========================================================================== */
 
 (function () {
@@ -33,13 +37,13 @@
   var startTimestamp = null;
   var center = null; // page coordinates, fixed for the lifetime of the sim
 
-  var GM = 2200000;             // gravitational parameter, tuned for a pleasant orbit period
-  var SOFTENING = 18;            // px, prevents singularity at the center
-  var CAPTURE_RADIUS = 16;       // px, letters this close to center are consumed
-  var MAX_LETTERS = 4000;        // performance cap on very content-heavy pages
-  var VELOCITY_SCALE = 1 / 3;    // requested 3x reduction in initial kick
-  var SPIN_UP_DURATION = 2000;   // ms, eased ramp-in so the handoff isn't abrupt
-  var RESET_DURATION = 3200;     // ms, smooth-return tween length
+  var MASS = 20;                  // px, geometrized "mass" of the black hole
+  var RS = 2 * MASS;              // px, Schwarzschild radius (event horizon)
+  var MAX_LETTERS = 2200;         // performance cap on very content-heavy pages
+  var VELOCITY_SCALE = 1 / 3;     // requested 3x reduction in initial kick
+  var SPIN_UP_DURATION = 2000;    // ms, eased ramp-in so the handoff isn't abrupt
+  var RESET_DURATION = 3200;      // ms, smooth-return tween length
+  var HEIGHT_RECHECK_MS = 2000;   // throttle for expensive document-height reads
 
   function makeButtons() {
     var wrap = document.createElement('div');
@@ -110,12 +114,14 @@
     el.style.pointerEvents = 'none';
     el.style.zIndex = '99999';
     el.style.overflow = 'visible';
+    // Isolate this subtree from the rest of the page's layout/paint work.
+    el.style.contain = 'layout style paint';
     document.body.appendChild(el);
     return el;
   }
 
   function makeBlackHole(cx, cy) {
-    var radius = 22;
+    var radius = RS;
     var hole = document.createElement('div');
     hole.id = 'gravity-blackhole';
     hole.style.position = 'absolute';
@@ -212,29 +218,25 @@
         var y0 = rect.top + rect.height / 2 + window.scrollY;
         var rx = x0 - center.x;
         var ry = y0 - center.y;
-        var r = Math.sqrt(rx * rx + ry * ry) || 1;
+        var r0 = Math.sqrt(rx * rx + ry * ry) || 1;
+        var phi0 = Math.atan2(ry, rx);
 
-        // Circular-orbit speed at this radius, perturbed for elliptical
-        // variety, then scaled down per the requested 3x reduction.
-        var vCirc = Math.sqrt(GM / r);
-        var speedFactor = 0.65 + Math.random() * 0.7;
-        var speed = vCirc * speedFactor * VELOCITY_SCALE;
-
-        // Tangential direction (perpendicular to radius vector), consistent
-        // rotation sense for a coherent swirl.
-        var tx = -ry / r;
-        var ty = rx / r;
+        // Tangential kick, scaled down per the requested 3x reduction.
+        // ell is the conserved specific angular momentum of the geodesic.
+        var speedFactor = 0.5 + Math.random() * 0.9;
+        var vTangential = Math.sqrt(MASS / r0) * speedFactor * VELOCITY_SCALE;
+        var ell = r0 * vTangential;
 
         letters.push({
           el: span,
-          x: x0,
+          r: r0,
+          phi: phi0,
+          vr: 0,        // dr/dtau, purely tangential kick to start
+          ell: ell,
+          x: x0,        // cached Cartesian (for rendering + reset target)
           y: y0,
-          vx: tx * speed,
-          vy: ty * speed,
           origX: x0,
           origY: y0,
-          node: node,
-          charIndex: c,
           captured: false
         });
 
@@ -248,6 +250,7 @@
     active = true;
     lastTime = null;
     startTimestamp = null;
+    lastHeightCheck = 0;
     rafId = requestAnimationFrame(step);
 
     // Trigger the fade-in transitions on the next frame (needs a tick for
@@ -262,18 +265,19 @@
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
-  // Freeze a captured letter at the black hole center instead of deleting
-  // it. It stays in the `letters` array (excluded from further physics)
-  // so "Return to Normal" can tween it back out to its original spot.
+  // Freeze a captured letter at the event horizon instead of deleting it.
+  // It stays in the `letters` array (excluded from further physics) so
+  // "Return to Normal" can tween it back out to its original spot. The
+  // transition is cleared first so it snaps invisible immediately rather
+  // than fading out over the old spin-up duration.
   function captureLetter(L) {
     L.captured = true;
-    L.vx = 0;
-    L.vy = 0;
-    L.x = center.x;
-    L.y = center.y;
-    L.el.style.transform = 'translate(' + L.x + 'px, ' + L.y + 'px) translate(-50%, -50%)';
-    L.el.style.opacity = '0'; // visually swallowed
+    L.vr = 0;
+    L.el.style.transition = 'none';
+    L.el.style.opacity = '0';
   }
+
+  var lastHeightCheck = 0;
 
   function step(now) {
     if (!active) return;
@@ -282,41 +286,51 @@
     var dt = Math.min((now - lastTime) / 1000, 0.05); // seconds, clamp for tab-switch jumps
     lastTime = now;
 
-    // Ease the velocity in over SPIN_UP_DURATION so motion doesn't snap to
+    // Ease the coupling in over SPIN_UP_DURATION so motion doesn't snap to
     // full speed the instant the button is pressed.
     var spinT = Math.min((now - startTimestamp) / SPIN_UP_DURATION, 1);
-    var velocityRamp = easeInOutCubic(spinT);
+    var ramp = easeInOutCubic(spinT);
 
-    for (var i = letters.length - 1; i >= 0; i--) {
+    for (var i = 0; i < letters.length; i++) {
       var L = letters[i];
       if (L.captured) continue;
 
-      var rx = L.x - center.x;
-      var ry = L.y - center.y;
-      var r = Math.sqrt(rx * rx + ry * ry);
-
-      if (r < CAPTURE_RADIUS) {
+      if (L.r <= RS) {
         captureLetter(L);
         continue;
       }
 
-      var r2 = rx * rx + ry * ry + SOFTENING * SOFTENING;
-      var r3 = Math.pow(r2, 1.5);
-      var ax = -GM * rx / r3;
-      var ay = -GM * ry / r3;
+      var r = L.r;
+      var r2 = r * r;
+      var r3 = r2 * r;
+      var r4 = r3 * r;
+      var ell2 = L.ell * L.ell;
 
-      L.vx += ax * dt * velocityRamp;
-      L.vy += ay * dt * velocityRamp;
-      L.x += L.vx * dt * velocityRamp;
-      L.y += L.vy * dt * velocityRamp;
+      // d^2r/dtau^2 = ell^2/r^3 - rs/(2r^2) - (3/2) rs ell^2 / r^4
+      var rAccel = ell2 / r3 - RS / (2 * r2) - (1.5 * RS * ell2) / r4;
 
+      L.vr += rAccel * dt * ramp;
+      L.r += L.vr * dt * ramp;
+      L.phi += (L.ell / r2) * dt * ramp;
+
+      if (L.r <= RS) {
+        captureLetter(L);
+        continue;
+      }
+
+      L.x = center.x + L.r * Math.cos(L.phi);
+      L.y = center.y + L.r * Math.sin(L.phi);
       L.el.style.transform = 'translate(' + L.x + 'px, ' + L.y + 'px) translate(-50%, -50%)';
     }
 
-    // Keep the overlay tall enough if the document has grown (e.g. dynamic content).
-    var h = pageHeight();
-    if (overlay && parseFloat(overlay.style.height) < h) {
-      overlay.style.height = h + 'px';
+    // Throttle the (layout-forcing) document-height check heavily instead
+    // of doing it every frame — this was the main source of jank.
+    if (now - lastHeightCheck > HEIGHT_RECHECK_MS) {
+      lastHeightCheck = now;
+      var h = pageHeight();
+      if (overlay && parseFloat(overlay.style.height) < h) {
+        overlay.style.height = h + 'px';
+      }
     }
 
     rafId = requestAnimationFrame(step);

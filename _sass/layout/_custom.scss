@@ -21,19 +21,10 @@ body.gravity-mode *:not(.masthead, .masthead *, #gravity-controls, #gravity-cont
   background-color: #333;
 }
 
-/* Black feature-box styling, e.g. for About Me / Research Interests */
+/* Outlined feature-box styling, e.g. for About Me / Research Interests.
+   Outline only — no fill, text stays the normal black heading/body color. */
 .black-box {
-  background-color: #000;
-  color: #fff;
+  border: 1px solid #000;
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
-
-  h1, h2, h3, h4, h5, h6 {
-    color: #fff;
-  }
-
-  a {
-    color: #fff;
-    text-decoration: underline;
-  }
 }
