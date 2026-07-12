@@ -41,7 +41,7 @@
   var RS = 2 * MASS;              // px, Schwarzschild radius (event horizon)
   var MAX_LETTERS = 2200;         // performance cap on very content-heavy pages
   var VELOCITY_SCALE = 1 / 3;     // requested 3x reduction in initial kick
-  var TIME_SCALE = 60000;         // converts real seconds -> geometrized proper-time units
+  var TIME_SCALE = 15000;         // converts real seconds -> geometrized proper-time units
   var SPIN_UP_DURATION = 2000;    // ms, eased ramp-in so the handoff isn't abrupt
   var RESET_DURATION = 3200;      // ms, smooth-return tween length
   var HEIGHT_RECHECK_MS = 2000;   // throttle for expensive document-height reads
