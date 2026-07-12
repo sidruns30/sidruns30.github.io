@@ -37,11 +37,13 @@
   var startTimestamp = null;
   var center = null; // page coordinates, fixed for the lifetime of the sim
 
-  var MASS = 20;                  // px, geometrized "mass" of the black hole
+  var MASS = 12;                  // px, geometrized "mass" of the black hole
   var RS = 2 * MASS;              // px, Schwarzschild radius (event horizon)
   var MAX_LETTERS = 2200;         // performance cap on very content-heavy pages
-  var VELOCITY_SCALE = 1 / 3;     // requested 3x reduction in initial kick
-  var TIME_SCALE = 2150;          // converts real seconds -> geometrized proper-time units
+  var VELOCITY_SCALE = 1.2;       // tangential kick strength — tuned so most
+                                   // letters land above the ISCO and actually
+                                   // orbit rather than plunging straight in
+  var TIME_SCALE = 860;           // converts real seconds -> geometrized proper-time units
   var SPIN_UP_DURATION = 2000;    // ms, eased ramp-in so the handoff isn't abrupt
   var RESET_DURATION = 3200;      // ms, smooth-return tween length
   var HEIGHT_RECHECK_MS = 2000;   // throttle for expensive document-height reads
