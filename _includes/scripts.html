@@ -1,5 +1,18 @@
+<script>
+  window.PLOT_MANIFEST = [
+    {% for f in site.static_files %}
+      {% if f.path contains '/assets/plots/' %}
+        {% case f.extname %}
+          {% when '.jpg' or '.jpeg' or '.png' or '.gif' or '.webp' %}
+"{{ f.path | relative_url }}",
+          {% endcase %}
+      {% endif %}
+    {% endfor %}
+  ];
+</script>
 <script type="module" src="{{ base_path }}/assets/js/main.min.js"></script>
 <script src="{{ base_path }}/assets/js/gravity.js"></script>
+<script src="{{ base_path }}/assets/js/plot-carousel.js"></script>
 
 {% include analytics.html %}
 
