@@ -1,7 +1,7 @@
 /* ==========================================================================
    GRAVITY MODE
-   "Let there be gravity" — turns every character of visible text on the
-   page into a small orbiting body around a central black hole.
+   "Let there be gravity" — turns every character of visible page text into
+   a small orbiting body around a central black hole.
 
    Physics: each letter is a test mass in the reduced two-body problem,
    i.e. orbiting a fixed central point of mass M (valid when M >> m, the
@@ -16,6 +16,10 @@
    viewport coordinates, so scrolling is a pure Galilean shift of the
    viewing frame: the orbits themselves don't change, you're just looking
    at a different window onto the same fixed simulation.
+
+   Letters that wander inside the black hole's capture radius are removed
+   permanently — both the floating clone AND the source character in the
+   real underlying text — so they don't reappear on "Return to Normal".
    ========================================================================== */
 
 (function () {
@@ -26,13 +30,16 @@
   var blackHole = null;
   var letters = [];
   var lastTime = null;
+  var startTimestamp = null;
   var center = null; // page coordinates, fixed for the lifetime of the sim
 
-  var GM = 2200000;        // gravitational parameter, tuned for a pleasant orbit period
-  var SOFTENING = 18;       // px, prevents singularity at the center
-  var MAX_LETTERS = 700;    // performance cap on content-heavy pages
-  var VELOCITY_SCALE = 1 / 3; // requested 3x reduction in initial kick
-  var RESET_DURATION = 1200; // ms, smooth-return tween length
+  var GM = 2200000;             // gravitational parameter, tuned for a pleasant orbit period
+  var SOFTENING = 18;            // px, prevents singularity at the center
+  var CAPTURE_RADIUS = 16;       // px, letters this close to center are consumed
+  var MAX_LETTERS = 4000;        // performance cap on very content-heavy pages
+  var VELOCITY_SCALE = 1 / 3;    // requested 3x reduction in initial kick
+  var SPIN_UP_DURATION = 2000;   // ms, eased ramp-in so the handoff isn't abrupt
+  var RESET_DURATION = 3200;     // ms, smooth-return tween length
 
   function makeButtons() {
     var wrap = document.createElement('div');
@@ -56,7 +63,7 @@
     var reset = document.createElement('button');
     reset.id = 'gravity-reset-button';
     reset.type = 'button';
-    reset.textContent = 'reset';
+    reset.textContent = 'Return to Normal';
     styleButton(reset, '#7a1f1f');
     reset.style.display = 'none';
     reset.addEventListener('click', smoothReset);
@@ -120,10 +127,14 @@
     hole.style.background = 'radial-gradient(circle at 35% 35%, #333 0%, #000 60%, #000 100%)';
     hole.style.boxShadow = '0 0 25px 8px rgba(0,0,0,0.55)';
     hole.style.pointerEvents = 'none';
+    hole.style.opacity = '0';
+    hole.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease';
     return hole;
   }
 
-  // Walk the DOM and collect text nodes we're allowed to touch.
+  // Walk the DOM and collect text nodes we're allowed to touch. The
+  // masthead (site title + nav links) is deliberately excluded so
+  // navigation always stays intact and readable.
   function collectTextNodes() {
     var results = [];
     var skipTags = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEXTAREA: 1, IFRAME: 1 };
@@ -133,6 +144,7 @@
         var parent = node.parentElement;
         if (!parent) return NodeFilter.FILTER_REJECT;
         if (parent.closest('#gravity-overlay') || parent.closest('#gravity-controls')) return NodeFilter.FILTER_REJECT;
+        if (parent.closest('.masthead')) return NodeFilter.FILTER_REJECT;
         if (skipTags[parent.tagName]) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
@@ -191,7 +203,8 @@
         span.style.fontWeight = parentStyle.fontWeight;
         span.style.fontStyle = parentStyle.fontStyle;
         span.style.setProperty('color', parentStyle.color, 'important');
-        span.style.setProperty('opacity', parentStyle.opacity, 'important');
+        span.style.opacity = '0';
+        span.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease';
         overlay.appendChild(span);
 
         // Convert viewport-relative rect to page (document) coordinates.
@@ -219,7 +232,9 @@
           vx: tx * speed,
           vy: ty * speed,
           origX: x0,
-          origY: y0
+          origY: y0,
+          node: node,
+          charIndex: c
         });
 
         count++;
@@ -231,28 +246,66 @@
     document.getElementById('gravity-reset-button').style.display = 'inline-block';
     active = true;
     lastTime = null;
+    startTimestamp = null;
     rafId = requestAnimationFrame(step);
+
+    // Trigger the fade-in transitions on the next frame (needs a tick for
+    // the browser to register the initial opacity:0 before animating).
+    requestAnimationFrame(function () {
+      for (var i = 0; i < letters.length; i++) letters[i].el.style.opacity = '1';
+      if (blackHole) blackHole.style.opacity = '1';
+    });
+  }
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  // Permanently remove a letter: delete its floating clone AND blank the
+  // source character in the real text node (replaced with a space so
+  // sibling character indices in the same node stay valid).
+  function consumeLetter(index) {
+    var L = letters[index];
+    if (L.el && L.el.parentNode) L.el.parentNode.removeChild(L.el);
+    try {
+      var val = L.node.nodeValue;
+      L.node.nodeValue = val.substring(0, L.charIndex) + ' ' + val.substring(L.charIndex + 1);
+    } catch (e) { /* text node may have been altered elsewhere; ignore */ }
+    letters.splice(index, 1);
   }
 
   function step(now) {
     if (!active) return;
     if (lastTime === null) lastTime = now;
+    if (startTimestamp === null) startTimestamp = now;
     var dt = Math.min((now - lastTime) / 1000, 0.05); // seconds, clamp for tab-switch jumps
     lastTime = now;
 
-    for (var i = 0; i < letters.length; i++) {
+    // Ease the velocity in over SPIN_UP_DURATION so motion doesn't snap to
+    // full speed the instant the button is pressed.
+    var spinT = Math.min((now - startTimestamp) / SPIN_UP_DURATION, 1);
+    var velocityRamp = easeInOutCubic(spinT);
+
+    for (var i = letters.length - 1; i >= 0; i--) {
       var L = letters[i];
       var rx = L.x - center.x;
       var ry = L.y - center.y;
+      var r = Math.sqrt(rx * rx + ry * ry);
+
+      if (r < CAPTURE_RADIUS) {
+        consumeLetter(i);
+        continue;
+      }
+
       var r2 = rx * rx + ry * ry + SOFTENING * SOFTENING;
       var r3 = Math.pow(r2, 1.5);
       var ax = -GM * rx / r3;
       var ay = -GM * ry / r3;
 
-      L.vx += ax * dt;
-      L.vy += ay * dt;
-      L.x += L.vx * dt;
-      L.y += L.vy * dt;
+      L.vx += ax * dt * velocityRamp;
+      L.vy += ay * dt * velocityRamp;
+      L.x += L.vx * dt * velocityRamp;
+      L.y += L.vy * dt * velocityRamp;
 
       L.el.style.transform = 'translate(' + L.x + 'px, ' + L.y + 'px) translate(-50%, -50%)';
     }
@@ -266,21 +319,17 @@
     rafId = requestAnimationFrame(step);
   }
 
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  }
-
   function smoothReset() {
     if (!active || resetting) return;
     resetting = true;
     if (rafId) cancelAnimationFrame(rafId);
 
     var startPositions = letters.map(function (L) { return { x: L.x, y: L.y }; });
-    var startTime = null;
+    var tweenStart = null;
 
     function tween(now) {
-      if (startTime === null) startTime = now;
-      var t = Math.min((now - startTime) / RESET_DURATION, 1);
+      if (tweenStart === null) tweenStart = now;
+      var t = Math.min((now - tweenStart) / RESET_DURATION, 1);
       var eased = easeInOutCubic(t);
 
       for (var i = 0; i < letters.length; i++) {
@@ -293,6 +342,7 @@
       }
 
       if (blackHole) {
+        blackHole.style.transition = 'none';
         blackHole.style.opacity = String(1 - eased);
       }
 

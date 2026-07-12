@@ -9,6 +9,7 @@
 body.gravity-mode * {
   color: transparent !important;
   text-shadow: none !important;
+  transition: color 2s ease, text-shadow 2s ease;
 }
 
 #gravity-button {
