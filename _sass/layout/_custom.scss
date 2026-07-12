@@ -4,9 +4,9 @@
 
 /* Gravity mode: hide all in-flow text (color only, so layout/images/photos
    are unaffected) while the floating letter clones in #gravity-overlay
-   orbit the page center. Overlay letters set their own color inline with
-   !important, which wins over this rule regardless of specificity/order. */
-body.gravity-mode * {
+   orbit the page center. The masthead (site title + nav) and the control
+   buttons are explicitly excluded so navigation stays usable throughout. */
+body.gravity-mode *:not(.masthead, .masthead *, #gravity-controls, #gravity-controls *) {
   color: transparent !important;
   text-shadow: none !important;
   transition: color 2s ease, text-shadow 2s ease;
@@ -19,4 +19,21 @@ body.gravity-mode * {
 #gravity-button:hover {
   transform: scale(1.05);
   background-color: #333;
+}
+
+/* Black feature-box styling, e.g. for About Me / Research Interests */
+.black-box {
+  background-color: #000;
+  color: #fff;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
 }

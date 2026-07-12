@@ -54,7 +54,7 @@
     var btn = document.createElement('button');
     btn.id = 'gravity-button';
     btn.type = 'button';
-    btn.textContent = 'let there be gravity';
+    btn.textContent = 'Turn on Gravity';
     styleButton(btn, '#111');
     btn.addEventListener('click', function () {
       if (!active) startGravity();
@@ -234,7 +234,8 @@
           origX: x0,
           origY: y0,
           node: node,
-          charIndex: c
+          charIndex: c,
+          captured: false
         });
 
         count++;
@@ -261,17 +262,17 @@
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
-  // Permanently remove a letter: delete its floating clone AND blank the
-  // source character in the real text node (replaced with a space so
-  // sibling character indices in the same node stay valid).
-  function consumeLetter(index) {
-    var L = letters[index];
-    if (L.el && L.el.parentNode) L.el.parentNode.removeChild(L.el);
-    try {
-      var val = L.node.nodeValue;
-      L.node.nodeValue = val.substring(0, L.charIndex) + ' ' + val.substring(L.charIndex + 1);
-    } catch (e) { /* text node may have been altered elsewhere; ignore */ }
-    letters.splice(index, 1);
+  // Freeze a captured letter at the black hole center instead of deleting
+  // it. It stays in the `letters` array (excluded from further physics)
+  // so "Return to Normal" can tween it back out to its original spot.
+  function captureLetter(L) {
+    L.captured = true;
+    L.vx = 0;
+    L.vy = 0;
+    L.x = center.x;
+    L.y = center.y;
+    L.el.style.transform = 'translate(' + L.x + 'px, ' + L.y + 'px) translate(-50%, -50%)';
+    L.el.style.opacity = '0'; // visually swallowed
   }
 
   function step(now) {
@@ -288,12 +289,14 @@
 
     for (var i = letters.length - 1; i >= 0; i--) {
       var L = letters[i];
+      if (L.captured) continue;
+
       var rx = L.x - center.x;
       var ry = L.y - center.y;
       var r = Math.sqrt(rx * rx + ry * ry);
 
       if (r < CAPTURE_RADIUS) {
-        consumeLetter(i);
+        captureLetter(L);
         continue;
       }
 
@@ -339,6 +342,10 @@
         var nx = sx + (L.origX - sx) * eased;
         var ny = sy + (L.origY - sy) * eased;
         L.el.style.transform = 'translate(' + nx + 'px, ' + ny + 'px) translate(-50%, -50%)';
+        if (L.captured) {
+          L.el.style.transition = 'opacity ' + RESET_DURATION + 'ms ease';
+          L.el.style.opacity = String(eased);
+        }
       }
 
       if (blackHole) {

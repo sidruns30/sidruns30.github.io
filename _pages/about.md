@@ -7,8 +7,11 @@ redirect_from:
   - /about.html
 ---
 
+<div class="black-box" markdown="1">
 I am a graduate student in the Physics Department at Stanford University. My research focuses on plasma astrophysics and high-energy astrophysics, using theory and large-scale kinetic and fluid simulations to understand extreme environments around compact objects.
+</div>
 
+<div class="black-box" markdown="1">
 Research interests
 ======
 My work spans a range of problems in high-energy plasma astrophysics, including:
@@ -18,5 +21,6 @@ My work spans a range of problems in high-energy plasma astrophysics, including:
 - Very high-energy flares and multi-wavelength variability from supermassive black holes
 
 I use a combination of particle-in-cell, force-free electrodynamics, and general-relativistic magnetohydrodynamic simulations, along with analytic theory, to study these systems.
+</div>
 
 Take a look at my [publications](/publications/) for more details on specific projects, or my [CV](/cv/) for my full academic background.
