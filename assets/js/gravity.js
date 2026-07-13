@@ -1,29 +1,34 @@
 /* ==========================================================================
    GRAVITY MODE
    "Turn on Gravity" — turns every character of visible page text into a
-   small orbiting body around a central black hole.
+   small orbiting body around a central spinning (Kerr) black hole.
 
-   Physics: each letter is a test particle following a Schwarzschild
-   geodesic in the equatorial plane (i.e. genuine general-relativistic
-   orbital dynamics, not the Newtonian Kepler approximation). Using
-   geometrized units (G = c = 1) with black hole mass M and Schwarzschild
-   radius rs = 2M, the equatorial geodesic equations for a massive test
-   particle reduce to:
+   Physics: each letter is a test mass on an equatorial Kerr geodesic —
+   the general-relativistic orbit around a ROTATING black hole of mass M
+   and spin parameter a (dimensionless, -1 < a < 1; negative means the
+   hole spins opposite to the letters' orbital direction — "retrograde").
+   Using geometrized units (G = c = 1):
 
-       ell = r^2 dphi/dtau                (conserved specific angular momentum)
-       V_eff(r) = (1 - rs/r)(1 + ell^2/r^2)
-       d^2r/dtau^2 = -(1/2) V_eff'(r)
-                   = ell^2/r^3 - rs/(2 r^2) - (3/2) rs ell^2 / r^4
-       dphi/dtau = ell / r^2
+       Delta(r) = r^2 - 2Mr + a^2
+       R(r) = [E(r^2+a^2) - a*L]^2 - Delta(r) * [r^2 + (L - a*E)^2]
+       (dr/dtau)^2 = R(r) / r^4                     (equatorial motion)
+       dphi/dtau = [(L - a*E) + (a/Delta)*(E(r^2+a^2) - a*L)] / r^2
 
-   A letter that crosses r = rs has crossed the event horizon and is
-   captured — this is the actual physical definition of the horizon, not
-   an arbitrary cutoff.
+   E and L are the conserved specific energy and angular momentum of each
+   letter's geodesic, fixed at the moment gravity is switched on so that
+   the initial kick is purely tangential (dr/dtau = 0 initially). d^2r/dtau^2
+   is obtained from a small centered numerical derivative of R(r)/r^4 —
+   the same trick as the non-spinning case, just applied numerically
+   since the Kerr expression doesn't reduce to Schwarzschild's clean
+   effective-potential form.
+
+   The event horizon sits at r+ = M + sqrt(M^2 - a^2) — not simply 2M once
+   the hole is spinning — and that's what sets the visual black hole size
+   and the actual capture radius.
 
    Everything is simulated and rendered in PAGE (document) coordinates, not
    viewport coordinates, so scrolling is a pure Galilean shift of the
-   viewing frame: the orbits themselves don't change, you're just looking
-   at a different window onto the same fixed simulation.
+   viewing frame.
    ========================================================================== */
 
 (function () {
@@ -37,18 +42,25 @@
   var startTimestamp = null;
   var center = null; // page coordinates, fixed for the lifetime of the sim
 
-  var MASS = 12;                  // px, geometrized "mass" of the black hole
-  var RS = 2 * MASS;              // px, Schwarzschild radius (event horizon)
+  // Mutable physics parameters, live-controlled by the sliders.
+  var MASS = 12;                  // px, black hole mass M
+  var SPIN = -0.99;               // dimensionless spin a* = a/M, -1..1
+
   var MAX_LETTERS = 2200;         // performance cap on very content-heavy pages
-  var VELOCITY_SCALE = 1.0;       // tangential kick strength — slightly reduced
-                                   // from before per feedback; note this does
-                                   // make plunges somewhat more likely again
+  var VELOCITY_SCALE = 1.0;       // tangential kick strength
   var TIME_SCALE = 320;           // converts real seconds -> geometrized proper-time units
   var SPIN_UP_DURATION = 2000;    // ms, eased ramp-in so the handoff isn't abrupt
   var RESET_DURATION = 3200;      // ms, smooth-return tween length
   var HEIGHT_RECHECK_MS = 2000;   // throttle for expensive document-height reads
+  var H_DERIV = 0.05;             // px, step size for the numerical dR/dr derivative
 
-  function makeButtons() {
+  function horizonRadius() {
+    var a = SPIN * MASS;
+    var disc = Math.max(MASS * MASS - a * a, 0);
+    return MASS + Math.sqrt(disc);
+  }
+
+  function makeControls() {
     var wrap = document.createElement('div');
     wrap.id = 'gravity-controls';
     wrap.style.position = 'fixed';
@@ -56,7 +68,37 @@
     wrap.style.right = '1.25rem';
     wrap.style.zIndex = '100000';
     wrap.style.display = 'flex';
+    wrap.style.flexDirection = 'column';
+    wrap.style.alignItems = 'flex-end';
     wrap.style.gap = '0.5rem';
+    wrap.style.fontFamily = "'Inter', sans-serif";
+
+    var sliders = document.createElement('div');
+    sliders.style.background = 'rgba(255,255,255,0.92)';
+    sliders.style.border = '1px solid rgba(0,0,0,0.15)';
+    sliders.style.borderRadius = '10px';
+    sliders.style.padding = '0.6rem 0.8rem';
+    sliders.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
+    sliders.style.minWidth = '190px';
+    sliders.style.fontSize = '0.75rem';
+    sliders.style.color = '#111';
+
+    var massRow = makeSliderRow('Mass (M)', 5, 40, 1, MASS, function (v) {
+      MASS = v;
+      updateBlackHoleGeometry();
+    });
+    var spinRow = makeSliderRow('Spin (a)', -0.99, 0.99, 0.01, SPIN, function (v) {
+      SPIN = v;
+      updateBlackHoleGeometry();
+    });
+
+    sliders.appendChild(massRow.row);
+    sliders.appendChild(spinRow.row);
+    wrap.appendChild(sliders);
+
+    var buttonRow = document.createElement('div');
+    buttonRow.style.display = 'flex';
+    buttonRow.style.gap = '0.5rem';
 
     var btn = document.createElement('button');
     btn.id = 'gravity-button';
@@ -75,9 +117,39 @@
     reset.style.display = 'none';
     reset.addEventListener('click', smoothReset);
 
-    wrap.appendChild(btn);
-    wrap.appendChild(reset);
+    buttonRow.appendChild(btn);
+    buttonRow.appendChild(reset);
+    wrap.appendChild(buttonRow);
+
     document.body.appendChild(wrap);
+  }
+
+  function makeSliderRow(label, min, max, step, initial, onChange) {
+    var row = document.createElement('label');
+    row.style.display = 'block';
+    row.style.marginBottom = '0.3rem';
+
+    var text = document.createElement('div');
+    text.textContent = label + ': ' + initial;
+    text.style.marginBottom = '0.15rem';
+
+    var input = document.createElement('input');
+    input.type = 'range';
+    input.min = String(min);
+    input.max = String(max);
+    input.step = String(step);
+    input.value = String(initial);
+    input.style.width = '100%';
+
+    input.addEventListener('input', function () {
+      var v = parseFloat(input.value);
+      text.textContent = label + ': ' + v;
+      onChange(v);
+    });
+
+    row.appendChild(text);
+    row.appendChild(input);
+    return { row: row, input: input };
   }
 
   function styleButton(btn, bg) {
@@ -107,8 +179,6 @@
   function makeOverlay() {
     var el = document.createElement('div');
     el.id = 'gravity-overlay';
-    // Absolute + anchored at the document origin (no positioned ancestor)
-    // so it scrolls naturally with the page — this IS the Galilean shift.
     el.style.position = 'absolute';
     el.style.top = '0';
     el.style.left = '0';
@@ -117,14 +187,13 @@
     el.style.pointerEvents = 'none';
     el.style.zIndex = '99999';
     el.style.overflow = 'visible';
-    // Isolate this subtree from the rest of the page's layout/paint work.
     el.style.contain = 'layout style paint';
     document.body.appendChild(el);
     return el;
   }
 
   function makeBlackHole(cx, cy) {
-    var radius = RS;
+    var radius = horizonRadius();
     var hole = document.createElement('div');
     hole.id = 'gravity-blackhole';
     hole.style.position = 'absolute';
@@ -137,13 +206,21 @@
     hole.style.boxShadow = '0 0 25px 8px rgba(0,0,0,0.55)';
     hole.style.pointerEvents = 'none';
     hole.style.opacity = '0';
-    hole.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease';
+    hole.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease, width 0.3s ease, height 0.3s ease, left 0.3s ease, top 0.3s ease';
     return hole;
   }
 
-  // Walk the DOM and collect text nodes we're allowed to touch. The
-  // masthead (site title + nav links) is deliberately excluded so
-  // navigation always stays intact and readable.
+  // Called whenever a slider changes, so the visible horizon tracks the
+  // current M/a live, even mid-simulation.
+  function updateBlackHoleGeometry() {
+    if (!blackHole || !center) return;
+    var radius = horizonRadius();
+    blackHole.style.left = (center.x - radius) + 'px';
+    blackHole.style.top = (center.y - radius) + 'px';
+    blackHole.style.width = radius * 2 + 'px';
+    blackHole.style.height = radius * 2 + 'px';
+  }
+
   function collectTextNodes() {
     var results = [];
     var skipTags = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEXTAREA: 1, IFRAME: 1 };
@@ -163,12 +240,46 @@
     return results;
   }
 
+  // R(r)/r^4 from the Kerr equatorial radial equation, for given E, L and
+  // the CURRENT mass/spin (so live slider changes affect motion immediately).
+  function radialF(r, E, L) {
+    var a = SPIN * MASS;
+    var delta = r * r - 2 * MASS * r + a * a;
+    var term1 = E * (r * r + a * a) - a * L;
+    var term2 = r * r + (L - a * E) * (L - a * E);
+    var R = term1 * term1 - delta * term2;
+    return R / (r * r * r * r);
+  }
+
+  // Solve for the energy E that makes R(r0) = 0 (a turning point), given a
+  // chosen angular momentum L, so the initial kick is purely tangential.
+  function solveEnergyForCircularish(r0, L) {
+    var a = SPIN * MASS;
+    var delta0 = r0 * r0 - 2 * MASS * r0 + a * a;
+    var A = r0 * r0 + a * a;
+    var B = a * L;
+
+    var aCoef = A * A - delta0 * a * a;
+    var bCoef = 2 * a * L * (delta0 - A);
+    var cCoef = a * a * L * L - delta0 * (r0 * r0 + L * L);
+
+    var disc = bCoef * bCoef - 4 * aCoef * cCoef;
+    if (disc < 0 || Math.abs(aCoef) < 1e-9) return 1; // fallback: nearly-bound energy
+
+    var sq = Math.sqrt(disc);
+    var e1 = (-bCoef + sq) / (2 * aCoef);
+    var e2 = (-bCoef - sq) / (2 * aCoef);
+
+    // Prefer the positive root closest to 1 (a "bound-ish" orbit).
+    var candidates = [e1, e2].filter(function (e) { return e > 0 && isFinite(e); });
+    if (!candidates.length) return 1;
+    candidates.sort(function (x, y) { return Math.abs(x - 1) - Math.abs(y - 1); });
+    return candidates[0];
+  }
+
   function startGravity() {
     var textNodes = collectTextNodes();
 
-    // Fix the simulation's frame in PAGE coordinates at the moment of
-    // activation. It does not move again — scrolling only changes what
-    // part of it you can see.
     center = {
       x: window.innerWidth / 2 + window.scrollX,
       y: window.innerHeight / 2 + window.scrollY
@@ -216,7 +327,6 @@
         span.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease';
         overlay.appendChild(span);
 
-        // Convert viewport-relative rect to page (document) coordinates.
         var x0 = rect.left + rect.width / 2 + window.scrollX;
         var y0 = rect.top + rect.height / 2 + window.scrollY;
         var rx = x0 - center.x;
@@ -224,19 +334,18 @@
         var r0 = Math.sqrt(rx * rx + ry * ry) || 1;
         var phi0 = Math.atan2(ry, rx);
 
-        // Tangential kick, scaled down per the requested 3x reduction.
-        // ell is the conserved specific angular momentum of the geodesic.
         var speedFactor = 0.5 + Math.random() * 0.9;
         var vTangential = Math.sqrt(MASS / r0) * speedFactor * VELOCITY_SCALE;
-        var ell = r0 * vTangential;
+        var L = r0 * vTangential; // all letters share the same swirl sense
+        var E = solveEnergyForCircularish(r0, L);
 
         letters.push({
           el: span,
           r: r0,
           phi: phi0,
-          vr: 0,        // dr/dtau, purely tangential kick to start
-          ell: ell,
-          x: x0,        // cached Cartesian (for rendering + reset target)
+          E: E,
+          L: L,
+          x: x0,
           y: y0,
           origX: x0,
           origY: y0,
@@ -256,8 +365,6 @@
     lastHeightCheck = 0;
     rafId = requestAnimationFrame(step);
 
-    // Trigger the fade-in transitions on the next frame (needs a tick for
-    // the browser to register the initial opacity:0 before animating).
     requestAnimationFrame(function () {
       for (var i = 0; i < letters.length; i++) letters[i].el.style.opacity = '1';
       if (blackHole) blackHole.style.opacity = '1';
@@ -268,14 +375,8 @@
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
-  // Freeze a captured letter at the event horizon instead of deleting it.
-  // It stays in the `letters` array (excluded from further physics) so
-  // "Return to Normal" can tween it back out to its original spot. The
-  // transition is cleared first so it snaps invisible immediately rather
-  // than fading out over the old spin-up duration.
   function captureLetter(L) {
     L.captured = true;
-    L.vr = 0;
     L.el.style.transition = 'none';
     L.el.style.opacity = '0';
   }
@@ -286,49 +387,54 @@
     if (!active) return;
     if (lastTime === null) lastTime = now;
     if (startTimestamp === null) startTimestamp = now;
-    var dt = Math.min((now - lastTime) / 1000, 0.05); // seconds, clamp for tab-switch jumps
+    var dt = Math.min((now - lastTime) / 1000, 0.05);
     lastTime = now;
 
-    // Ease the coupling in over SPIN_UP_DURATION so motion doesn't snap to
-    // full speed the instant the button is pressed.
     var spinT = Math.min((now - startTimestamp) / SPIN_UP_DURATION, 1);
     var ramp = easeInOutCubic(spinT);
-    var dtau = dt * TIME_SCALE * ramp; // geometrized proper-time step
+    var dtau = dt * TIME_SCALE * ramp;
+
+    var rHorizon = horizonRadius();
+    var a = SPIN * MASS;
 
     for (var i = 0; i < letters.length; i++) {
-      var L = letters[i];
-      if (L.captured) continue;
+      var Lt = letters[i];
+      if (Lt.captured) continue;
 
-      if (L.r <= RS) {
-        captureLetter(L);
+      if (Lt.r <= rHorizon) {
+        captureLetter(Lt);
         continue;
       }
 
-      var r = L.r;
-      var r2 = r * r;
-      var r3 = r2 * r;
-      var r4 = r3 * r;
-      var ell2 = L.ell * L.ell;
+      var r = Lt.r;
 
-      // d^2r/dtau^2 = ell^2/r^3 - rs/(2r^2) - (3/2) rs ell^2 / r^4
-      var rAccel = ell2 / r3 - RS / (2 * r2) - (1.5 * RS * ell2) / r4;
+      // Numerical d^2r/dtau^2 = (1/2) d/dr [R(r)/r^4], via centered difference.
+      var fPlus = radialF(r + H_DERIV, Lt.E, Lt.L);
+      var fMinus = radialF(r - H_DERIV, Lt.E, Lt.L);
+      var rAccel = (fPlus - fMinus) / (4 * H_DERIV);
 
-      L.vr += rAccel * dtau;
-      L.r += L.vr * dtau;
-      L.phi += (L.ell / r2) * dtau;
+      var delta = r * r - 2 * MASS * r + a * a;
+      var dphidtau;
+      if (delta > 1e-6) {
+        dphidtau = ((Lt.L - a * Lt.E) + (a / delta) * (Lt.E * (r * r + a * a) - a * Lt.L)) / (r * r);
+      } else {
+        dphidtau = 0; // guarded by the horizon check above; shouldn't normally hit
+      }
 
-      if (L.r <= RS) {
-        captureLetter(L);
+      Lt.vr = (Lt.vr || 0) + rAccel * dtau;
+      Lt.r += Lt.vr * dtau;
+      Lt.phi += dphidtau * dtau;
+
+      if (Lt.r <= rHorizon) {
+        captureLetter(Lt);
         continue;
       }
 
-      L.x = center.x + L.r * Math.cos(L.phi);
-      L.y = center.y + L.r * Math.sin(L.phi);
-      L.el.style.transform = 'translate(' + L.x + 'px, ' + L.y + 'px) translate(-50%, -50%)';
+      Lt.x = center.x + Lt.r * Math.cos(Lt.phi);
+      Lt.y = center.y + Lt.r * Math.sin(Lt.phi);
+      Lt.el.style.transform = 'translate(' + Lt.x + 'px, ' + Lt.y + 'px) translate(-50%, -50%)';
     }
 
-    // Throttle the (layout-forcing) document-height check heavily instead
-    // of doing it every frame — this was the main source of jank.
     if (now - lastHeightCheck > HEIGHT_RECHECK_MS) {
       lastHeightCheck = now;
       var h = pageHeight();
@@ -394,8 +500,8 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', makeButtons);
+    document.addEventListener('DOMContentLoaded', makeControls);
   } else {
-    makeButtons();
+    makeControls();
   }
 })();
