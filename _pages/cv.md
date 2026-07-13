@@ -55,7 +55,7 @@ Publications
 
 Awards
 ======
-1. Burger's Symposium Winner (2025) — Awarded to the Best Poster in the College of Mathematical and Natural Sciences
+1. Burgers Symposium Winner (2025) — Awarded to the Best Poster in the College of Mathematical and Natural Sciences
 2. John Chi-Lin Wang Award (2024) — Awarded by the Astronomy Department at the University of Maryland
 3. Academic High Honors Award (2021) — Awarded by the Physics Department at UC Santa Barbara
 4. Research High Honors Award (2021) — Awarded by the Physics Department at UC Santa Barbara
