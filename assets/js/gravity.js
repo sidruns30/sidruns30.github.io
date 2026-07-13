@@ -103,7 +103,7 @@
     var btn = document.createElement('button');
     btn.id = 'gravity-button';
     btn.type = 'button';
-    btn.textContent = 'Turn on Gravity';
+    btn.textContent = 'I \u2665 Black Holes';
     styleButton(btn, '#111');
     btn.addEventListener('click', function () {
       if (!active) startGravity();
@@ -112,7 +112,7 @@
     var reset = document.createElement('button');
     reset.id = 'gravity-reset-button';
     reset.type = 'button';
-    reset.textContent = 'Return to Normal';
+    reset.textContent = 'Return to Normalcy';
     styleButton(reset, '#7a1f1f');
     reset.style.display = 'none';
     reset.addEventListener('click', smoothReset);
@@ -204,10 +204,36 @@
     hole.style.borderRadius = '50%';
     hole.style.background = 'radial-gradient(circle at 35% 35%, #333 0%, #000 60%, #000 100%)';
     hole.style.boxShadow = '0 0 25px 8px rgba(0,0,0,0.55)';
-    hole.style.pointerEvents = 'none';
+    hole.style.pointerEvents = 'auto';
+    hole.style.cursor = 'grab';
     hole.style.opacity = '0';
-    hole.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease, width 0.3s ease, height 0.3s ease, left 0.3s ease, top 0.3s ease';
+    hole.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease, width 0.3s ease, height 0.3s ease';
+    attachDragHandlers(hole);
     return hole;
+  }
+
+  var dragging = false;
+
+  function attachDragHandlers(hole) {
+    hole.addEventListener('mousedown', function (e) {
+      dragging = true;
+      hole.style.cursor = 'grabbing';
+      hole.style.transition = 'width 0.3s ease, height 0.3s ease'; // no opacity/position lag while dragging
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (!dragging || !center) return;
+      center.x = e.pageX;
+      center.y = e.pageY;
+      updateBlackHoleGeometry();
+    });
+
+    document.addEventListener('mouseup', function () {
+      if (!dragging) return;
+      dragging = false;
+      hole.style.cursor = 'grab';
+    });
   }
 
   // Called whenever a slider changes, so the visible horizon tracks the
