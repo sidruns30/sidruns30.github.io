@@ -358,7 +358,6 @@
         var rx = x0 - center.x;
         var ry = y0 - center.y;
         var r0 = Math.sqrt(rx * rx + ry * ry) || 1;
-        var phi0 = Math.atan2(ry, rx);
 
         var speedFactor = 0.5 + Math.random() * 0.9;
         var vTangential = Math.sqrt(MASS / r0) * speedFactor * VELOCITY_SCALE;
@@ -367,12 +366,11 @@
 
         letters.push({
           el: span,
-          r: r0,
-          phi: phi0,
-          E: E,
-          L: L,
           x: x0,
           y: y0,
+          vr: 0,
+          E: E,
+          L: L,
           origX: x0,
           origY: y0,
           captured: false
@@ -427,12 +425,19 @@
       var Lt = letters[i];
       if (Lt.captured) continue;
 
-      if (Lt.r <= rHorizon) {
+      // Derive r, phi fresh from the letter's actual page position and the
+      // CURRENT (possibly just-dragged) center. This is what keeps a drag
+      // from rigidly translating every letter: their real x/y is the
+      // source of truth, not a center-relative coordinate.
+      var rx = Lt.x - center.x;
+      var ry = Lt.y - center.y;
+      var r = Math.sqrt(rx * rx + ry * ry);
+      var phi = Math.atan2(ry, rx);
+
+      if (r <= rHorizon) {
         captureLetter(Lt);
         continue;
       }
-
-      var r = Lt.r;
 
       // Numerical d^2r/dtau^2 = (1/2) d/dr [R(r)/r^4], via centered difference.
       var fPlus = radialF(r + H_DERIV, Lt.E, Lt.L);
@@ -447,17 +452,17 @@
         dphidtau = 0; // guarded by the horizon check above; shouldn't normally hit
       }
 
-      Lt.vr = (Lt.vr || 0) + rAccel * dtau;
-      Lt.r += Lt.vr * dtau;
-      Lt.phi += dphidtau * dtau;
+      Lt.vr += rAccel * dtau;
+      var newR = r + Lt.vr * dtau;
+      var newPhi = phi + dphidtau * dtau;
 
-      if (Lt.r <= rHorizon) {
+      if (newR <= rHorizon) {
         captureLetter(Lt);
         continue;
       }
 
-      Lt.x = center.x + Lt.r * Math.cos(Lt.phi);
-      Lt.y = center.y + Lt.r * Math.sin(Lt.phi);
+      Lt.x = center.x + newR * Math.cos(newPhi);
+      Lt.y = center.y + newR * Math.sin(newPhi);
       Lt.el.style.transform = 'translate(' + Lt.x + 'px, ' + Lt.y + 'px) translate(-50%, -50%)';
     }
 
