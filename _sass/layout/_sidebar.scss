@@ -10,6 +10,11 @@
   -webkit-transform: translate3d(0, 0 , 0);
           transform: translate3d(0, 0 , 0);
 
+  background-image: url("/images/equations_bg.png");
+  background-repeat: repeat-y;
+  background-position: top center;
+  background-size: 100% auto;
+
   @include clearfix();
   margin-bottom: 1em;
 
