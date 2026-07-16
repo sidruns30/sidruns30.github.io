@@ -116,7 +116,13 @@ def main():
                     color=COLOR, alpha=ALPHA, ha='left', va='center')
 
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    plt.savefig(OUTPUT_FILE, transparent=True, dpi=DPI, bbox_inches='tight', pad_inches=0.1)
+    # pad_inches needs to be generous here: bbox_inches='tight' crops the
+    # figure down to the actual drawn content, which silently eats any
+    # margin placed in data coordinates. Without enough pad, whatever
+    # equation ends up nearest the edge sits right at the image boundary —
+    # and when the image tiles via CSS background-repeat, that equation
+    # gets sliced in half at the seam every time the pattern repeats.
+    plt.savefig(OUTPUT_FILE, transparent=True, dpi=DPI, bbox_inches='tight', pad_inches=1.0)
     print(f"Saved {OUTPUT_FILE}")
     print(f"{len(equations)} equations across {N_COLUMNS} columns, {rows_per_col} rows/column")
 
