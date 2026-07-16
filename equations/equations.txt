@@ -1,0 +1,33 @@
+# Physics equations for the site's background watermark.
+# One LaTeX expression per line, WITHOUT surrounding $ signs (the build
+# script adds those automatically). Lines starting with # are comments
+# and blank lines are ignored.
+#
+# After editing this file, ask Claude to regenerate the background image
+# (equations/generate_bg.py handles layout, sizing, and avoiding overlap
+# automatically — you don't need to worry about spacing).
+
+\frac{\partial f}{\partial t} + \mathbf{v}\cdot\nabla f + \frac{q}{m}(\mathbf{E}+\mathbf{v}\times\mathbf{B})\cdot\nabla_v f = 0
+\frac{\partial \rho}{\partial t} + \nabla\cdot(\rho\mathbf{v}) = 0
+\rho\frac{D\mathbf{v}}{Dt} = -\nabla p + \mathbf{J}\times\mathbf{B}
+\frac{\partial \mathbf{B}}{\partial t} = \nabla\times(\mathbf{v}\times\mathbf{B} - \eta\nabla\times\mathbf{B})
+\nabla\times\mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
+\nabla\times\mathbf{B} = \mu_0\mathbf{J} + \mu_0\epsilon_0\frac{\partial \mathbf{E}}{\partial t}
+\nabla\cdot\mathbf{B} = 0
+\mathbf{F} = q(\mathbf{E}+\mathbf{v}\times\mathbf{B})
+\Delta(r) = r^2 - 2Mr + a^2
+\omega^2 = k^2c_s^2 + \omega_{pe}^2
+\nabla\cdot\mathbf{E} = \frac{\rho_c}{\epsilon_0}
+r_+ = M + \sqrt{M^2-a^2}
+i\hbar\frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\nabla^2\psi + V\psi
+\hat{H}\psi = E\psi
+\frac{\partial N_k}{\partial t} + \nabla_k\omega\cdot\nabla_x N_k - \nabla_x\omega\cdot\nabla_k N_k = 0
+\nabla^2\mathbf{A} - \frac{1}{c^2}\frac{\partial^2 \mathbf{A}}{\partial t^2} = -\mu_0\mathbf{J}
+\frac{dA}{dt} = \frac{i}{\hbar}[\hat{H},A]
+[\hat{x},\hat{p}] = i\hbar
+\Delta x\,\Delta p \geq \frac{\hbar}{2}
+\frac{\partial \mathbf{v}}{\partial t} + (\mathbf{v}\cdot\nabla)\mathbf{v} = -\frac{\nabla p}{\rho}
+\frac{\partial f}{\partial t} + \mathbf{v}\cdot\nabla_x f + \mathbf{F}\cdot\nabla_v f = \left(\frac{\partial f}{\partial t}\right)_{coll}
+v_A = \frac{B}{\sqrt{\mu_0\rho}}
+\omega_c = \frac{qB}{m}
+\lambda_D = \sqrt{\frac{\epsilon_0 k_B T}{n e^2}}

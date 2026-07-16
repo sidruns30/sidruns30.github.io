@@ -74,6 +74,8 @@
     wrap.style.fontFamily = "'Inter', sans-serif";
 
     var sliders = document.createElement('div');
+    sliders.id = 'gravity-sliders';
+    sliders.style.display = 'none';
     sliders.style.background = 'rgba(255,255,255,0.92)';
     sliders.style.border = '1px solid rgba(0,0,0,0.15)';
     sliders.style.borderRadius = '10px';
@@ -383,6 +385,7 @@
     document.body.classList.add('gravity-mode');
     document.getElementById('gravity-button').style.display = 'none';
     document.getElementById('gravity-reset-button').style.display = 'inline-block';
+    document.getElementById('gravity-sliders').style.display = 'block';
     active = true;
     lastTime = null;
     startTimestamp = null;
@@ -528,6 +531,7 @@
     letters = [];
     document.getElementById('gravity-button').style.display = 'inline-block';
     document.getElementById('gravity-reset-button').style.display = 'none';
+    document.getElementById('gravity-sliders').style.display = 'none';
   }
 
   if (document.readyState === 'loading') {
