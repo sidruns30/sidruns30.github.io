@@ -70,6 +70,9 @@
     wrap.style.fontFamily = "'Inter', sans-serif";
     wrap.style.marginTop = '1.5rem';
     wrap.style.marginLeft = '0.6rem';
+    wrap.style.width = '100%';
+    wrap.style.maxWidth = '210px';
+    wrap.style.boxSizing = 'border-box';
 
     var anchor = document.getElementById('gravity-controls-anchor');
     if (!anchor) {
@@ -88,18 +91,19 @@
     sliders.style.borderRadius = '10px';
     sliders.style.padding = '0.6rem 0.8rem';
     sliders.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
-    sliders.style.minWidth = '190px';
+    sliders.style.width = '100%';
+    sliders.style.boxSizing = 'border-box';
     sliders.style.fontSize = '0.75rem';
     sliders.style.color = '#111';
 
-    var massRow = makeSliderRow('Mass (M)', 5, 40, 1, MASS, function (v) {
+    var massRow = makeSliderRow('Mass', 'M', 5, 40, 1, MASS, function (v) {
       MASS = v;
       updateBlackHoleGeometry();
-    });
-    var spinRow = makeSliderRow('Spin (a)', -0.99, 0.99, 0.01, SPIN, function (v) {
+    }, 'linear-gradient(to right, #000000, #380157, #174c8d, #0e8474, #69b031, #e7c56d, #ffffff)');
+    var spinRow = makeSliderRow('Spin', 'a', -0.99, 0.99, 0.01, SPIN, function (v) {
       SPIN = v;
       updateBlackHoleGeometry();
-    });
+    }, 'linear-gradient(to right, #94f1f3, #1b95e0, #364070, #000000, #682c2c, #c76e17, #f5de45)');
 
     sliders.appendChild(massRow.row);
     sliders.appendChild(spinRow.row);
@@ -107,6 +111,8 @@
 
     var buttonRow = document.createElement('div');
     buttonRow.style.display = 'flex';
+    buttonRow.style.flexDirection = 'column';
+    buttonRow.style.width = '100%';
     buttonRow.style.gap = '0.5rem';
 
     var btn = document.createElement('button');
@@ -142,14 +148,28 @@
     }
   }
 
-  function makeSliderRow(label, min, max, step, initial, onChange) {
+  function makeSliderRow(labelText, symbol, min, max, step, initial, onChange, trackGradient) {
     var row = document.createElement('label');
     row.style.display = 'block';
     row.style.marginBottom = '0.3rem';
 
     var text = document.createElement('div');
-    text.textContent = label + ': ' + initial;
     text.style.marginBottom = '0.15rem';
+
+    var labelSpan = document.createElement('span');
+    labelSpan.textContent = labelText + ' ';
+
+    var symbolSpan = document.createElement('span');
+    symbolSpan.textContent = symbol;
+    symbolSpan.style.fontStyle = 'italic';
+    symbolSpan.style.fontFamily = "'Computer Modern Serif', Georgia, serif";
+
+    var valueSpan = document.createElement('span');
+    valueSpan.textContent = ' = ' + initial;
+
+    text.appendChild(labelSpan);
+    text.appendChild(symbolSpan);
+    text.appendChild(valueSpan);
 
     var input = document.createElement('input');
     input.type = 'range';
@@ -158,10 +178,15 @@
     input.step = String(step);
     input.value = String(initial);
     input.style.width = '100%';
+    input.style.boxSizing = 'border-box';
+    if (trackGradient) {
+      input.style.setProperty('--track-gradient', trackGradient);
+      input.className = 'gravity-slider-styled';
+    }
 
     input.addEventListener('input', function () {
       var v = parseFloat(input.value);
-      text.textContent = label + ': ' + v;
+      valueSpan.textContent = ' = ' + v;
       onChange(v);
     });
 
@@ -171,6 +196,8 @@
   }
 
   function styleButton(btn, bg) {
+    btn.style.width = '100%';
+    btn.style.boxSizing = 'border-box';
     btn.style.padding = '0.6rem 1.1rem';
     btn.style.fontFamily = "'Inter', sans-serif";
     btn.style.fontSize = '0.85rem';

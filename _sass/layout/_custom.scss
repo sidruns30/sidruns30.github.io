@@ -95,6 +95,48 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
+/* Gravity mode: Mass/Spin sliders styled with a cmasher-derived gradient
+   track (rainforest for mass, iceburn for spin), set via --track-gradient
+   custom property on each input from JS. */
+.gravity-slider-styled {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.gravity-slider-styled::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--track-gradient);
+}
+
+.gravity-slider-styled::-moz-range-track {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--track-gradient);
+}
+
+.gravity-slider-styled::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #111;
+  margin-top: -2px;
+}
+
+.gravity-slider-styled::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #111;
+}
+
 /* Physics-equation watermark, tiled across the entire page background.
    Fixed-px background-size doesn't scale with viewport, so a big monitor
    just reveals many more (same-size) repeats of the tile, which reads as
