@@ -1,6 +1,6 @@
 ---
-title: "Hobbies"
-permalink: /hobbies/
+title: "Miscellaneous Things"
+permalink: /misc-things/
 author_profile: true
 ---
 
