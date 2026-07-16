@@ -105,7 +105,7 @@
     var btn = document.createElement('button');
     btn.id = 'gravity-button';
     btn.type = 'button';
-    btn.textContent = 'I \u2665 Black Holes';
+    btn.textContent = 'I \u2665\uFE0E Black Holes';
     styleButton(btn, '#111');
     btn.addEventListener('click', function () {
       if (!active) startGravity();
