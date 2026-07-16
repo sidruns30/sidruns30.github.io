@@ -69,6 +69,7 @@
     wrap.style.gap = '0.5rem';
     wrap.style.fontFamily = "'Inter', sans-serif";
     wrap.style.marginTop = '1.5rem';
+    wrap.style.marginLeft = '0.6rem';
 
     var anchor = document.getElementById('gravity-controls-anchor');
     if (!anchor) {
