@@ -63,15 +63,21 @@
   function makeControls() {
     var wrap = document.createElement('div');
     wrap.id = 'gravity-controls';
-    wrap.style.position = 'fixed';
-    wrap.style.bottom = '1.25rem';
-    wrap.style.right = '1.25rem';
-    wrap.style.zIndex = '100000';
     wrap.style.display = 'flex';
     wrap.style.flexDirection = 'column';
-    wrap.style.alignItems = 'flex-end';
+    wrap.style.alignItems = 'flex-start';
     wrap.style.gap = '0.5rem';
     wrap.style.fontFamily = "'Inter', sans-serif";
+    wrap.style.marginTop = '1.5rem';
+
+    var anchor = document.getElementById('gravity-controls-anchor');
+    if (!anchor) {
+      // Fallback for any page without the sidebar (shouldn't normally happen).
+      wrap.style.position = 'fixed';
+      wrap.style.bottom = '1.25rem';
+      wrap.style.left = '1.25rem';
+      wrap.style.zIndex = '100000';
+    }
 
     var sliders = document.createElement('div');
     sliders.id = 'gravity-sliders';
@@ -128,7 +134,11 @@
     buttonRow.appendChild(reset);
     wrap.appendChild(buttonRow);
 
-    document.body.appendChild(wrap);
+    if (anchor) {
+      anchor.appendChild(wrap);
+    } else {
+      document.body.appendChild(wrap);
+    }
   }
 
   function makeSliderRow(label, min, max, step, initial, onChange) {
