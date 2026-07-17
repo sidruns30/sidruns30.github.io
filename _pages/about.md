@@ -28,3 +28,5 @@ I use a combination of PIC, force-free and GRMHD simulations, along with analyti
 </div>
 
 Take a look at my [publications](/publications/) for more details on specific projects, or my [CV](/cv/) for my full academic background.
+
+<img src="/images/jdote_homepage.jpg" alt="J dot E plot" class="homepage-banner-img" />
