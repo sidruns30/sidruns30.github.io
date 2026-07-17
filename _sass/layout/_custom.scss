@@ -37,14 +37,31 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-/* Homepage banner image (single static long image, replaces the old
-   rotating plot carousel). Spans the main content column width, height
-   auto to preserve its native aspect ratio. */
-.homepage-banner-img {
-  display: block;
+/* Homepage side image (single static image, replaces the old rotating
+   plot carousel). Sits in the same reserved right-hand margin, cropped
+   to fill that space rather than shown at its full (very tall) native
+   length. */
+#homepage-side-image {
+  display: none;
+}
+
+@include breakpoint($large) {
+  #homepage-side-image {
+    display: block;
+    position: absolute;
+    top: calc(#{$masthead-height} + 2em);
+    right: 1.5em;
+    width: 300px;
+    height: calc(100vh - #{$masthead-height} - 4em);
+    overflow: hidden;
+  }
+}
+
+#homepage-side-image img {
   width: 100%;
-  height: auto;
-  margin: 1.5rem 0;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Gravity mode: Mass/Spin sliders styled with a cmasher-derived gradient
