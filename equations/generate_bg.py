@@ -35,7 +35,7 @@ BASE_FONTSIZE = 46      # pt, before any per-equation shrink-to-fit
 MIN_FONTSIZE = 4        # pt, essentially no floor — guarantees a fit over readability
 DPI = 150
 COLOR = '#555555'
-ALPHA = 0.30
+ALPHA = 0.14
 MAX_ROTATION_DEG = 8    # kept modest so tilted text doesn't bleed into neighbors
 COLUMN_MARGIN_FRAC = 0.08  # fraction of column width reserved as side margin
 

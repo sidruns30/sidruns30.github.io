@@ -11,6 +11,8 @@ redirect_from:
 
 [Download full CV (PDF)]({{ base_path }}/files/Siddhant_Solanki_CV.pdf)
 
+<div class="black-box" markdown="1">
+
 Education
 ======
 * Ph.D. in Physics, Stanford University, June 2026 – Present
@@ -87,3 +89,5 @@ External Conferences and Presentations
 In the News
 ======
 * ["Monthly Roundup: The Supermassive Black Hole of Messier 87"](https://aasnova.org/2025/06/25/monthly-roundup-the-supermassive-black-hole-of-messier-87/), AAS Nova (June 2025)
+
+</div>
