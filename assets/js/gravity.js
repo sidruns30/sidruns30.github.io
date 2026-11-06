@@ -38,6 +38,9 @@
   var overlay = null;
   var blackHole = null;
   var letters = [];
+  var sources = [];
+  var controlsHome = null;
+  var status = null;
   var lastTime = null;
   var startTimestamp = null;
   var center = null; // page coordinates, fixed for the lifetime of the sim
@@ -60,41 +63,27 @@
     return MASS + Math.sqrt(disc);
   }
 
+  function reducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function announce(message) {
+    if (status) status.textContent = message;
+  }
+
   function makeControls() {
+    if (document.getElementById('gravity-controls')) return;
     var wrap = document.createElement('div');
     wrap.id = 'gravity-controls';
-    wrap.style.display = 'flex';
-    wrap.style.flexDirection = 'column';
-    wrap.style.alignItems = 'flex-start';
-    wrap.style.gap = '0.5rem';
-    wrap.style.fontFamily = "'Inter', sans-serif";
-    wrap.style.marginTop = '1.5rem';
-    wrap.style.marginLeft = '0.6rem';
-    wrap.style.width = '100%';
-    wrap.style.maxWidth = '210px';
-    wrap.style.boxSizing = 'border-box';
+    wrap.setAttribute('role', 'group');
+    wrap.setAttribute('aria-label', 'Interactive black hole');
 
-    var anchor = document.getElementById('gravity-controls-anchor');
-    if (!anchor) {
-      // Fallback for any page without the sidebar (shouldn't normally happen).
-      wrap.style.position = 'fixed';
-      wrap.style.bottom = '1.25rem';
-      wrap.style.left = '1.25rem';
-      wrap.style.zIndex = '100000';
-    }
+    controlsHome = document.getElementById('gravity-controls-anchor');
+    if (!controlsHome) wrap.classList.add('gravity-controls--floating');
 
     var sliders = document.createElement('div');
     sliders.id = 'gravity-sliders';
-    sliders.style.display = 'none';
-    sliders.style.background = 'rgba(255,255,255,0.92)';
-    sliders.style.border = '1px solid rgba(0,0,0,0.15)';
-    sliders.style.borderRadius = '10px';
-    sliders.style.padding = '0.6rem 0.8rem';
-    sliders.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
-    sliders.style.width = '100%';
-    sliders.style.boxSizing = 'border-box';
-    sliders.style.fontSize = '0.75rem';
-    sliders.style.color = '#111';
+    sliders.hidden = true;
 
     var massRow = makeSliderRow('Mass', 'M', 5, 40, 1, MASS, function (v) {
       MASS = v;
@@ -107,65 +96,89 @@
 
     sliders.appendChild(massRow.row);
     sliders.appendChild(spinRow.row);
+
+    var help = document.createElement('p');
+    help.id = 'gravity-instructions';
+    help.className = 'gravity-help';
+    help.textContent = 'Drag the black hole, or focus it and use the arrow keys. Press Esc to restore the page.';
+    sliders.appendChild(help);
     wrap.appendChild(sliders);
 
     var buttonRow = document.createElement('div');
-    buttonRow.style.display = 'flex';
-    buttonRow.style.flexDirection = 'column';
-    buttonRow.style.width = '100%';
-    buttonRow.style.gap = '0.5rem';
+    buttonRow.className = 'gravity-buttons';
 
     var btn = document.createElement('button');
     btn.id = 'gravity-button';
     btn.type = 'button';
+    btn.setAttribute('aria-label', 'I love black holes. Start the interactive black hole.');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'gravity-sliders');
     btn.appendChild(document.createTextNode('I '));
     var heart = document.createElement('span');
     heart.textContent = '\u2665\uFE0E';
-    heart.style.color = '#e63946';
+    heart.className = 'gravity-heart';
+    heart.setAttribute('aria-hidden', 'true');
     btn.appendChild(heart);
     btn.appendChild(document.createTextNode(' Black Holes'));
-    styleButton(btn, '#111');
-    btn.addEventListener('click', function () {
-      if (!active) startGravity();
-    });
+    btn.addEventListener('click', startGravity);
 
     var reset = document.createElement('button');
     reset.id = 'gravity-reset-button';
     reset.type = 'button';
     reset.textContent = 'Return to Normalcy';
-    styleButton(reset, '#7a1f1f');
-    reset.style.display = 'none';
+    reset.hidden = true;
     reset.addEventListener('click', smoothReset);
 
     buttonRow.appendChild(btn);
     buttonRow.appendChild(reset);
     wrap.appendChild(buttonRow);
+    (controlsHome || document.body).appendChild(wrap);
 
-    if (anchor) {
-      anchor.appendChild(wrap);
-    } else {
-      document.body.appendChild(wrap);
-    }
+    status = document.createElement('div');
+    status.id = 'gravity-status';
+    status.className = 'sr-only';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('aria-atomic', 'true');
+    // Keep announcements out of the layout even on pages without the site CSS.
+    status.style.cssText = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;';
+    document.body.appendChild(status);
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && active) {
+        event.preventDefault();
+        if (resetting) finishReset();
+        else smoothReset();
+      }
+    });
+    window.addEventListener('resize', function () {
+      // Original character positions become invalid when the page reflows.
+      if (active) finishReset('Page restored after the window was resized.');
+    });
+    window.addEventListener('pagehide', function () {
+      if (active) finishReset();
+    });
   }
 
   function makeSliderRow(labelText, symbol, min, max, step, initial, onChange, trackGradient) {
     var row = document.createElement('label');
-    row.style.display = 'block';
-    row.style.marginBottom = '0.3rem';
+    row.className = 'gravity-slider-row';
 
-    var text = document.createElement('div');
-    text.style.marginBottom = '0.15rem';
+    var text = document.createElement('span');
+    text.className = 'gravity-slider-label';
 
     var labelSpan = document.createElement('span');
     labelSpan.textContent = labelText + ' ';
 
     var symbolSpan = document.createElement('span');
     symbolSpan.textContent = symbol;
-    symbolSpan.style.fontStyle = 'italic';
-    symbolSpan.style.fontFamily = "'Computer Modern Serif', Georgia, serif";
+    symbolSpan.className = 'gravity-slider-symbol';
+    symbolSpan.setAttribute('aria-hidden', 'true');
 
     var valueSpan = document.createElement('span');
+    valueSpan.className = 'gravity-slider-value';
     valueSpan.textContent = ' = ' + initial;
+    valueSpan.setAttribute('aria-hidden', 'true');
 
     text.appendChild(labelSpan);
     text.appendChild(symbolSpan);
@@ -173,12 +186,12 @@
 
     var input = document.createElement('input');
     input.type = 'range';
+    input.id = 'gravity-' + labelText.toLowerCase();
     input.min = String(min);
     input.max = String(max);
     input.step = String(step);
     input.value = String(initial);
-    input.style.width = '100%';
-    input.style.boxSizing = 'border-box';
+    input.setAttribute('aria-label', labelText);
     if (trackGradient) {
       input.style.setProperty('--track-gradient', trackGradient);
       input.className = 'gravity-slider-styled';
@@ -193,24 +206,6 @@
     row.appendChild(text);
     row.appendChild(input);
     return { row: row, input: input };
-  }
-
-  function styleButton(btn, bg) {
-    btn.style.width = '100%';
-    btn.style.boxSizing = 'border-box';
-    btn.style.padding = '0.6rem 1.1rem';
-    btn.style.fontFamily = "'Inter', sans-serif";
-    btn.style.fontSize = '0.85rem';
-    btn.style.letterSpacing = '0.02em';
-    btn.style.border = '1px solid rgba(0,0,0,0.15)';
-    btn.style.borderRadius = '999px';
-    btn.style.background = bg;
-    btn.style.color = '#fff';
-    btn.style.cursor = 'pointer';
-    btn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.25)';
-    btn.style.transition = 'transform 0.15s ease, background-color 0.15s ease';
-    btn.addEventListener('mouseenter', function () { btn.style.transform = 'scale(1.05)'; });
-    btn.addEventListener('mouseleave', function () { btn.style.transform = 'scale(1)'; });
   }
 
   function pageHeight() {
@@ -239,8 +234,14 @@
 
   function makeBlackHole(cx, cy) {
     var radius = horizonRadius();
-    var hole = document.createElement('div');
+    var hole = document.createElement('button');
     hole.id = 'gravity-blackhole';
+    hole.type = 'button';
+    hole.setAttribute('aria-label', 'Black hole. Use arrow keys to move it; hold Shift for larger steps.');
+    hole.setAttribute('aria-describedby', 'gravity-instructions');
+    hole.style.padding = '0';
+    hole.style.border = '0';
+    hole.style.touchAction = 'none';
     hole.style.position = 'absolute';
     hole.style.left = (cx - radius) + 'px';
     hole.style.top = (cy - radius) + 'px';
@@ -260,24 +261,40 @@
   var dragging = false;
 
   function attachDragHandlers(hole) {
-    hole.addEventListener('mousedown', function (e) {
+    hole.addEventListener('pointerdown', function (event) {
+      if (resetting || !event.isPrimary || event.button !== 0) return;
       dragging = true;
+      hole.setPointerCapture(event.pointerId);
       hole.style.cursor = 'grabbing';
-      hole.style.transition = 'width 0.3s ease, height 0.3s ease'; // no opacity/position lag while dragging
-      e.preventDefault();
+      hole.style.transition = 'width 0.3s ease, height 0.3s ease';
+      event.preventDefault();
     });
 
-    document.addEventListener('mousemove', function (e) {
-      if (!dragging || !center) return;
-      center.x = e.pageX;
-      center.y = e.pageY;
+    hole.addEventListener('pointermove', function (event) {
+      if (!dragging || resetting || !center) return;
+      center.x = event.pageX;
+      center.y = event.pageY;
       updateBlackHoleGeometry();
     });
 
-    document.addEventListener('mouseup', function () {
-      if (!dragging) return;
+    function endDrag() {
       dragging = false;
       hole.style.cursor = 'grab';
+    }
+    hole.addEventListener('pointerup', endDrag);
+    hole.addEventListener('pointercancel', endDrag);
+    hole.addEventListener('lostpointercapture', endDrag);
+    hole.addEventListener('keydown', function (event) {
+      if (resetting || !center) return;
+      var directions = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+      var direction = directions[event.key];
+      if (!direction) return;
+      event.preventDefault();
+      var distance = event.shiftKey ? 60 : 20;
+      var radius = horizonRadius();
+      center.x = Math.max(window.scrollX + radius, Math.min(window.scrollX + window.innerWidth - radius, center.x + direction[0] * distance));
+      center.y = Math.max(window.scrollY + radius, Math.min(window.scrollY + window.innerHeight - radius, center.y + direction[1] * distance));
+      updateBlackHoleGeometry();
     });
   }
 
@@ -294,21 +311,50 @@
 
   function collectTextNodes() {
     var results = [];
-    var skipTags = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEXTAREA: 1, IFRAME: 1 };
+    var excluded = '#gravity-overlay, #gravity-controls, #gravity-status, .masthead, .sr-only, .visually-hidden, script, style, noscript, textarea, iframe, svg, canvas, button, input, select, option, [role="button"], [hidden], [inert], [aria-hidden="true"], [contenteditable="true"]';
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode: function (node) {
         if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
         var parent = node.parentElement;
-        if (!parent) return NodeFilter.FILTER_REJECT;
-        if (parent.closest('#gravity-overlay') || parent.closest('#gravity-controls')) return NodeFilter.FILTER_REJECT;
-        if (parent.closest('.masthead')) return NodeFilter.FILTER_REJECT;
-        if (skipTags[parent.tagName]) return NodeFilter.FILTER_REJECT;
+        if (!parent || parent.closest(excluded)) return NodeFilter.FILTER_REJECT;
+        var style = window.getComputedStyle(parent);
+        if (style.display === 'none' || style.visibility !== 'visible' || parseFloat(style.opacity) === 0) return NodeFilter.FILTER_REJECT;
+        // Opacity is not inherited, so an invisible ancestor needs its own check.
+        for (var ancestor = parent.parentElement; ancestor; ancestor = ancestor.parentElement) {
+          if (parseFloat(window.getComputedStyle(ancestor).opacity) === 0) return NodeFilter.FILTER_REJECT;
+        }
+        var rect = parent.getBoundingClientRect();
+        if (rect.bottom <= 0 || rect.top >= window.innerHeight || rect.right <= 0 || rect.left >= window.innerWidth) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
     });
-    var n;
-    while ((n = walker.nextNode())) results.push(n);
+    var node;
+    while ((node = walker.nextNode())) results.push(node);
     return results;
+  }
+
+  function hideAnimatedText(node, selected) {
+    if (!selected.length || !node.parentNode) return;
+    var wrapper = document.createElement('span');
+    wrapper.className = 'gravity-source-wrapper';
+    var cursor = 0;
+    for (var i = 0; i < selected.length; i++) {
+      var start = selected[i];
+      var end = start + 1;
+      while (i + 1 < selected.length && selected[i + 1] === end) {
+        end++;
+        i++;
+      }
+      if (start > cursor) wrapper.appendChild(document.createTextNode(node.nodeValue.slice(cursor, start)));
+      var hiddenText = document.createElement('span');
+      hiddenText.className = 'gravity-source';
+      hiddenText.textContent = node.nodeValue.slice(start, end);
+      wrapper.appendChild(hiddenText);
+      cursor = end;
+    }
+    if (cursor < node.nodeValue.length) wrapper.appendChild(document.createTextNode(node.nodeValue.slice(cursor)));
+    node.parentNode.replaceChild(wrapper, node);
+    sources.push({ original: node, wrapper: wrapper });
   }
 
   // R(r)/r^4 from the Kerr equatorial radial equation, for given E, L and
@@ -349,6 +395,7 @@
   }
 
   function startGravity() {
+    if (active || resetting) return;
     var textNodes = collectTextNodes();
 
     center = {
@@ -362,11 +409,14 @@
     letters = [];
 
     var count = 0;
+    var selectedNodes = [];
     outer:
     for (var i = 0; i < textNodes.length; i++) {
       var node = textNodes[i];
       var text = node.nodeValue;
       var parentStyle = window.getComputedStyle(node.parentElement);
+      var selected = [];
+      selectedNodes.push({ node: node, selected: selected });
 
       for (var c = 0; c < text.length; c++) {
         var ch = text[c];
@@ -381,10 +431,13 @@
           var rects = range.getClientRects();
           if (rects && rects.length) rect = rects[0];
         } catch (e) { /* ignore, fall through */ }
-        if (!rect || (rect.width === 0 && rect.height === 0)) continue;
+        if (!rect || rect.width <= 0 || rect.height <= 0 || rect.bottom <= 0 || rect.top >= window.innerHeight || rect.right <= 0 || rect.left >= window.innerWidth) continue;
+        selected.push(c);
 
         var span = document.createElement('span');
         span.textContent = ch;
+        span.setAttribute('aria-hidden', 'true');
+        span.className = 'gravity-letter';
         span.style.position = 'absolute';
         span.style.left = '0';
         span.style.top = '0';
@@ -393,6 +446,8 @@
         span.style.fontSize = parentStyle.fontSize;
         span.style.fontWeight = parentStyle.fontWeight;
         span.style.fontStyle = parentStyle.fontStyle;
+        span.style.textTransform = parentStyle.textTransform;
+        span.style.lineHeight = parentStyle.lineHeight;
         span.style.setProperty('color', parentStyle.color, 'important');
         span.style.opacity = '0';
         span.style.transition = 'opacity ' + SPIN_UP_DURATION + 'ms ease';
@@ -400,6 +455,7 @@
 
         var x0 = rect.left + rect.width / 2 + window.scrollX;
         var y0 = rect.top + rect.height / 2 + window.scrollY;
+        span.style.transform = 'translate(' + x0 + 'px, ' + y0 + 'px) translate(-50%, -50%)';
         var rx = x0 - center.x;
         var ry = y0 - center.y;
         var r0 = Math.sqrt(rx * rx + ry * ry) || 1;
@@ -425,10 +481,20 @@
       }
     }
 
+    selectedNodes.forEach(function (entry) {
+      hideAnimatedText(entry.node, entry.selected);
+    });
     document.body.classList.add('gravity-mode');
-    document.getElementById('gravity-button').style.display = 'none';
-    document.getElementById('gravity-reset-button').style.display = 'inline-block';
-    document.getElementById('gravity-sliders').style.display = 'block';
+    document.body.appendChild(document.getElementById('gravity-controls'));
+    var startButton = document.getElementById('gravity-button');
+    startButton.hidden = true;
+    startButton.setAttribute('aria-expanded', 'true');
+    var resetButton = document.getElementById('gravity-reset-button');
+    resetButton.hidden = false;
+    resetButton.disabled = false;
+    document.getElementById('gravity-sliders').hidden = false;
+    resetButton.focus({ preventScroll: true });
+    announce('Black hole mode is active. Adjust mass and spin, drag the black hole, or press Escape to restore the page.');
     active = true;
     lastTime = null;
     startTimestamp = null;
@@ -502,7 +568,7 @@
       var newR = r + Lt.vr * dtau;
       var newPhi = phi + dphidtau * dtau;
 
-      if (newR <= rHorizon) {
+      if (!isFinite(newR) || !isFinite(newPhi) || newR <= rHorizon) {
         captureLetter(Lt);
         continue;
       }
@@ -526,7 +592,14 @@
   function smoothReset() {
     if (!active || resetting) return;
     resetting = true;
-    if (rafId) cancelAnimationFrame(rafId);
+    dragging = false;
+    if (rafId !== null) cancelAnimationFrame(rafId);
+    if (reducedMotion()) {
+      finishReset();
+      return;
+    }
+    document.getElementById('gravity-reset-button').disabled = true;
+    announce('Restoring the page. Press Escape again to finish immediately.');
 
     var startPositions = letters.map(function (L) { return { x: L.x, y: L.y }; });
     var tweenStart = null;
@@ -555,26 +628,42 @@
       }
 
       if (t < 1) {
-        requestAnimationFrame(tween);
+        rafId = requestAnimationFrame(tween);
       } else {
         finishReset();
       }
     }
 
-    requestAnimationFrame(tween);
+    rafId = requestAnimationFrame(tween);
   }
 
-  function finishReset() {
+  function finishReset(message) {
+    if (rafId !== null) cancelAnimationFrame(rafId);
+    rafId = null;
     active = false;
     resetting = false;
+    dragging = false;
     document.body.classList.remove('gravity-mode');
     if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    sources.forEach(function (source) {
+      if (source.wrapper.parentNode) source.wrapper.parentNode.replaceChild(source.original, source.wrapper);
+    });
+    sources = [];
     overlay = null;
     blackHole = null;
+    center = null;
     letters = [];
-    document.getElementById('gravity-button').style.display = 'inline-block';
-    document.getElementById('gravity-reset-button').style.display = 'none';
-    document.getElementById('gravity-sliders').style.display = 'none';
+    var controls = document.getElementById('gravity-controls');
+    if (controlsHome) controlsHome.appendChild(controls);
+    var startButton = document.getElementById('gravity-button');
+    startButton.hidden = false;
+    startButton.setAttribute('aria-expanded', 'false');
+    var resetButton = document.getElementById('gravity-reset-button');
+    resetButton.hidden = true;
+    resetButton.disabled = false;
+    document.getElementById('gravity-sliders').hidden = true;
+    startButton.focus({ preventScroll: true });
+    announce(message || 'The page has been restored.');
   }
 
   if (document.readyState === 'loading') {

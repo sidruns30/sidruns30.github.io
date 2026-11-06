@@ -1,38 +1,16 @@
 ---
-layout: archive
+layout: academic
 title: "Publications"
 permalink: /publications/
-author_profile: true
+description: "Publications by Siddhant Solanki on plasma astrophysics, magnetars, black hole accretion, and computational methods."
 ---
-
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
-
-{% include base_path %}
-
-<div class="black-box">
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
-    {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
+<div class="container page-content">
+  <header class="page-heading"><p class="eyebrow">Research output</p><h1>Publications<span class="name-period">.</span></h1><p>Theory, simulations, and observations of astrophysical plasmas.</p><a class="text-link" href="{{ site.author.googlescholar }}">Google Scholar <span aria-hidden="true">↗</span></a></header>
+  <div class="publication-tools" hidden>
+    <div class="publication-filters" role="group" aria-label="Filter publications"><button type="button" data-filter="all" aria-pressed="true">All work</button><button type="button" data-filter="journal" aria-pressed="false">Journal articles</button><button type="button" data-filter="preprint" aria-pressed="false">Preprints</button></div>
+    <label class="search-field"><span class="sr-only">Search publications</span><svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="m12 12 5 5" stroke="currentColor" stroke-width="1.5"/></svg><input type="search" id="publication-search" placeholder="Search publications" autocomplete="off"></label>
+  </div>
+  <p class="results-count" aria-live="polite" aria-atomic="true" hidden></p>
+  <div class="publication-list">{% assign publications = site.publications | sort: 'date' | reverse %}{% for post in publications %}{% include publication-row.html summary=true %}{% endfor %}</div>
+  <p class="empty-results" hidden>No publications match. Try another title, author, or year.</p>
 </div>
-
-
-

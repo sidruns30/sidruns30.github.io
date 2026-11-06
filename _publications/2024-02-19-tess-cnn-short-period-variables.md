@@ -1,6 +1,10 @@
 ---
 title: "Short-Period Variables in TESS Full-Frame Image Light Curves Identified via Convolutional Neural Networks"
 collection: publications
+layout: research-paper
+status: preprint
+publication_year: "2024"
+authors: "Olmschenk, G., Barry, R. K., Ishitani Silva, S., Powell, B. P., Kruse, E., Schnittman, J. D., Cieplak, A. M., Barclay, T., Solanki, S., et al."
 category: manuscripts
 permalink: /publication/2024-02-19-tess-cnn-short-period-variables
 excerpt: 'A convolutional neural network approach to identifying short-period variable stars in TESS full-frame image light curves.'

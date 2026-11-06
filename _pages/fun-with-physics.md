@@ -1,4 +1,5 @@
 ---
+layout: academic-page
 title: "Fun with Physics"
 permalink: /fun-with-physics/
 author_profile: true
@@ -6,8 +7,7 @@ author_profile: true
 
 This page collects side projects, research notes, and simulations I've built outside of formal publications — things I find fun to explore even when they don't (yet) turn into a paper.
 
-Research notes
-======
+## Research notes
 Short write-ups on physics topics or techniques I've dug into.
 
 <!-- Example entry format:
@@ -17,8 +17,7 @@ Short write-ups on physics topics or techniques I've dug into.
 A sentence or two describing what the note covers.
 -->
 
-Simulation projects
-======
+## Simulation projects
 Personal or side simulation projects, demos, and visualizations.
 
 <!-- Example entry format:

@@ -1,6 +1,10 @@
 ---
 title: "The Inner 2 pc of Sagittarius A*: Simulations of the Circumnuclear Disk and Multiphase Gas Accretion in the Galactic Center"
 collection: publications
+layout: research-paper
+status: journal
+publication_year: "2023"
+authors: "Solanki, S., Ressler, S. M., Murchikova, L., Stone, J. M., & Morris, M. R."
 category: manuscripts
 permalink: /publication/2023-07-28-sgra-inner-2pc
 excerpt: 'Numerical simulations modeling the circumnuclear disk and multiphase accretion flow feeding the Galactic Center black hole.'

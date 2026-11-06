@@ -1,6 +1,10 @@
 ---
 title: "Short-period Heartbeat Binaries from TESS Full-Frame Images"
 collection: publications
+layout: research-paper
+status: journal
+publication_year: "2025"
+authors: "Solanki, S., Cieplak, A. M., Schnittman, J., Baker, J. G., Barclay, T., Barry, R. K., Kostov, V., Kruse, E., Olmschenk, G., Powell, B. P., Ishitani Silva, S., & Torres, G."
 category: manuscripts
 permalink: /publication/2024-12-27-heartbeat-binaries-tess
 excerpt: 'A catalog of short-period heartbeat binary systems identified from TESS full-frame image photometry.'

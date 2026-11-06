@@ -1,0 +1,10 @@
+<article class="publication-row" data-publication data-search="{{ post.title | append: ' ' | append: post.authors | append: ' ' | append: post.venue | append: ' ' | append: post.publication_year | downcase | escape }}" data-status="{{ post.status }}">
+  <div class="publication-year">{% if post.publication_year %}{{ post.publication_year }}{% else %}{{ post.date | date: '%Y' }}{% endif %}<span class="publication-status">{% if post.status == 'preprint' %}Preprint{% else %}Journal article{% endif %}</span></div>
+  <div class="publication-info">
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+    {% if post.authors %}<p class="publication-authors">{{ post.authors | replace: 'Solanki, S.', '<strong>Solanki, S.</strong>' }}</p>{% endif %}
+    <p class="publication-venue">{{ post.venue }}</p>
+    {% if include.summary %}<p class="publication-summary">{{ post.excerpt | strip_html }}</p>{% endif %}
+    <div class="publication-links"><a href="{{ post.paperurl }}">{% if post.paperurl contains 'arxiv.org' %}Read on arXiv{% else %}Read paper{% endif %} <span aria-hidden="true">↗</span></a><a href="{{ post.url | relative_url }}">Details <span aria-hidden="true">→</span></a></div>
+  </div>
+</article>

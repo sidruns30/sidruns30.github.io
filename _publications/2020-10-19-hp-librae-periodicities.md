@@ -1,6 +1,10 @@
 ---
 title: "Periodicities in the K2 lightcurve of HP Librae"
 collection: publications
+layout: research-paper
+status: journal
+publication_year: "2021"
+authors: "Solanki, S., Kupfer, T., Blaes, O., Breedt, E., & Scaringi, S."
 category: manuscripts
 permalink: /publication/2020-10-19-hp-librae-periodicities
 excerpt: 'Analysis of periodic signals in the K2 lightcurve of the cataclysmic variable HP Librae.'

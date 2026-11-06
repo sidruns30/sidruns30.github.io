@@ -1,6 +1,10 @@
 ---
 title: "Stellar-wind Fueled Accretion onto Sagittarius A* in the Presence of a Nuclear Star Cluster"
 collection: publications
+layout: research-paper
+status: preprint
+publication_year: "2026"
+authors: "Skrabacz, E., Murchikova, L., Ressler, S. M., Ukani, A., & Solanki, S."
 category: manuscripts
 permalink: /publication/2026-01-14-sgra-stellar-wind-accretion
 excerpt: 'Simulations of accretion onto Sagittarius A* fueled by stellar winds from the surrounding nuclear star cluster.'

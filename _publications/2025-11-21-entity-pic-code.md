@@ -1,6 +1,10 @@
 ---
 title: "Entity -- Hardware-agnostic Particle-in-Cell Code for Plasma Astrophysics. I: Curvilinear Special Relativistic Module"
 collection: publications
+layout: research-paper
+status: journal
+publication_year: "2026"
+authors: "Hakobyan, H., Böss, L. M., Cai, Y., Chernoglazov, A., Galishnikova, A., Gorbunov, E. A., Mahlmann, J. F., Philippov, A., Solanki, S., Vanthieghem, A., & Zhou, M."
 category: manuscripts
 permalink: /publication/2025-11-21-entity-pic-code
 excerpt: 'Description of Entity, a hardware-agnostic particle-in-cell simulation code for plasma astrophysics, and its curvilinear special-relativistic module.'

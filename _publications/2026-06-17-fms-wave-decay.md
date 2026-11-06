@@ -1,6 +1,11 @@
 ---
 title: "Nonlinear Decay of Fast Magnetosonic Waves through Weak Turbulence: Force-Free Electrodynamics Simulations"
 collection: publications
+layout: research-paper
+status: preprint
+publication_year: "2026"
+authors: "Solanki, S., Mahlmann, J., & Philippov, A."
+featured: true
 category: manuscripts
 permalink: /publication/2026-06-17-fms-wave-decay
 excerpt: 'Force-free electrodynamics simulations showing how fast magnetosonic waves decay nonlinearly in highly magnetized magnetar environments, relevant to fast radio bursts.'
