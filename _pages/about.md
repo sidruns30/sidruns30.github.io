@@ -22,7 +22,7 @@ redirect_from:
   </figure>
 </section>
 <section class="research-section section container" id="research" aria-labelledby="research-title">
-  <div class="section-heading"><div><p class="eyebrow">01 / Research</p><h2 id="research-title">The universe, at its extremes.</h2></div><p>Connecting plasma-scale physics<br class="desktop-break"> to astrophysical phenomena.</p></div>
+  <div class="section-heading"><div><p class="eyebrow">01 / Research</p><h2 id="research-title">Relativistic Plasmas</h2></div></div>
   <div class="research-grid">
     <article class="research-card"><span class="research-number">01</span><h3>Magnetars &amp;<br> plasma waves</h3><p>Wave propagation, nonlinear decay, and turbulence in strongly magnetized plasmas, with applications to fast radio bursts and pulsar emission.</p><a href="{{ '/publication/2026-06-17-fms-wave-decay' | relative_url }}">Waves &amp; turbulence <span aria-hidden="true">↗</span></a></article>
     <article class="research-card"><span class="research-number">02</span><h3>Black holes &amp;<br> their environments</h3><p>Multiphase accretion onto Sagittarius A*, magnetic reconnection, and the very high-energy flares and variability of supermassive black holes.</p><a href="{{ '/publication/2025-05-21-m87-flares-lightcurves' | relative_url }}">Reconnection-powered flares <span aria-hidden="true">↗</span></a></article>
@@ -36,5 +36,5 @@ redirect_from:
 </section>
 <section class="about-section section container" aria-labelledby="about-title">
   <div><p class="eyebrow">03 / Background</p><h2 id="about-title">A little about me.</h2><a class="text-link" href="{{ '/cv/' | relative_url }}">Full academic CV <span aria-hidden="true">↗</span></a></div>
-  <div class="about-copy"><p>I’m a graduate student in Stanford’s Physics Department, working in plasma and high-energy astrophysics. I grew up in India and earned my bachelor’s in Physics at UC Santa Barbara, followed by a master’s in Astronomy at the University of Maryland. I transferred to Stanford in 2026 to continue my PhD.</p><p>I also enjoy teaching and mentorship. If you’re an undergraduate considering graduate school in physics or astronomy, I’m happy to talk.</p><a class="text-link" href="mailto:{{ site.author.email }}">Say hello <span aria-hidden="true">↗</span></a></div>
+  <div class="about-copy"><p>I’m a graduate student in Stanford’s Physics Department, working in plasma and high-energy astrophysics. I grew up in India and earned my bachelor’s in Physics at UC Santa Barbara, followed by a master’s in Astronomy at the University of Maryland. I transferred to Stanford in 2026 to continue my PhD.</p><p>I also enjoy teaching and mentorship. If you’re an undergraduate considering graduate school in physics or astronomy, I’m happy to talk.</p></div>
 </section>
