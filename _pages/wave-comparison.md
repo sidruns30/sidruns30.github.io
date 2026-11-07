@@ -1,6 +1,6 @@
 ---
 layout: academic-page
-title: "One pulse. Three plasma models."
+title: "Escape of Fast Radio Burst Propagation"
 permalink: /research/wave-comparison/
 description: "A strong fast magnetosonic pulse interacting with weak resonant Alfvén waves in MHD, force-free electrodynamics, and kinetic pair plasma."
 published: true
@@ -34,11 +34,11 @@ For PIC, the input starvation parameter is **ψ<sub>st</sub> = 0.5**, using the 
 
 ## Reading the movies
 
-Three wide panels show MHD, FFE, and PIC on the same physical clock. Each shows **electromagnetic wave energy** with the uniform guide field removed. Low amplitudes fade to transparency. The still preview is monochrome; the movie uses the palette sampled from Figure 1 of the [ApJ paper](https://arxiv.org/pdf/2606.19450v1), with a fixed scale shared by every model and frame.
+Three wide panels show MHD, FFE, and PIC on the same physical clock. Each shows **electromagnetic wave energy** with the uniform guide field removed. Low amplitudes fade to transparency against a black background. The still preview uses the maximum RGB channel as monochrome intensity; the movie uses a black–red–yellow palette following Figure 1 of the [ApJL paper](https://arxiv.org/pdf/2606.19448v1), with a fixed scale shared by every model and frame.
 
 The displayed energy follows the paper's wave-energy definition: <i>u</i><sub>w</sub> = (&#124;<i>E</i>&#124;² + &#124;<i>B</i> − <i>B</i>₀&#124;²)/2 in the normalized units above. The guide field is removed **before** squaring. This positive quantity differs from subtracting the uniform background energy from the total electromagnetic energy.
 
-The movie uses the existing completed production runs. It shows electromagnetic energy only. All energy scalars are calculated on the native grid before averaging onto the common 640 × 128 display grid. The energy-density unit is <i>U</i>₀ = <i>B</i>₀²/(4π). Color is linear from 0 to 0.39<i>U</i>₀. Values below 0.0005<i>U</i>₀ are transparent, with a smooth transition to full opacity at 0.012<i>U</i>₀. These display thresholds also fade real weak seed waves; the downloadable energies retain them.
+The movie uses the existing completed production runs. It shows electromagnetic energy only. All energy scalars are calculated on the native grid before averaging onto the common 640 × 128 display grid. The energy-density unit is <i>U</i>₀ = <i>B</i>₀²/(4π). The shared energy normalization spans 0 to 0.39<i>U</i>₀ linearly. Black marks zero; the palette reaches red at 0.0468<i>U</i>₀ and yellow at the upper bound. Values below 0.0005<i>U</i>₀ are transparent, with a smooth transition to full opacity at 0.012<i>U</i>₀. These display thresholds also fade real weak seed waves; the downloadable energies retain them.
 
 | Model | Native grid (x × z) | Plasma regime |
 | --- | --- | --- |
