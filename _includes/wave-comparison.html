@@ -1,0 +1,19 @@
+<figure class="simulation-feature simulation-comparison" aria-labelledby="wave-comparison-title">
+  <div class="simulation-copy">
+    <div><p class="eyebrow">A closer look</p><h3 id="wave-comparison-title">One pulse.<br> Three models.</h3></div>
+    <div><p>A fast magnetosonic pulse travels through a background of Alfvén waves. These simulations compare its evolution in relativistic MHD, force-free electrodynamics, and a kinetic pair plasma.</p><span class="method-list">MHD <span>·</span> FFE <span>·</span> PIC</span></div>
+  </div>
+  <div class="comparison-player">
+    <video controls playsinline preload="metadata" width="1920" height="1020" poster="{{ site.data.wave_comparison.poster | relative_url }}" aria-label="Side-by-side movies of an FMS pulse in MHD, FFE, and PIC" aria-describedby="wave-comparison-caption">
+      <source src="{{ site.data.wave_comparison.movie | relative_url }}" type="video/mp4">
+      <p><a href="{{ site.data.wave_comparison.movie | relative_url }}">Download the simulation movie.</a></p>
+    </video>
+  </div>
+  <figcaption id="wave-comparison-caption" class="comparison-caption"><span>Matched magnetic pulse · Shared wave seeds · Synchronized time<span class="comparison-viewing-tip">Use full screen to compare the panels.</span></span><a href="{{ site.data.wave_comparison.movie | relative_url }}" download>Download movie <span aria-hidden="true">↓</span></a></figcaption>
+  <details class="comparison-methods">
+    <summary>About this comparison</summary>
+    <p>{{ site.data.wave_comparison.description }}</p>
+    <p>The curves track compressive and Alfvén-polarized electromagnetic fluctuations. The MHD compressive component can include fast and slow modes. Their evolution can reflect conversion, redistribution, and damping; it does not by itself measure plasma heating.</p>
+    <a href="{{ site.data.wave_comparison.methods | relative_url }}">Simulation setup and diagnostics <span aria-hidden="true">↗</span></a>
+  </details>
+</figure>
