@@ -1,0 +1,847 @@
+{
+  "generated_utc": "2026-11-07T03:39:04.520968+00:00",
+  "status": "complete",
+  "regime": "resonant_fms03",
+  "solver": "FFE",
+  "case": "coupled",
+  "controls_or_refinements": [],
+  "additional_evolution_campaigns": false,
+  "requested_interval_L_over_c": [
+    0,
+    2
+  ],
+  "actual_exported_interval_L_over_c": [
+    0.0,
+    2.0
+  ],
+  "frame_count": 101,
+  "cadence_L_over_c": 0.02,
+  "geometry": {
+    "physical_domain_x_z": [
+      5,
+      1
+    ],
+    "guide_physical_xyz": [
+      0,
+      0,
+      1
+    ],
+    "native_grid_x_y_z": [
+      1920,
+      384,
+      1
+    ],
+    "ghosts_per_side": [
+      4,
+      4,
+      4
+    ],
+    "native_basis": [
+      "physical x",
+      "physical z",
+      "-physical y"
+    ],
+    "export_vector_components": [
+      "physical x",
+      "physical y",
+      "physical z"
+    ],
+    "export_spatial_array_axes": [
+      "physical z",
+      "physical x"
+    ],
+    "ghost_removal": "Physical cell-center coordinate mask, no duplicated periodic boundaries",
+    "display_grid_x_z": [
+      640,
+      128
+    ],
+    "display_reduction": "3 by 3 block mean after native diagnostics"
+  },
+  "physics": {
+    "B0": 1,
+    "c": 1,
+    "L_transverse": 1,
+    "FMS_peak_deltaB_over_B0": 0.3,
+    "carrier_cycles_per_L": 14,
+    "envelope_width_L": 0.75,
+    "pulse_center_x_L": 1,
+    "AW_pairs": 40,
+    "AW_traveling_waves": 80,
+    "AW_peak_deltaB_over_B0_per_wave": 0.005,
+    "model": "force-free electrodynamics in Minkowski spacetime",
+    "initialization": "Canonical header FFE model; no legacy amplitude rescaling"
+  },
+  "numerics": {
+    "reconstruction": "MP7",
+    "integrator": "RK4",
+    "dt_L_over_c": 0.0005128205128205128,
+    "output_steps": 39,
+    "target_steps": 3900,
+    "invariant_native_z_physical_cells": 1,
+    "invariant_axis_support": "Source inspection of Periodic slab copying and MP7 index bounds; no extra pilot",
+    "native_D_equals_E": true,
+    "constraint_enforcement": "Existing FFEvolve E dot B projection and E>B cutoff retained",
+    "current_driver_eta": 0,
+    "current_driver_gamma": 8,
+    "diagnostics_cutoff_cycles_per_L": 64,
+    "coherent_fast_band_kx_cycles_per_L": [
+      10,
+      18
+    ],
+    "coherent_fast_band_kz": 0
+  },
+  "build": {
+    "solver_tree": "/scratch/zt1/project/sashaph-prj/user/siddhant/einstein-toolkit/Cactus",
+    "thorn": "arrangements/UserThorns/FFEvolve",
+    "thorn_head_context": "02a74fda5644e10f3d7b816878031997cd9ef3df",
+    "head_caveat": "Existing tree had pre-existing modified source/deck files; exact binary and library hashes identify the build",
+    "method": "Private copy of existing thorn archive with only initializer object replaced; relink read-only numerical dependencies",
+    "binary_sha256": "742cd09de196d4df5cff4f38bd25e6ec298971fe67caa22716dab12d874ca651",
+    "original_thorn_archive_sha256": "1fa740dd800a7c569a6845281e5598ff2c10a108398acd5309fa0541d4cb5032",
+    "initial_condition_sha256": "efddb50b4764842ef045389e495a1ee04e60cb60674afba830255833a03036e7",
+    "initializer_adapter_sha256": "846dd071b87d72755c6207e8b6de7eb39e89a5b0b4afe4ac4865f015f0618546",
+    "diagnostics_sha256": "0cccfa32bcc580641e334b14fac06faa2dc9b98a328f1e283121fac503536098",
+    "extractor_sha256": "3b5ae1ed13ff48722105c5c2d5eaea63c42164e2ce5acb68a5300f8e6b24e236",
+    "parameter_deck_sha256": {
+      "production_coupled.par": "0f591d102ee3b934364416a6e8b996a753982656c4bf24d2f0e9295bfe151db2",
+      "continuation_coupled.par": "16975e12c26b198a3d8f15065297f12d0fbde6ffd64b6bd9e1a817008d07aaa3"
+    },
+    "modules": [
+      "gcc/11.3.0",
+      "openmpi/gcc/11.3.0/zen2/4.1.5"
+    ]
+  },
+  "execution": {
+    "build_job": 23860400,
+    "production_job": 23860401,
+    "guarded_checkpoint_continuation_job": 23860638,
+    "final_export_job": 23860655,
+    "ranks": 256,
+    "nodes": 2,
+    "ranks_per_node": 128,
+    "threads_per_rank": 1,
+    "memory_GB_per_node": 32,
+    "production_wall_minutes": 150,
+    "continuation_wall_minutes": 60,
+    "termination_reserve_minutes": 2,
+    "checkpoint": "t=1 plus termination; restart-only auto recovery; preserve and append existing outputs",
+    "checkpoint_handoff": {
+      "termination_checkpoint_iteration": 3730,
+      "recovered_iteration": 3730,
+      "time_L_over_c": 1.912820512820513,
+      "status": "Verified in production and continuation logs",
+      "first_allocation_timeout_context": "Solver exited cleanly after the termination checkpoint; scheduler limit occurred during its intermediate export"
+    },
+    "placement": "Each host verifies exactly 128 local job ranks and pins one to each allocated cpuset CPU",
+    "affinity_records": [
+      "affinity-23860401-compute-b6-28.zaratan.umd.edu.json",
+      "affinity-23860638-compute-b6-28.zaratan.umd.edu.json"
+    ],
+    "slurm_accounting": "JobID|State|ExitCode|Elapsed|AllocCPUS|NNodes|NodeList\n23860400|COMPLETED|0:0|00:01:57|4|1|compute-b8-57\n23860401|TIMEOUT|0:0|02:30:15|256|2|compute-b6-[28,35]\n23860638|COMPLETED|0:0|00:10:52|256|2|compute-b6-[28,35]\n23860655|COMPLETED|0:0|00:03:57|1|1|compute-a8-13\n"
+  },
+  "native_diagnostics": {
+    "total_em": {
+      "initial": 0.5121636344542995,
+      "final": 0.5108574931757268,
+      "minimum": 0.5108574931757268,
+      "maximum": 0.5121636344542995
+    },
+    "perturbation_em": {
+      "initial": 0.012163634454299353,
+      "final": 0.010857493175772169,
+      "minimum": 0.010857493175772169,
+      "maximum": 0.012163634454299353
+    },
+    "compressive_em_lowpass": {
+      "initial": 0.011157803529187658,
+      "final": 0.006021454598017271,
+      "minimum": 0.005316749322034246,
+      "maximum": 0.011157803529187658
+    },
+    "alfven_em_lowpass": {
+      "initial": 0.0010000000000000013,
+      "final": 0.004771528586236318,
+      "minimum": 0.0010000000000000013,
+      "maximum": 0.006124007928286646
+    },
+    "coherent_fast_em": {
+      "initial": 0.011157801845945357,
+      "final": 0.005411261705151978,
+      "minimum": 0.0047105218788595846,
+      "maximum": 0.011157801845945357
+    },
+    "degenerate_parallel_em_lowpass": {
+      "initial": 9.303508883308549e-08,
+      "final": 1.545255689119028e-05,
+      "minimum": 9.303508883308549e-08,
+      "maximum": 6.329006535747442e-05
+    },
+    "e_dot_b_rms": {
+      "initial": 1.9803036071507704e-19,
+      "final": 6.569667401234253e-19,
+      "minimum": 1.9803036071507704e-19,
+      "maximum": 1.1608600333852098e-18
+    },
+    "e_parallel_rms": {
+      "initial": 1.8891547131742307e-19,
+      "final": 6.320938141380667e-19,
+      "minimum": 1.8891547131742307e-19,
+      "maximum": 1.1874806444870677e-18
+    },
+    "e_parallel_max": {
+      "initial": 4.914942626283097e-18,
+      "final": 1.2825230295278126e-17,
+      "minimum": 4.914942626283097e-18,
+      "maximum": 4.8566730613522206e-17
+    },
+    "max_e_over_b": {
+      "initial": 0.44190613808860146,
+      "final": 0.6313709939864968,
+      "minimum": 0.39866728894622894,
+      "maximum": 0.7440811547399634
+    },
+    "div_b_lowpass_rms": {
+      "initial": 0.0,
+      "final": 0.044744822429726855,
+      "minimum": 0.0,
+      "maximum": 0.047002679561866254
+    }
+  },
+  "total_em_fractional_change": -0.0025502421310413803,
+  "perturbation_em_fractional_change": -0.10738083945506238,
+  "interpretation": "Linear EM projections about guide +z. The compressive projection includes both fast and slow magnetosonic modes in MHD; fast_em_lowpass is a legacy alias for compressive_em_lowpass, not an eigenmode-resolved MHD fast energy. Pure parallel modes are degenerate and reported separately. Projection changes are not a heating measurement.",
+  "diagnostic_table_sha256": "3fa32329b61ecd8e1eb6c5736c3fba9d2b77cf5f13ce4fe0782d82b503b2cfee",
+  "native_output_path": "/scratch/zt1/project/sashaph-prj/user/siddhant/website-fms-comparison-20261106/resonant_fms03/ffe/production_coupled",
+  "export_path": "/scratch/zt1/project/sashaph-prj/user/siddhant/website-fms-comparison-20261106/resonant_fms03/frames/ffe",
+  "display_compression_bounds": {
+    "ffe": {
+      "definition": "(physical Bz - B0) / B0 on saved display grid; B0=1",
+      "display_grid": [
+        128,
+        640
+      ],
+      "interval": [
+        0.0,
+        2.0
+      ],
+      "frame_count": 101,
+      "minimum": -0.32601398229599,
+      "maximum": 0.3443872928619385,
+      "absolute_maximum": 0.3443872928619385,
+      "extremum_frame": {
+        "time": 1.08,
+        "minimum": -0.2629212737083435,
+        "maximum": 0.3443872928619385,
+        "absolute_maximum": 0.3443872928619385
+      },
+      "per_frame": [
+        {
+          "time": 0.0,
+          "minimum": -0.29441946744918823,
+          "maximum": 0.29441940784454346,
+          "absolute_maximum": 0.29441946744918823
+        },
+        {
+          "time": 0.02,
+          "minimum": -0.29494619369506836,
+          "maximum": 0.2946513891220093,
+          "absolute_maximum": 0.29494619369506836
+        },
+        {
+          "time": 0.04,
+          "minimum": -0.29485952854156494,
+          "maximum": 0.29576218128204346,
+          "absolute_maximum": 0.29576218128204346
+        },
+        {
+          "time": 0.06,
+          "minimum": -0.2954781651496887,
+          "maximum": 0.2953680753707886,
+          "absolute_maximum": 0.2954781651496887
+        },
+        {
+          "time": 0.08,
+          "minimum": -0.29523372650146484,
+          "maximum": 0.2959401607513428,
+          "absolute_maximum": 0.2959401607513428
+        },
+        {
+          "time": 0.1,
+          "minimum": -0.2964246869087219,
+          "maximum": 0.2957632541656494,
+          "absolute_maximum": 0.2964246869087219
+        },
+        {
+          "time": 0.12,
+          "minimum": -0.29560285806655884,
+          "maximum": 0.29885566234588623,
+          "absolute_maximum": 0.29885566234588623
+        },
+        {
+          "time": 0.14,
+          "minimum": -0.2981364130973816,
+          "maximum": 0.2955857515335083,
+          "absolute_maximum": 0.2981364130973816
+        },
+        {
+          "time": 0.16,
+          "minimum": -0.2958224415779114,
+          "maximum": 0.299130916595459,
+          "absolute_maximum": 0.299130916595459
+        },
+        {
+          "time": 0.18,
+          "minimum": -0.29981863498687744,
+          "maximum": 0.29708266258239746,
+          "absolute_maximum": 0.29981863498687744
+        },
+        {
+          "time": 0.2,
+          "minimum": -0.2974587678909302,
+          "maximum": 0.30337655544281006,
+          "absolute_maximum": 0.30337655544281006
+        },
+        {
+          "time": 0.22,
+          "minimum": -0.3016224503517151,
+          "maximum": 0.3002159595489502,
+          "absolute_maximum": 0.3016224503517151
+        },
+        {
+          "time": 0.24,
+          "minimum": -0.3017270565032959,
+          "maximum": 0.30040740966796875,
+          "absolute_maximum": 0.3017270565032959
+        },
+        {
+          "time": 0.26,
+          "minimum": -0.29614168405532837,
+          "maximum": 0.30820512771606445,
+          "absolute_maximum": 0.30820512771606445
+        },
+        {
+          "time": 0.28,
+          "minimum": -0.3058716058731079,
+          "maximum": 0.3003469705581665,
+          "absolute_maximum": 0.3058716058731079
+        },
+        {
+          "time": 0.3,
+          "minimum": -0.2985122799873352,
+          "maximum": 0.30758941173553467,
+          "absolute_maximum": 0.30758941173553467
+        },
+        {
+          "time": 0.32,
+          "minimum": -0.3040958046913147,
+          "maximum": 0.2933049201965332,
+          "absolute_maximum": 0.3040958046913147
+        },
+        {
+          "time": 0.34,
+          "minimum": -0.2953781485557556,
+          "maximum": 0.3108772039413452,
+          "absolute_maximum": 0.3108772039413452
+        },
+        {
+          "time": 0.36,
+          "minimum": -0.30371856689453125,
+          "maximum": 0.29152965545654297,
+          "absolute_maximum": 0.30371856689453125
+        },
+        {
+          "time": 0.38,
+          "minimum": -0.2897986173629761,
+          "maximum": 0.300434947013855,
+          "absolute_maximum": 0.300434947013855
+        },
+        {
+          "time": 0.4,
+          "minimum": -0.29444700479507446,
+          "maximum": 0.2950035333633423,
+          "absolute_maximum": 0.2950035333633423
+        },
+        {
+          "time": 0.42,
+          "minimum": -0.28710758686065674,
+          "maximum": 0.29446661472320557,
+          "absolute_maximum": 0.29446661472320557
+        },
+        {
+          "time": 0.44,
+          "minimum": -0.2960798740386963,
+          "maximum": 0.28661859035491943,
+          "absolute_maximum": 0.2960798740386963
+        },
+        {
+          "time": 0.46,
+          "minimum": -0.2835555076599121,
+          "maximum": 0.28512144088745117,
+          "absolute_maximum": 0.28512144088745117
+        },
+        {
+          "time": 0.48,
+          "minimum": -0.2828298807144165,
+          "maximum": 0.2873769998550415,
+          "absolute_maximum": 0.2873769998550415
+        },
+        {
+          "time": 0.5,
+          "minimum": -0.294772207736969,
+          "maximum": 0.28578853607177734,
+          "absolute_maximum": 0.294772207736969
+        },
+        {
+          "time": 0.52,
+          "minimum": -0.2912214994430542,
+          "maximum": 0.2818373441696167,
+          "absolute_maximum": 0.2912214994430542
+        },
+        {
+          "time": 0.54,
+          "minimum": -0.2876880168914795,
+          "maximum": 0.29831600189208984,
+          "absolute_maximum": 0.29831600189208984
+        },
+        {
+          "time": 0.56,
+          "minimum": -0.27630090713500977,
+          "maximum": 0.29540109634399414,
+          "absolute_maximum": 0.29540109634399414
+        },
+        {
+          "time": 0.58,
+          "minimum": -0.31276851892471313,
+          "maximum": 0.3072749376296997,
+          "absolute_maximum": 0.31276851892471313
+        },
+        {
+          "time": 0.6,
+          "minimum": -0.26754599809646606,
+          "maximum": 0.2835174798965454,
+          "absolute_maximum": 0.2835174798965454
+        },
+        {
+          "time": 0.62,
+          "minimum": -0.28136688470840454,
+          "maximum": 0.31824731826782227,
+          "absolute_maximum": 0.31824731826782227
+        },
+        {
+          "time": 0.64,
+          "minimum": -0.27990925312042236,
+          "maximum": 0.3046673536300659,
+          "absolute_maximum": 0.3046673536300659
+        },
+        {
+          "time": 0.66,
+          "minimum": -0.29206979274749756,
+          "maximum": 0.28865933418273926,
+          "absolute_maximum": 0.29206979274749756
+        },
+        {
+          "time": 0.68,
+          "minimum": -0.26860082149505615,
+          "maximum": 0.2842203378677368,
+          "absolute_maximum": 0.2842203378677368
+        },
+        {
+          "time": 0.7,
+          "minimum": -0.2637981176376343,
+          "maximum": 0.3135247230529785,
+          "absolute_maximum": 0.3135247230529785
+        },
+        {
+          "time": 0.72,
+          "minimum": -0.2662699818611145,
+          "maximum": 0.2748821973800659,
+          "absolute_maximum": 0.2748821973800659
+        },
+        {
+          "time": 0.74,
+          "minimum": -0.26861572265625,
+          "maximum": 0.2967033386230469,
+          "absolute_maximum": 0.2967033386230469
+        },
+        {
+          "time": 0.76,
+          "minimum": -0.26279640197753906,
+          "maximum": 0.2723480463027954,
+          "absolute_maximum": 0.2723480463027954
+        },
+        {
+          "time": 0.78,
+          "minimum": -0.3002500534057617,
+          "maximum": 0.3017693758010864,
+          "absolute_maximum": 0.3017693758010864
+        },
+        {
+          "time": 0.8,
+          "minimum": -0.2581446170806885,
+          "maximum": 0.27290499210357666,
+          "absolute_maximum": 0.27290499210357666
+        },
+        {
+          "time": 0.82,
+          "minimum": -0.2903866767883301,
+          "maximum": 0.33118605613708496,
+          "absolute_maximum": 0.33118605613708496
+        },
+        {
+          "time": 0.84,
+          "minimum": -0.2647799849510193,
+          "maximum": 0.2753819227218628,
+          "absolute_maximum": 0.2753819227218628
+        },
+        {
+          "time": 0.86,
+          "minimum": -0.2889232039451599,
+          "maximum": 0.3047393560409546,
+          "absolute_maximum": 0.3047393560409546
+        },
+        {
+          "time": 0.88,
+          "minimum": -0.2891664505004883,
+          "maximum": 0.30366289615631104,
+          "absolute_maximum": 0.30366289615631104
+        },
+        {
+          "time": 0.9,
+          "minimum": -0.27663761377334595,
+          "maximum": 0.2965158224105835,
+          "absolute_maximum": 0.2965158224105835
+        },
+        {
+          "time": 0.92,
+          "minimum": -0.31535935401916504,
+          "maximum": 0.31016433238983154,
+          "absolute_maximum": 0.31535935401916504
+        },
+        {
+          "time": 0.94,
+          "minimum": -0.26026368141174316,
+          "maximum": 0.2940030097961426,
+          "absolute_maximum": 0.2940030097961426
+        },
+        {
+          "time": 0.96,
+          "minimum": -0.2996118664741516,
+          "maximum": 0.33660733699798584,
+          "absolute_maximum": 0.33660733699798584
+        },
+        {
+          "time": 0.98,
+          "minimum": -0.25750571489334106,
+          "maximum": 0.2939873933792114,
+          "absolute_maximum": 0.2939873933792114
+        },
+        {
+          "time": 1.0,
+          "minimum": -0.2847748398780823,
+          "maximum": 0.3413398265838623,
+          "absolute_maximum": 0.3413398265838623
+        },
+        {
+          "time": 1.02,
+          "minimum": -0.2798451781272888,
+          "maximum": 0.3127356767654419,
+          "absolute_maximum": 0.3127356767654419
+        },
+        {
+          "time": 1.04,
+          "minimum": -0.28311651945114136,
+          "maximum": 0.32863640785217285,
+          "absolute_maximum": 0.32863640785217285
+        },
+        {
+          "time": 1.06,
+          "minimum": -0.2683725953102112,
+          "maximum": 0.3050847053527832,
+          "absolute_maximum": 0.3050847053527832
+        },
+        {
+          "time": 1.08,
+          "minimum": -0.2629212737083435,
+          "maximum": 0.3443872928619385,
+          "absolute_maximum": 0.3443872928619385
+        },
+        {
+          "time": 1.1,
+          "minimum": -0.28248131275177,
+          "maximum": 0.32401835918426514,
+          "absolute_maximum": 0.32401835918426514
+        },
+        {
+          "time": 1.12,
+          "minimum": -0.2816857695579529,
+          "maximum": 0.30784475803375244,
+          "absolute_maximum": 0.30784475803375244
+        },
+        {
+          "time": 1.14,
+          "minimum": -0.2719687223434448,
+          "maximum": 0.3005741834640503,
+          "absolute_maximum": 0.3005741834640503
+        },
+        {
+          "time": 1.16,
+          "minimum": -0.27418071031570435,
+          "maximum": 0.3113064765930176,
+          "absolute_maximum": 0.3113064765930176
+        },
+        {
+          "time": 1.18,
+          "minimum": -0.32601398229599,
+          "maximum": 0.31306397914886475,
+          "absolute_maximum": 0.32601398229599
+        },
+        {
+          "time": 1.2,
+          "minimum": -0.276275634765625,
+          "maximum": 0.28908228874206543,
+          "absolute_maximum": 0.28908228874206543
+        },
+        {
+          "time": 1.22,
+          "minimum": -0.2532854676246643,
+          "maximum": 0.30595362186431885,
+          "absolute_maximum": 0.30595362186431885
+        },
+        {
+          "time": 1.24,
+          "minimum": -0.31836551427841187,
+          "maximum": 0.29528379440307617,
+          "absolute_maximum": 0.31836551427841187
+        },
+        {
+          "time": 1.26,
+          "minimum": -0.28328949213027954,
+          "maximum": 0.3020439147949219,
+          "absolute_maximum": 0.3020439147949219
+        },
+        {
+          "time": 1.28,
+          "minimum": -0.2515801191329956,
+          "maximum": 0.32114362716674805,
+          "absolute_maximum": 0.32114362716674805
+        },
+        {
+          "time": 1.3,
+          "minimum": -0.251048743724823,
+          "maximum": 0.2944009304046631,
+          "absolute_maximum": 0.2944009304046631
+        },
+        {
+          "time": 1.32,
+          "minimum": -0.25018465518951416,
+          "maximum": 0.30776453018188477,
+          "absolute_maximum": 0.30776453018188477
+        },
+        {
+          "time": 1.34,
+          "minimum": -0.2427484393119812,
+          "maximum": 0.2936575412750244,
+          "absolute_maximum": 0.2936575412750244
+        },
+        {
+          "time": 1.36,
+          "minimum": -0.24798977375030518,
+          "maximum": 0.30965399742126465,
+          "absolute_maximum": 0.30965399742126465
+        },
+        {
+          "time": 1.38,
+          "minimum": -0.23976320028305054,
+          "maximum": 0.30378639698028564,
+          "absolute_maximum": 0.30378639698028564
+        },
+        {
+          "time": 1.4,
+          "minimum": -0.24594271183013916,
+          "maximum": 0.3068796396255493,
+          "absolute_maximum": 0.3068796396255493
+        },
+        {
+          "time": 1.42,
+          "minimum": -0.24067145586013794,
+          "maximum": 0.30687522888183594,
+          "absolute_maximum": 0.30687522888183594
+        },
+        {
+          "time": 1.44,
+          "minimum": -0.24627256393432617,
+          "maximum": 0.30165529251098633,
+          "absolute_maximum": 0.30165529251098633
+        },
+        {
+          "time": 1.46,
+          "minimum": -0.24493074417114258,
+          "maximum": 0.31066787242889404,
+          "absolute_maximum": 0.31066787242889404
+        },
+        {
+          "time": 1.48,
+          "minimum": -0.25388050079345703,
+          "maximum": 0.2935624122619629,
+          "absolute_maximum": 0.2935624122619629
+        },
+        {
+          "time": 1.5,
+          "minimum": -0.2512393593788147,
+          "maximum": 0.31183111667633057,
+          "absolute_maximum": 0.31183111667633057
+        },
+        {
+          "time": 1.52,
+          "minimum": -0.26031070947647095,
+          "maximum": 0.2998476028442383,
+          "absolute_maximum": 0.2998476028442383
+        },
+        {
+          "time": 1.54,
+          "minimum": -0.2556729316711426,
+          "maximum": 0.31101155281066895,
+          "absolute_maximum": 0.31101155281066895
+        },
+        {
+          "time": 1.56,
+          "minimum": -0.26616382598876953,
+          "maximum": 0.30839622020721436,
+          "absolute_maximum": 0.30839622020721436
+        },
+        {
+          "time": 1.58,
+          "minimum": -0.26239776611328125,
+          "maximum": 0.30623483657836914,
+          "absolute_maximum": 0.30623483657836914
+        },
+        {
+          "time": 1.6,
+          "minimum": -0.26204508543014526,
+          "maximum": 0.31298601627349854,
+          "absolute_maximum": 0.31298601627349854
+        },
+        {
+          "time": 1.62,
+          "minimum": -0.2596420645713806,
+          "maximum": 0.30915236473083496,
+          "absolute_maximum": 0.30915236473083496
+        },
+        {
+          "time": 1.64,
+          "minimum": -0.2697306275367737,
+          "maximum": 0.32015132904052734,
+          "absolute_maximum": 0.32015132904052734
+        },
+        {
+          "time": 1.66,
+          "minimum": -0.25017744302749634,
+          "maximum": 0.3173459768295288,
+          "absolute_maximum": 0.3173459768295288
+        },
+        {
+          "time": 1.68,
+          "minimum": -0.25214171409606934,
+          "maximum": 0.322584867477417,
+          "absolute_maximum": 0.322584867477417
+        },
+        {
+          "time": 1.7,
+          "minimum": -0.24447190761566162,
+          "maximum": 0.3181575536727905,
+          "absolute_maximum": 0.3181575536727905
+        },
+        {
+          "time": 1.72,
+          "minimum": -0.2629539370536804,
+          "maximum": 0.32418835163116455,
+          "absolute_maximum": 0.32418835163116455
+        },
+        {
+          "time": 1.74,
+          "minimum": -0.2500767707824707,
+          "maximum": 0.3239481449127197,
+          "absolute_maximum": 0.3239481449127197
+        },
+        {
+          "time": 1.76,
+          "minimum": -0.2574840784072876,
+          "maximum": 0.3231703042984009,
+          "absolute_maximum": 0.3231703042984009
+        },
+        {
+          "time": 1.78,
+          "minimum": -0.2501147389411926,
+          "maximum": 0.33028745651245117,
+          "absolute_maximum": 0.33028745651245117
+        },
+        {
+          "time": 1.8,
+          "minimum": -0.27090388536453247,
+          "maximum": 0.3213132619857788,
+          "absolute_maximum": 0.3213132619857788
+        },
+        {
+          "time": 1.82,
+          "minimum": -0.24041855335235596,
+          "maximum": 0.33096277713775635,
+          "absolute_maximum": 0.33096277713775635
+        },
+        {
+          "time": 1.84,
+          "minimum": -0.2505995035171509,
+          "maximum": 0.3258857727050781,
+          "absolute_maximum": 0.3258857727050781
+        },
+        {
+          "time": 1.86,
+          "minimum": -0.23925566673278809,
+          "maximum": 0.32316362857818604,
+          "absolute_maximum": 0.32316362857818604
+        },
+        {
+          "time": 1.88,
+          "minimum": -0.24614036083221436,
+          "maximum": 0.326340913772583,
+          "absolute_maximum": 0.326340913772583
+        },
+        {
+          "time": 1.9,
+          "minimum": -0.24034810066223145,
+          "maximum": 0.3110896348953247,
+          "absolute_maximum": 0.3110896348953247
+        },
+        {
+          "time": 1.92,
+          "minimum": -0.2420901656150818,
+          "maximum": 0.3238410949707031,
+          "absolute_maximum": 0.3238410949707031
+        },
+        {
+          "time": 1.94,
+          "minimum": -0.241784930229187,
+          "maximum": 0.31137609481811523,
+          "absolute_maximum": 0.31137609481811523
+        },
+        {
+          "time": 1.96,
+          "minimum": -0.24345266819000244,
+          "maximum": 0.31722497940063477,
+          "absolute_maximum": 0.31722497940063477
+        },
+        {
+          "time": 1.98,
+          "minimum": -0.24118554592132568,
+          "maximum": 0.31190359592437744,
+          "absolute_maximum": 0.31190359592437744
+        },
+        {
+          "time": 2.0,
+          "minimum": -0.23855727910995483,
+          "maximum": 0.31159210205078125,
+          "absolute_maximum": 0.31159210205078125
+        }
+      ]
+    }
+  }
+}

@@ -1,9 +1,15 @@
-ready: false
-movie: /assets/media/fms-resonant-decay.mp4
-poster: /assets/media/fms-resonant-decay.jpg
+ready: true
+movie: /assets/media/fms-resonant-decay.mp4?v=sigma10-beta01-full
+poster: /assets/media/fms-resonant-decay.jpg?v=sigma10-beta01-full
+curve_data: /assets/media/fms-resonant-decay.csv?v=sigma10-beta01-full
+metadata: /assets/media/fms-resonant-decay.json?v=sigma10-beta01-full
+mhd_report: /assets/media/fms-mhd-report.json
+ffe_report: /assets/media/fms-ffe-report.json
+pic_report: /assets/media/fms-pic-report.json
 methods: /research/wave-comparison/
 description: >-
-  A strong FMS pulse travels along +x through 40 weak Alfvén-wave pairs, with
-  the guide field along +z. The magnetic pulse and seed pattern are shared.
-  MHD has cold magnetization 5 and plasma beta 1; FFE neglects matter inertia;
+  An FMS pulse with peak magnetic amplitude δB/B₀ = 0.3 travels along +x
+  through 40 weak Alfvén-wave pairs, each wave at 0.005 B₀, with the guide
+  field along +z. The magnetic pulse and seed pattern are shared.
+  MHD has cold magnetization 10 and plasma beta 0.1; FFE neglects matter inertia;
   PIC follows a pair plasma with input starvation parameter 0.5.

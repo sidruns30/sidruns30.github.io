@@ -3,7 +3,7 @@ layout: academic-page
 title: "One pulse. Three plasma models."
 permalink: /research/wave-comparison/
 description: "A strong fast magnetosonic pulse interacting with weak resonant Alfvén waves in MHD, force-free electrodynamics, and kinetic pair plasma."
-published: false
+published: true
 ---
 
 A strong fast magnetosonic pulse travels through weak Alfvén-wave seeds. The comparison uses **Athena++** for relativistic MHD, **Einstein Toolkit / FFEvolve** for force-free electrodynamics, and **Entity** for particle-in-cell evolution.
@@ -26,7 +26,7 @@ Each pair's wavevectors add to the FMS carrier. The common spectrum includes par
 
 ## Plasma regimes
 
-The MHD background uses **cold magnetization σ = 5** and **β = 1**, where σ = <i>B</i>₀²/(4πρ<i>c</i>²) and β = 8π<i>p</i>/<i>B</i>₀². With adiabatic index 4/3, the normalized density is 0.2, pressure is 0.5, and enthalpy-based magnetization is approximately 0.455. Its initial pulse follows the finite-amplitude perpendicular relativistic-MHD simple-wave relation.
+The MHD background uses **cold magnetization σ = 10** and **β = 0.1**, where σ = <i>B</i>₀²/(4πρ<i>c</i>²) and β = 8π<i>p</i>/<i>B</i>₀². With adiabatic index 4/3, the normalized density is 0.1, pressure is 0.05, and enthalpy-based magnetization is approximately 3.33. Its initial pulse follows the finite-amplitude perpendicular relativistic-MHD simple-wave relation.
 
 FFE neglects matter inertia and pressure. Its isolated pulse has <i>E</i><sub>y</sub> = δ<i>B</i><sub>z</sub>. PIC uses the same electromagnetic pulse in a highly magnetized electron–positron plasma, with cold σ = 125 and initial dimensionless temperature 0.1. The electric and velocity fields therefore reflect each model's plasma regime; matching the magnetic pulse does not imply identical electric fields or matter thermodynamics.
 
@@ -36,10 +36,24 @@ For PIC, the input starvation parameter is **ψ<sub>st</sub> = 0.5**, using the 
 
 The upper maps show the magnetic compression δ<i>B</i><sub>z</sub>/<i>B</i><sub>0</sub>; the lower maps show the Alfvén component <i>B</i><sub>y</sub>/<i>B</i><sub>0</sub>. Both rows and all three models share one fixed magnetic-amplitude color scale. The maps use actual saved solver fields, averaged onto a common 640 × 128 display grid.
 
-The curves retain wavelengths with |<i>k</i>|<i>L</i>/(2π) ≤ 64. Each model's curves are normalized to its own initial compressive electromagnetic polarization norm, since the initial electric fields differ. Spectral diagnostics are computed at native resolution before display averaging. Modes with <i>k</i><sub>x</sub> = 0 have degenerate transverse polarizations and are recorded separately. The metadata records the actual times selected for each panel.
+| Model | Native grid (x × z) | Plasma regime |
+| --- | --- | --- |
+| Relativistic MHD | 2560 × 512 | Cold σ = 10; β = 0.1 |
+| Force-free electrodynamics | 1920 × 384 | Negligible matter inertia |
+| Pair-plasma PIC | 2560 × 512 | Cold σ = 125; ψ<sub>st</sub> = 0.5 |
+
+Frames are saved every 0.02<i>L</i>/<i>c</i>, from <i>t</i> = 0 to 2<i>L</i>/<i>c</i>. The renderer matches actual saved times to within 0.001<i>L</i>/<i>c</i> without interpolating the evolved fields.
+
+The curves retain wavelengths with &#124;<i>k</i>&#124;<i>L</i>/(2π) ≤ 64. Each model's curves are normalized to its own initial compressive electromagnetic polarization norm, since the initial electric fields differ. Spectral diagnostics are computed at native resolution before display averaging. Modes with <i>k</i><sub>x</sub> = 0 have degenerate transverse polarizations and are recorded separately. The metadata records the actual times selected for each panel.
 
 The curves are linear electromagnetic polarization diagnostics about the guide field: compressive (solid) and Alfvén-polarized (dashed). In MHD, the compressive projection includes both fast and slow magnetosonic modes. The curves help track conversion and spectral redistribution, but do not measure the complete wave energy in MHD or PIC, or directly measure plasma heating. Finite-amplitude steepening can also change the MHD pulse. These production runs do not establish numerical convergence or a universal damping rate.
 
+Over the full interval, FFE's total electromagnetic energy decreases by 0.255%, equivalent to 10.74% of its initial perturbation energy. Its exchange between polarizations therefore should not be read as exactly conservative. The solver reports below retain the measured energy balances and constraint residuals.
+
 PIC uses 32 particles per cell in total and two current-filter passes. The metadata retains its finite initial discrete Gauss-law residual and the separate offset relative to filtered charge, alongside their subsequent evolution. A small change in a constraint residual does not imply its initial value was zero.
+
+[Download the movie]({{ site.data.wave_comparison.movie | relative_url }}) · [Curve data (CSV)]({{ site.data.wave_comparison.curve_data | relative_url }}) · [Setup, timing, and diagnostics (JSON)]({{ site.data.wave_comparison.metadata | relative_url }})
+
+Solver reports: [MHD]({{ site.data.wave_comparison.mhd_report | relative_url }}) · [FFE]({{ site.data.wave_comparison.ffe_report | relative_url }}) · [PIC]({{ site.data.wave_comparison.pic_report | relative_url }})
 
 <p><a href="{{ '/' | relative_url }}#research">Return to research <span aria-hidden="true">↗</span></a></p>

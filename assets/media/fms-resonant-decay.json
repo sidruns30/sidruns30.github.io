@@ -1,0 +1,2343 @@
+{
+  "schema_version": 1,
+  "preview": false,
+  "model_order": [
+    "MHD",
+    "FFE",
+    "PIC"
+  ],
+  "physical_setup": {
+    "initial_condition_sha256": "efddb50b4764842ef045389e495a1ee04e60cb60674afba830255833a03036e7",
+    "units": "c=4pi=B0=L=1; L is transverse length, not long x-box length",
+    "spatial_axes": [
+      "physical x",
+      "physical z"
+    ],
+    "guide_physical": [
+      0,
+      0,
+      1
+    ],
+    "domain_lengths": [
+      5,
+      1
+    ],
+    "boundaries": "periodic x and z; unlike the paper absorbing x boundary; main packet does not wrap in displayed interval",
+    "duration_L_over_c": 2.0,
+    "output_interval_L_over_c": 0.02,
+    "pulse": {
+      "magnetic_carrier_peak": 0.3,
+      "carrier_cycles_per_L": 14,
+      "centre_x_over_L": 1,
+      "envelope_width_over_L": 0.75,
+      "profile": "0.3 sin(2pi*14*d) exp[-(d/.75)^6]; d is x/L-1 wrapped into [-2.5,2.5)",
+      "FFE_PIC": "physical Bz=1+f, Ey=f, vx=f/(1+f), rho/rho0=sqrt(1+2f), p/p0=(rho/rho0)^gamma; finite-inertia PIC start is a force-free-limit wave",
+      "MHD": "exact perpendicular SRMHD simplewave Riemann invariant; same lab magnetic pulse, model-dependent electric field and speed"
+    },
+    "alfven_seeds": {
+      "pairs": 40,
+      "traveling_waves": 80,
+      "each_wave_peak_dB_over_B0": 0.005,
+      "spatial_RMS_dB_over_B0": 0.0316227766016838,
+      "family_pair_counts": {
+        "kz7": 14,
+        "kz8": 13,
+        "kz9": 13
+      },
+      "phase": "2pi*(0.75487766624669276005*j+0.56984029099805326591*j*j), j=2*pair+member+1",
+      "modes": [
+        {
+          "pair": 0,
+          "k1_cycles_per_L": [
+            -12.0,
+            7
+          ],
+          "k2_cycles_per_L": [
+            26.0,
+            -7
+          ]
+        },
+        {
+          "pair": 1,
+          "k1_cycles_per_L": [
+            -12.2,
+            7
+          ],
+          "k2_cycles_per_L": [
+            26.2,
+            -7
+          ]
+        },
+        {
+          "pair": 2,
+          "k1_cycles_per_L": [
+            -12.4,
+            7
+          ],
+          "k2_cycles_per_L": [
+            26.4,
+            -7
+          ]
+        },
+        {
+          "pair": 3,
+          "k1_cycles_per_L": [
+            -12.6,
+            7
+          ],
+          "k2_cycles_per_L": [
+            26.6,
+            -7
+          ]
+        },
+        {
+          "pair": 4,
+          "k1_cycles_per_L": [
+            -12.8,
+            7
+          ],
+          "k2_cycles_per_L": [
+            26.8,
+            -7
+          ]
+        },
+        {
+          "pair": 5,
+          "k1_cycles_per_L": [
+            -13.0,
+            7
+          ],
+          "k2_cycles_per_L": [
+            27.0,
+            -7
+          ]
+        },
+        {
+          "pair": 6,
+          "k1_cycles_per_L": [
+            -13.2,
+            7
+          ],
+          "k2_cycles_per_L": [
+            27.2,
+            -7
+          ]
+        },
+        {
+          "pair": 7,
+          "k1_cycles_per_L": [
+            -13.4,
+            7
+          ],
+          "k2_cycles_per_L": [
+            27.4,
+            -7
+          ]
+        },
+        {
+          "pair": 8,
+          "k1_cycles_per_L": [
+            -13.6,
+            7
+          ],
+          "k2_cycles_per_L": [
+            27.6,
+            -7
+          ]
+        },
+        {
+          "pair": 9,
+          "k1_cycles_per_L": [
+            -13.8,
+            7
+          ],
+          "k2_cycles_per_L": [
+            27.8,
+            -7
+          ]
+        },
+        {
+          "pair": 10,
+          "k1_cycles_per_L": [
+            -14.0,
+            7
+          ],
+          "k2_cycles_per_L": [
+            28.0,
+            -7
+          ]
+        },
+        {
+          "pair": 11,
+          "k1_cycles_per_L": [
+            -14.2,
+            7
+          ],
+          "k2_cycles_per_L": [
+            28.2,
+            -7
+          ]
+        },
+        {
+          "pair": 12,
+          "k1_cycles_per_L": [
+            -14.4,
+            7
+          ],
+          "k2_cycles_per_L": [
+            28.4,
+            -7
+          ]
+        },
+        {
+          "pair": 13,
+          "k1_cycles_per_L": [
+            -14.6,
+            7
+          ],
+          "k2_cycles_per_L": [
+            28.6,
+            -7
+          ]
+        },
+        {
+          "pair": 14,
+          "k1_cycles_per_L": [
+            -12.0,
+            8
+          ],
+          "k2_cycles_per_L": [
+            26.0,
+            -8
+          ]
+        },
+        {
+          "pair": 15,
+          "k1_cycles_per_L": [
+            -12.2,
+            8
+          ],
+          "k2_cycles_per_L": [
+            26.2,
+            -8
+          ]
+        },
+        {
+          "pair": 16,
+          "k1_cycles_per_L": [
+            -12.4,
+            8
+          ],
+          "k2_cycles_per_L": [
+            26.4,
+            -8
+          ]
+        },
+        {
+          "pair": 17,
+          "k1_cycles_per_L": [
+            -12.6,
+            8
+          ],
+          "k2_cycles_per_L": [
+            26.6,
+            -8
+          ]
+        },
+        {
+          "pair": 18,
+          "k1_cycles_per_L": [
+            -12.8,
+            8
+          ],
+          "k2_cycles_per_L": [
+            26.8,
+            -8
+          ]
+        },
+        {
+          "pair": 19,
+          "k1_cycles_per_L": [
+            -13.0,
+            8
+          ],
+          "k2_cycles_per_L": [
+            27.0,
+            -8
+          ]
+        },
+        {
+          "pair": 20,
+          "k1_cycles_per_L": [
+            -13.2,
+            8
+          ],
+          "k2_cycles_per_L": [
+            27.2,
+            -8
+          ]
+        },
+        {
+          "pair": 21,
+          "k1_cycles_per_L": [
+            -13.4,
+            8
+          ],
+          "k2_cycles_per_L": [
+            27.4,
+            -8
+          ]
+        },
+        {
+          "pair": 22,
+          "k1_cycles_per_L": [
+            -13.6,
+            8
+          ],
+          "k2_cycles_per_L": [
+            27.6,
+            -8
+          ]
+        },
+        {
+          "pair": 23,
+          "k1_cycles_per_L": [
+            -13.8,
+            8
+          ],
+          "k2_cycles_per_L": [
+            27.8,
+            -8
+          ]
+        },
+        {
+          "pair": 24,
+          "k1_cycles_per_L": [
+            -14.0,
+            8
+          ],
+          "k2_cycles_per_L": [
+            28.0,
+            -8
+          ]
+        },
+        {
+          "pair": 25,
+          "k1_cycles_per_L": [
+            -14.2,
+            8
+          ],
+          "k2_cycles_per_L": [
+            28.2,
+            -8
+          ]
+        },
+        {
+          "pair": 26,
+          "k1_cycles_per_L": [
+            -14.4,
+            8
+          ],
+          "k2_cycles_per_L": [
+            28.4,
+            -8
+          ]
+        },
+        {
+          "pair": 27,
+          "k1_cycles_per_L": [
+            -12.0,
+            9
+          ],
+          "k2_cycles_per_L": [
+            26.0,
+            -9
+          ]
+        },
+        {
+          "pair": 28,
+          "k1_cycles_per_L": [
+            -12.2,
+            9
+          ],
+          "k2_cycles_per_L": [
+            26.2,
+            -9
+          ]
+        },
+        {
+          "pair": 29,
+          "k1_cycles_per_L": [
+            -12.4,
+            9
+          ],
+          "k2_cycles_per_L": [
+            26.4,
+            -9
+          ]
+        },
+        {
+          "pair": 30,
+          "k1_cycles_per_L": [
+            -12.6,
+            9
+          ],
+          "k2_cycles_per_L": [
+            26.6,
+            -9
+          ]
+        },
+        {
+          "pair": 31,
+          "k1_cycles_per_L": [
+            -12.8,
+            9
+          ],
+          "k2_cycles_per_L": [
+            26.8,
+            -9
+          ]
+        },
+        {
+          "pair": 32,
+          "k1_cycles_per_L": [
+            -13.0,
+            9
+          ],
+          "k2_cycles_per_L": [
+            27.0,
+            -9
+          ]
+        },
+        {
+          "pair": 33,
+          "k1_cycles_per_L": [
+            -13.2,
+            9
+          ],
+          "k2_cycles_per_L": [
+            27.2,
+            -9
+          ]
+        },
+        {
+          "pair": 34,
+          "k1_cycles_per_L": [
+            -13.4,
+            9
+          ],
+          "k2_cycles_per_L": [
+            27.4,
+            -9
+          ]
+        },
+        {
+          "pair": 35,
+          "k1_cycles_per_L": [
+            -13.6,
+            9
+          ],
+          "k2_cycles_per_L": [
+            27.6,
+            -9
+          ]
+        },
+        {
+          "pair": 36,
+          "k1_cycles_per_L": [
+            -13.8,
+            9
+          ],
+          "k2_cycles_per_L": [
+            27.8,
+            -9
+          ]
+        },
+        {
+          "pair": 37,
+          "k1_cycles_per_L": [
+            -14.0,
+            9
+          ],
+          "k2_cycles_per_L": [
+            28.0,
+            -9
+          ]
+        },
+        {
+          "pair": 38,
+          "k1_cycles_per_L": [
+            -14.2,
+            9
+          ],
+          "k2_cycles_per_L": [
+            28.2,
+            -9
+          ]
+        },
+        {
+          "pair": 39,
+          "k1_cycles_per_L": [
+            -14.4,
+            9
+          ],
+          "k2_cycles_per_L": [
+            28.4,
+            -9
+          ]
+        }
+      ],
+      "resonance_note": "All pairs have sum k=(14,0). kz7 is exactly resonant in FFE and nearest the revised beta0.1,cold-sigma10 MHD resonance kz=7*sqrt(16/15)=7.22957; kz8 brackets the inertial PIC daughter frequency. The original shared families7/8/9,40pairs and phases are unchanged. Shared seeds do not imply all pairs exactly resonant in every model.",
+      "nonlinear_constraints": "Alfven transverse velocity divided by local guide compression; E=-v cross B includes finite-amplitude cross terms; Bx=0, Bz depends x, By depends x,z so divergence B=0."
+    },
+    "PIC": {
+      "sigma_hot_gamma_law": 100,
+      "sigma_cold": 125,
+      "theta": 0.1,
+      "gamma_for_initial_adiabat": 1.6666666666666667,
+      "rho0": 0.008,
+      "p0": 0.0008,
+      "psi_st": 0.5,
+      "psi_definition": "E_AW,st/E_F0; E_AW,st=q n_total/k_perp in c=4pi=1, n_total includes both pair species",
+      "reference_kperp_cycles_per_L": 21.425428817178897,
+      "reference_convention": "RMS kperp over all 80 equal-amplitude traveling daughter waves",
+      "L_over_pair_skin_depth": 225.76450196067418,
+      "long_box_over_pair_skin_depth": 1128.822509803371,
+      "individual_starvation_threshold_E_over_B0": [
+        0.11237113016002917,
+        0.2678178602147362
+      ],
+      "nominal_grid": [
+        2560,
+        512
+      ],
+      "temperature_note": "PIC uses Maxwell-Juttner species; gamma-law initial enthalpy1.25 differs slightly from exact MJ enthalpy at theta.1; conduction drifts also add kinetic stress.",
+      "initial_current": "FFE spatial current: J=rho_charge*(E cross B)/B^2 + [(B dot curlB - E dot curlE)/B^2]*B; replaces independent phase-transport derivative current only in PIC loading",
+      "species_loading": "Common E cross B drift with equal/opposite parallel velocities; N=gamma(v_d)*rho/rho0, Nplus/minus=(N plus/minus rho_charge/C)/2, Vplus/minus=v_d plus/minus (J/C-rho_charge*v_d/C)/N. Exact charge/current; net parallel matter flux is determined by streams, not forced to zero."
+    },
+    "MHD": {
+      "cold_sigma": 10.0,
+      "plasma_beta": 0.1,
+      "gamma": 1.3333333333333333,
+      "rho0": 0.1,
+      "p0": 0.05,
+      "sigma_hot": 3.3333333333333335,
+      "theta": 0.5,
+      "alfven_speed": 0.8770580193070292,
+      "linear_perpendicular_fast_speed": 0.9058216273156766,
+      "grid": [
+        2560,
+        512
+      ],
+      "solver": "Athena++ SRMHD HLLE, RK3, PPM, CFL.25",
+      "interpretation": "Finite-inertia compressibility and strong-pulse steepening are model differences; changes in the compressive EM projection can include fast and slow components and are not a direct heating measurement.",
+      "enthalpy_density": 0.3
+    },
+    "FFE": {
+      "grid": [
+        1920,
+        384
+      ],
+      "linear_fast_speed": 1,
+      "alfven_speed": 1,
+      "mpi_ranks": 256
+    },
+    "primary_source": "https://arxiv.org/html/2606.19448v1",
+    "comparability": "Shared magnetic pulse and seed pattern; model-dependent electric fields, currents, thermodynamics, and dispersion. MHD uses cold sigma10 and beta0.1; FFE and PIC are unchanged. Production illustration without a convergence campaign."
+  },
+  "initial_condition_sha256": "efddb50b4764842ef045389e495a1ee04e60cb60674afba830255833a03036e7",
+  "diagnostics_sha256": "0cccfa32bcc580641e334b14fac06faa2dc9b98a328f1e283121fac503536098",
+  "renderer_sha256": "c4b2e029e55f0ae82ecc349ec057e8ef4a8360b2557d006922a7ccb6158783c6",
+  "domain_lengths": [
+    5.0,
+    1.0
+  ],
+  "spatial_axes": [
+    "x",
+    "z"
+  ],
+  "display_grid": [
+    640,
+    128
+  ],
+  "displayed_end_time": 2.0,
+  "frame_cadence": 0.02,
+  "fps": 12,
+  "poster_time": 1.0,
+  "color_limits": {
+    "compression": 0.75,
+    "alfven_component": 0.75
+  },
+  "shared_magnetic_amplitude_scale": true,
+  "models": {
+    "MHD": {
+      "native_grid": [
+        2560,
+        512
+      ],
+      "initial_compressive_em_normalization": 0.010055389275643312,
+      "display_ranges": {
+        "compression": [
+          -0.29425716400146484,
+          0.295119047164917
+        ],
+        "alfven_component": [
+          -0.3152557909488678,
+          0.31240013241767883
+        ]
+      },
+      "collocation": "Cell-centered Bcc; SR four-velocity converted to three-velocity; E=-v cross B; native (x,z,-y) rotated to physical (x,y,z)"
+    },
+    "FFE": {
+      "native_grid": [
+        1920,
+        384
+      ],
+      "initial_compressive_em_normalization": 0.011157803529187658,
+      "display_ranges": {
+        "compression": [
+          -0.32601398229599,
+          0.3443872928619385
+        ],
+        "alfven_component": [
+          -0.7265926599502563,
+          0.7498458623886108
+        ]
+      },
+      "collocation": "Carpet cell-centred native xy plane; physical x-z; coordinate mask removes all ghosts; native BvecFF and DvecFF=E in Minkowski"
+    },
+    "PIC": {
+      "native_grid": [
+        2560,
+        512
+      ],
+      "initial_compressive_em_normalization": 0.01111671837789052,
+      "display_ranges": {
+        "compression": [
+          -0.29764997959136963,
+          0.371559739112854
+        ],
+        "alfven_component": [
+          -0.3885904848575592,
+          0.4661270081996918
+        ]
+      },
+      "collocation": "Native B advanced diagnostically by a half Faraday step to E time; Yee-to-cell arithmetic interpolation; Cartesian physical rotation (native1,-native3,native2)",
+      "particles_per_cell_total": 32.0,
+      "current_filter_passes": 2.0,
+      "charge_constraints": {
+        "initial": {
+          "ampere_consistency": {
+            "full": {
+              "condition_flags": [
+                "negligible_normalization_scale",
+                "zero_elapsed_time"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.9867179507560353,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": false,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 0.0,
+              "normalized_residual": null,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.2018841955079065,
+              "rms": 0.0,
+              "rms_per_time": null
+            },
+            "lowpass": {
+              "condition_flags": [
+                "negligible_normalization_scale",
+                "zero_elapsed_time"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.986717776421521,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": false,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 0.0,
+              "normalized_residual": null,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.201883841114228,
+              "rms": 0.0,
+              "rms_per_time": null
+            }
+          },
+          "current_filter_passes": 2,
+          "definitions": {
+            "ampere_consistency": "divE_t-divE_0+(integral_divJf_t-integral_divJf_0)",
+            "filter": "F=cos^(2*nfilter)(pi*nx/Nx)*cos^(2*nfilter)(pi*ny/Ny)",
+            "filtered_continuity": "F(rho_t-rho_0)+(integral_divJf_t-integral_divJf_0)",
+            "filtered_gauss": "divE-F(rho_CIC)",
+            "filtered_gauss_drift": "[divE-F(rho)]_t-[divE-F(rho)]_0",
+            "raw_gauss": "divE-rho_CIC"
+          },
+          "domain_lengths": [
+            5.0,
+            1.0
+          ],
+          "elapsed_time": 0.0,
+          "filtered_continuity": {
+            "full": {
+              "condition_flags": [
+                "negligible_normalization_scale",
+                "zero_elapsed_time"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.9867179507560353,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": false,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 0.0,
+              "normalized_residual": null,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.2018841955079065,
+              "rms": 0.0,
+              "rms_per_time": null
+            },
+            "lowpass": {
+              "condition_flags": [
+                "negligible_normalization_scale",
+                "zero_elapsed_time"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.986717776421521,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": false,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 0.0,
+              "normalized_residual": null,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.201883841114228,
+              "rms": 0.0,
+              "rms_per_time": null
+            }
+          },
+          "filtered_gauss": {
+            "full": {
+              "condition_flags": [
+                "zero_elapsed_time",
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.9867179507560353,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(filtered CIC charge)",
+              "normalization_scale": 3.9867179507560353,
+              "normalized_residual": 0.0622783527391088,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.2018841955079065,
+              "rms": 0.24828622680852133,
+              "rms_per_time": null
+            },
+            "lowpass": {
+              "condition_flags": [
+                "zero_elapsed_time",
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.986717776421521,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(filtered CIC charge)",
+              "normalization_scale": 3.986717776421521,
+              "normalized_residual": 0.0622781362095153,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.201883841114228,
+              "rms": 0.24828535270887545,
+              "rms_per_time": null
+            }
+          },
+          "filtered_gauss_drift": {
+            "full": {
+              "condition_flags": [
+                "negligible_normalization_scale",
+                "zero_elapsed_time"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.9867179507560353,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": false,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 0.0,
+              "normalized_residual": null,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.2018841955079065,
+              "rms": 0.0,
+              "rms_per_time": null
+            },
+            "lowpass": {
+              "condition_flags": [
+                "negligible_normalization_scale",
+                "zero_elapsed_time"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.986717776421521,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": false,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 0.0,
+              "normalized_residual": null,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.201883841114228,
+              "rms": 0.0,
+              "rms_per_time": null
+            }
+          },
+          "initial_time": 0.0,
+          "lowpass_cycles_per_L": 64.0,
+          "lowpass_includes_zero_mode": true,
+          "mean_raw_charge": -5.376387269412364e-14,
+          "mean_raw_charge_change": 0.0,
+          "native_nx": 2560,
+          "native_nz": 512,
+          "normalization_floor": 4.2018841955079064e-10,
+          "raw_gauss": {
+            "full": {
+              "condition_flags": [
+                "zero_elapsed_time",
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.9867179507560353,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(raw CIC charge)",
+              "normalization_scale": 4.2018841955079065,
+              "normalized_residual": 0.005110265586306523,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.2018841955079065,
+              "rms": 0.021472744201949327,
+              "rms_per_time": null
+            },
+            "lowpass": {
+              "condition_flags": [
+                "zero_elapsed_time",
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 0.0,
+              "filtered_charge_rms": 3.986717776421521,
+              "integrated_div_current_rms": 0.0,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(raw CIC charge)",
+              "normalization_scale": 4.201883841114228,
+              "normalized_residual": 0.005110197901749095,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 4.201883841114228,
+              "rms": 0.021472457988255353,
+              "rms_per_time": null
+            }
+          },
+          "time": 0.0
+        },
+        "end": {
+          "ampere_consistency": {
+            "full": {
+              "condition_flags": [],
+              "filtered_charge_change_rms": 4.880368272122112,
+              "filtered_charge_rms": 2.750010741693704,
+              "integrated_div_current_rms": 4.8803682721192185,
+              "normalization_defined": true,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 4.880368272122112,
+              "normalized_residual": 4.894624869767587e-14,
+              "normalized_residual_per_time": 2.44734478651254e-14,
+              "raw_charge_rms": 3.616238135430148,
+              "rms": 2.388757191835356e-13,
+              "rms_per_time": 1.1943943847039264e-13
+            },
+            "lowpass": {
+              "condition_flags": [],
+              "filtered_charge_change_rms": 4.840736233361526,
+              "filtered_charge_rms": 2.6790472285405986,
+              "integrated_div_current_rms": 4.8407362333611506,
+              "normalization_defined": true,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 4.840736233361526,
+              "normalized_residual": 3.2489482206975708e-15,
+              "normalized_residual_per_time": 1.6244955846740808e-15,
+              "raw_charge_rms": 2.793506022232748,
+              "rms": 1.572730137224619e-14,
+              "rms_per_time": 7.86375463766764e-15
+            }
+          },
+          "current_filter_passes": 2,
+          "definitions": {
+            "ampere_consistency": "divE_t-divE_0+(integral_divJf_t-integral_divJf_0)",
+            "filter": "F=cos^(2*nfilter)(pi*nx/Nx)*cos^(2*nfilter)(pi*ny/Ny)",
+            "filtered_continuity": "F(rho_t-rho_0)+(integral_divJf_t-integral_divJf_0)",
+            "filtered_gauss": "divE-F(rho_CIC)",
+            "filtered_gauss_drift": "[divE-F(rho)]_t-[divE-F(rho)]_0",
+            "raw_gauss": "divE-rho_CIC"
+          },
+          "domain_lengths": [
+            5.0,
+            1.0
+          ],
+          "elapsed_time": 1.9999735618545251,
+          "filtered_continuity": {
+            "full": {
+              "condition_flags": [],
+              "filtered_charge_change_rms": 4.880368272122112,
+              "filtered_charge_rms": 2.750010741693704,
+              "integrated_div_current_rms": 4.8803682721192185,
+              "normalization_defined": true,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 4.880368272122112,
+              "normalized_residual": 3.4630725196948024e-09,
+              "normalized_residual_per_time": 1.731559149453747e-09,
+              "raw_charge_rms": 3.616238135430148,
+              "rms": 1.6901069249176492e-08,
+              "rms_per_time": 8.450646334296818e-09
+            },
+            "lowpass": {
+              "condition_flags": [],
+              "filtered_charge_change_rms": 4.840736233361526,
+              "filtered_charge_rms": 2.6790472285405986,
+              "integrated_div_current_rms": 4.8407362333611506,
+              "normalization_defined": true,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 4.840736233361526,
+              "normalized_residual": 6.884321238913539e-10,
+              "normalized_residual_per_time": 3.4422061222298767e-10,
+              "raw_charge_rms": 2.793506022232748,
+              "rms": 3.3325183263309082e-09,
+              "rms_per_time": 1.666281189857704e-09
+            }
+          },
+          "filtered_gauss": {
+            "full": {
+              "condition_flags": [
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 4.880368272122112,
+              "filtered_charge_rms": 2.750010741693704,
+              "integrated_div_current_rms": 4.8803682721192185,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(filtered CIC charge)",
+              "normalization_scale": 2.750010741693704,
+              "normalized_residual": 0.09028554799573892,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 3.616238135430148,
+              "rms": 0.24828622680798446,
+              "rms_per_time": null
+            },
+            "lowpass": {
+              "condition_flags": [
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 4.840736233361526,
+              "filtered_charge_rms": 2.6790472285405986,
+              "integrated_div_current_rms": 4.8407362333611506,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(filtered CIC charge)",
+              "normalization_scale": 2.6790472285405986,
+              "normalized_residual": 0.09267673599155217,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 2.793506022232748,
+              "rms": 0.24828535270835658,
+              "rms_per_time": null
+            }
+          },
+          "filtered_gauss_drift": {
+            "full": {
+              "condition_flags": [],
+              "filtered_charge_change_rms": 4.880368272122112,
+              "filtered_charge_rms": 2.750010741693704,
+              "integrated_div_current_rms": 4.8803682721192185,
+              "normalization_defined": true,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 4.880368272122112,
+              "normalized_residual": 3.4630725099477804e-09,
+              "normalized_residual_per_time": 1.7315591445801715e-09,
+              "raw_charge_rms": 3.616238135430148,
+              "rms": 1.6901069201607436e-08,
+              "rms_per_time": 8.450646310511975e-09
+            },
+            "lowpass": {
+              "condition_flags": [],
+              "filtered_charge_change_rms": 4.840736233361526,
+              "filtered_charge_rms": 2.6790472285405986,
+              "integrated_div_current_rms": 4.8407362333611506,
+              "normalization_defined": true,
+              "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+              "normalization_scale": 4.840736233361526,
+              "normalized_residual": 6.884321342983023e-10,
+              "normalized_residual_per_time": 3.442206174265307e-10,
+              "raw_charge_rms": 2.793506022232748,
+              "rms": 3.3325183767082006e-09,
+              "rms_per_time": 1.666281215046683e-09
+            }
+          },
+          "initial_time": 0.0,
+          "lowpass_cycles_per_L": 64.0,
+          "lowpass_includes_zero_mode": true,
+          "mean_raw_charge": -5.376423048084056e-14,
+          "mean_raw_charge_change": 3.035766082959412e-19,
+          "native_nx": 2560,
+          "native_nz": 512,
+          "normalization_floor": 4.880368272119218e-10,
+          "raw_gauss": {
+            "full": {
+              "condition_flags": [
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 4.880368272122112,
+              "filtered_charge_rms": 2.750010741693704,
+              "integrated_div_current_rms": 4.8803682721192185,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(raw CIC charge)",
+              "normalization_scale": 3.616238135430148,
+              "normalized_residual": 0.5482363103683371,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 3.616238135430148,
+              "rms": 1.9825530527814994,
+              "rms_per_time": null
+            },
+            "lowpass": {
+              "condition_flags": [
+                "absolute_constraint_not_a_time_difference"
+              ],
+              "filtered_charge_change_rms": 4.840736233361526,
+              "filtered_charge_rms": 2.6790472285405986,
+              "integrated_div_current_rms": 4.8407362333611506,
+              "normalization_defined": true,
+              "normalization_reference": "RMS(raw CIC charge)",
+              "normalization_scale": 2.793506022232748,
+              "normalized_residual": 0.11159113273979702,
+              "normalized_residual_per_time": null,
+              "raw_charge_rms": 2.793506022232748,
+              "rms": 0.31173050133639696,
+              "rms_per_time": null
+            }
+          },
+          "time": 1.9999735618545251
+        },
+        "maximum_resolved_filtered_gauss_drift_rms": 3.3325183767082006e-09,
+        "maximum_resolved_filtered_continuity_rms": 3.3325183263309082e-09,
+        "interpretation": "Initial absolute Gauss offsets are retained. Small subsequent drift or filtered continuity residual does not imply the initial Gauss constraint was exact. Raw and filtered residuals use different explicitly recorded charge normalizations."
+      }
+    }
+  },
+  "curve_normalization": "Each model's own initial low-pass compressive electromagnetic polarization norm",
+  "projection_interpretation": "The compressive projection includes both fast and slow magnetosonic modes in MHD. These EM diagnostics omit matter energy and are not heating measurements.",
+  "spectral_cutoff_cycles_per_L": 64.0,
+  "maximum_timestamp_offset": 0.00048828125,
+  "maximum_cross_model_time_spread": 0.00048828125,
+  "frames": [
+    {
+      "target_time": 0.0,
+      "actual_times": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "input_frame_sha256": [
+        "b2c1fb721612ba0b312d697fc25226363bffb6cb5763da4973d1f296b573c7f2",
+        "31fc698c6c2eb40e3815963141f8ea5650fb4d0f708e172ee0dd12d8b5e22d7f",
+        "0cc0a965925c7032d0703c418a76977c9f2e629a839ca663022753cc809c9d41"
+      ]
+    },
+    {
+      "target_time": 0.02,
+      "actual_times": [
+        0.02001953125,
+        0.02,
+        0.02004515041245147
+      ],
+      "input_frame_sha256": [
+        "ebd11ae2c81d69a5e4efcb59ea3f4e3c953936ce9a84c1a618df194bf1066164",
+        "98849113fd195097139d99543d9e74263544a6c2f8824bbc81ab4fb3038933a3",
+        "23b6ebd570639e9e44f227fdfe007cc9bbbfa3c94b9029218661afef2999b6c8"
+      ]
+    },
+    {
+      "target_time": 0.04,
+      "actual_times": [
+        0.0400390625,
+        0.04,
+        0.040090300824902746
+      ],
+      "input_frame_sha256": [
+        "3df5db8c2c48a43f8290e3fdc5844e73d3ca51229873aab73dc9023ff82f62f2",
+        "d22add6f060d7f7d5eea256604b2712d6a7685f463485fdb0ce811b746b3323d",
+        "4559859129e8e2527cc33d6d9ce942833e6ecdcb5f662d2eb6a89465c3cdc098"
+      ]
+    },
+    {
+      "target_time": 0.06,
+      "actual_times": [
+        0.06005859375,
+        0.06,
+        0.060135451237353775
+      ],
+      "input_frame_sha256": [
+        "ddecc3108fbe9859ab47956e4c53ee987e78ab4fa22f53237906e9433c1532bf",
+        "98d91d608126d05ef30503deeeb508df02d3475cd20372ba6b9c0197b5bc1a35",
+        "76eb48663c313d74b26c82494270b9f154f44509dbb4b791b911e66f08428373"
+      ]
+    },
+    {
+      "target_time": 0.08,
+      "actual_times": [
+        0.080078125,
+        0.08,
+        0.08002399891220831
+      ],
+      "input_frame_sha256": [
+        "825ccbedc20c4f5ea9fd100c1b6b76c7f081e016e1ec22bfc046d0cce2e7bdcb",
+        "a7d882b58dccd2fd54259cec0b1cd39cdf2f182b8542c98f9e665377ac9fa2a0",
+        "f4d047fb5c33455ed46ec9a0f167cc73a3df6145a97dfcfc1a88e98dae9bc162"
+      ]
+    },
+    {
+      "target_time": 0.1,
+      "actual_times": [
+        0.10009765625,
+        0.1,
+        0.10006914932466023
+      ],
+      "input_frame_sha256": [
+        "261ccf2d8160b696f3f2bd5eb54ef11d0821e0d847893d879e78c778c4a07483",
+        "7ab7b81e8e90c5a9c36abd090b9f675e6e455720636db637b0b12824c36793ac",
+        "adab2a4c6a0a5e9d9caa45129df77ed09cc60a9efef83d7ac88fdb7fd78bdab6"
+      ]
+    },
+    {
+      "target_time": 0.12,
+      "actual_times": [
+        0.1201171875,
+        0.12,
+        0.12011429973711214
+      ],
+      "input_frame_sha256": [
+        "c79f7dcb95f324cd9752f3ea23f247591ba1f7e8616a75b037b5613c62d4ebbc",
+        "3e473a609880f7e5c59a4f6bbc8519067d7030fe26d10701b42f6f9caf467a80",
+        "32c1f62c4855fc7012d50e9cf1d76f95d505b2278f96501ee3b8837a6dbbe0c1"
+      ]
+    },
+    {
+      "target_time": 0.14,
+      "actual_times": [
+        0.14013671875,
+        0.14,
+        0.14000284741196545
+      ],
+      "input_frame_sha256": [
+        "5e55f5b245b429cc4db11d77d29f4d5ff783efecfd03448f6920169bd2a2cb46",
+        "30003823b5e28046898b076090db80b221f1e266796b314142f4e1dfb3c434cd",
+        "bf429842592255c16e3894a88bd21dee202f7fad39697037b28596fd8889e58f"
+      ]
+    },
+    {
+      "target_time": 0.16,
+      "actual_times": [
+        0.16015625,
+        0.16,
+        0.1600479978244156
+      ],
+      "input_frame_sha256": [
+        "88eb8fda964e3b11cbcafae15219df34944cf4448b350475f1aa6d21595ca658",
+        "ad009e76590e967ac71b5f7c7af3ec1452ad736391f6f680522fb049e4b4d93e",
+        "df3c47d694fb10b347f35742c2bc591cc35c21151af5d447d56f8a71cbc3fde6"
+      ]
+    },
+    {
+      "target_time": 0.18,
+      "actual_times": [
+        0.18017578125,
+        0.18,
+        0.18009314823686573
+      ],
+      "input_frame_sha256": [
+        "582321875cae5cd277f7ce9f851be3497c20362d817d434e43d836c37adeda5f",
+        "530c98011c821542b00fc6e44233f147acb89497e7a175a45b16a7ba5d6ea454",
+        "f6a939b1d6aa25f1af582a9ffe2f339747778c6b133f3fd1f0e06d2693e6bd4e"
+      ]
+    },
+    {
+      "target_time": 0.2,
+      "actual_times": [
+        0.2001953125,
+        0.2,
+        0.20013829864931587
+      ],
+      "input_frame_sha256": [
+        "c3d3180920d9ead7c88ec848b40a576c87a3b39b53dc570926d7eb1aab115bb3",
+        "a49319c11ea919597fd9f29925991bbfd0219cdff3eaadc57fa553a3aa4bc1b5",
+        "663139e527784bf97f783bd91c51902a555c057874f3e367cad4929ccc8bd1f0"
+      ]
+    },
+    {
+      "target_time": 0.22,
+      "actual_times": [
+        0.22021484375,
+        0.22,
+        0.22002684632416875
+      ],
+      "input_frame_sha256": [
+        "c58e0392800a34aa529b51baa073a5add6017dc799f9b70636b3a0c85346de0a",
+        "18e056ed656f3f7b5c16793613028e0c804f3da20e12dd0a59e8a2f766b0406a",
+        "1ab053e006fde4f44172315f2fa7ca2c856c8634b6b452e4d2bd4310bab82fa3"
+      ]
+    },
+    {
+      "target_time": 0.24,
+      "actual_times": [
+        0.240234375,
+        0.24,
+        0.2400719967366189
+      ],
+      "input_frame_sha256": [
+        "9752c082a6f2b53dd33a7da39d9cc32080ce6b3864151f46eb243ae15d808820",
+        "4d2339425de82124d7f6455a4046c8b58a2e00c32f8cd30b9b8708c801b8cd1c",
+        "2449251d4f9b605627ea68efe43958d9953838eda0f495550c01ec70e76c3f64"
+      ]
+    },
+    {
+      "target_time": 0.26,
+      "actual_times": [
+        0.26025390625,
+        0.26,
+        0.26011714714906903
+      ],
+      "input_frame_sha256": [
+        "041119ab9cc6e7dcdc764e9b5c7fde9782c968c40cc39619a5d3329ec2b45d08",
+        "5964b3e6068f4ca5b4c9db3a47f9db608af30b3f366e743b9a741ff8c1d4bf5d",
+        "c905e5a436909983d767e2068b3f0626d6bb725d98df69c96d72b76b26529772"
+      ]
+    },
+    {
+      "target_time": 0.28,
+      "actual_times": [
+        0.2802734375,
+        0.28,
+        0.2800056948239219
+      ],
+      "input_frame_sha256": [
+        "e3f48e7bb241b354ddd3b9351a1e7dca66053efb08b5eadd012ac9cc849e1301",
+        "de70497d4407c47ad448d0bb1856e2f6c6f43c3a8204643910d0e9ec40364863",
+        "cde3a5e869628aa5ce63d6ad16dc414af80cb63652317759bbb9257340bce398"
+      ]
+    },
+    {
+      "target_time": 0.3,
+      "actual_times": [
+        0.30029296875,
+        0.3,
+        0.30005084523637204
+      ],
+      "input_frame_sha256": [
+        "5db2c9525fd20dff02ed6c18b8c89b21f4ceb0b821f35c2e408ebc52ea869fa7",
+        "26b01a8ca780372b3b8d2fe7f1d425709d9dfb7ed65c1e9a3af384b3b201fa65",
+        "86751e450674ceeff6f3a6731d66b5199b9ffadb1deabfa28371fbdf612c8b9c"
+      ]
+    },
+    {
+      "target_time": 0.32,
+      "actual_times": [
+        0.3203125,
+        0.32,
+        0.3200959956488222
+      ],
+      "input_frame_sha256": [
+        "11f456f1d46f079dc97e635da21d06d4db09571273217a28f92692bce10b5649",
+        "883c286e0d4a5f84fb444dbedce74bfe200bdf949c338ebf65bd59eca1514c02",
+        "76d5f98e5e438097d82f9ee8e51f8203f255bee7baa1e180cbda7e1a005c4fbd"
+      ]
+    },
+    {
+      "target_time": 0.34,
+      "actual_times": [
+        0.34033203125,
+        0.34,
+        0.3401411460612723
+      ],
+      "input_frame_sha256": [
+        "e897e8da9973a42d044ecd47d123786716ba3d8fa8b8173c53400edcfe053c93",
+        "f6acbea6a9fb6d8af4f986abdccb72ec538a4f3fcb8e82b1ea1ac3b75ab1a7e6",
+        "ce720f3e30d76e08aec9181899dc544bebb4d9b4c841a8800b759f3ce863213e"
+      ]
+    },
+    {
+      "target_time": 0.36,
+      "actual_times": [
+        0.3603515625,
+        0.36,
+        0.3600296937361252
+      ],
+      "input_frame_sha256": [
+        "f55d731d239556e7938fbb796bd2ce8be166e663dfa99ae08bb26006dc98cfea",
+        "df08b9cbaf96da4ce6fc2db026e1a855c743b522bbbbeb044a25b9d4a9159387",
+        "d0c0b9735b3a97422e8e8e730de81121061bddfc544bff92c56197d0ade2ae29"
+      ]
+    },
+    {
+      "target_time": 0.38,
+      "actual_times": [
+        0.38037109375,
+        0.38,
+        0.38007484414857534
+      ],
+      "input_frame_sha256": [
+        "a6e69ba39268afae5d80148951ef54142ade25f90a7bc8f0d8732b2d83e647b1",
+        "f4106e1420cbe2983635b8d17a4a3204a2e83bbb89396e0b438124c888fb6a39",
+        "2ab479b7033bb9c6ecac1241341ba4c7577b30d89e50f5a92acd0fea3eb05415"
+      ]
+    },
+    {
+      "target_time": 0.4,
+      "actual_times": [
+        0.400390625,
+        0.4,
+        0.4001199945610255
+      ],
+      "input_frame_sha256": [
+        "75c26fc5f54b4bcdfed694281625ad151b93d5aec23b5d04c6211e0465104681",
+        "a3159f53d48bda8266d48dac602a4b4717451385e29ae8090a351c2b734c7761",
+        "7ce6585fdd2a4bf4a3929f66c6d3f1aa4822007ecfd973246b7d4713f0dc0384"
+      ]
+    },
+    {
+      "target_time": 0.42,
+      "actual_times": [
+        0.42041015625,
+        0.42,
+        0.42000854223587836
+      ],
+      "input_frame_sha256": [
+        "09929af0db2f2fc56e52f92dc5ae918c53721c69225c97d1defa2e89a8c3b3c7",
+        "c941de6e1b3e32074b6b0a4752317d5f03fd87112a8b6b57d4385e525bb0ed79",
+        "7d0bd7e53f8a68ae6e46283cdb9f0934cd5a4b3e0bbffc313d872ca25d56dcb7"
+      ]
+    },
+    {
+      "target_time": 0.44,
+      "actual_times": [
+        0.4404296875,
+        0.44,
+        0.4400536926483285
+      ],
+      "input_frame_sha256": [
+        "22455ab641a01265bb0ede0261ec8e889c895d539c62a81bc9a8372307d4991a",
+        "97e32bc037cb7c35488106dff952754244cd6dab190ba284e90e89bea887db23",
+        "6f3083e37aa7985f7be386297b46a465a2da86fde85e03cf80b88bde252f4d49"
+      ]
+    },
+    {
+      "target_time": 0.46,
+      "actual_times": [
+        0.46044921875,
+        0.46,
+        0.46009884306077864
+      ],
+      "input_frame_sha256": [
+        "4d2fdea5d96caa396adbf9b5b6e999799a305e24bce7eb79a3c7186362e66850",
+        "5790130e6451f03ee8bf0608cc90f31285cb1fce843a409b64bbcb22e02e7a36",
+        "850c4989cf31eb23ef5a3b32bb6f99ee66dd18e45376ce64034cdb925c0b2796"
+      ]
+    },
+    {
+      "target_time": 0.48,
+      "actual_times": [
+        0.48046875,
+        0.48,
+        0.4801439934732288
+      ],
+      "input_frame_sha256": [
+        "9dfcecd1e9c4c4b66930779732290b9c9f6383d31adf03b1b3950718374dff97",
+        "70b25bbf7cdf603a6857faf543ebb9b2fbc74086145633376a5fe8201766623c",
+        "b981c76ff58a62c00d38a8d7af3b1a7314a0ee4237d53c6a226922c7d139696a"
+      ]
+    },
+    {
+      "target_time": 0.5,
+      "actual_times": [
+        0.50048828125,
+        0.5,
+        0.5000325411480817
+      ],
+      "input_frame_sha256": [
+        "39fcd7237920ae104d98a729e538b3525d1dc0c996365fb3d37dbee06e55b10b",
+        "4f7906a95f8958e8deb8e3b37d8015ee9eabce91cf421e92dd1c1c09a42446cf",
+        "9c43ff7ed6af8ef60aaa5c6b758f31ba01e0bbb72c4e01ede1f37c7a52475510"
+      ]
+    },
+    {
+      "target_time": 0.52,
+      "actual_times": [
+        0.52001953125,
+        0.52,
+        0.520077691560539
+      ],
+      "input_frame_sha256": [
+        "1db53d3d6abed60f3da76b9a802c73e364d4b69bd0e473bdab47b769ce10147f",
+        "8718264adfe08fb4059b4289df6faeac90f77d9d3e19b4c93292a1f956b8ba8c",
+        "8bbaf26f58ecb4dddd01bdb884a79bc2fd7c8feee0a11953e8bdf88e523327fd"
+      ]
+    },
+    {
+      "target_time": 0.54,
+      "actual_times": [
+        0.5400390625,
+        0.54,
+        0.5401228419729962
+      ],
+      "input_frame_sha256": [
+        "d1c062b5f43e8e928e9b95a511c48519328ce5e480914e8d303e7872dfbbd397",
+        "a3e63cc4493b00c831a16bdce68853db27ea242839da31767e061cc86d8b4cef",
+        "cbfd98e3e23f13405522809900e6f6a539f0b48c39e7403aeff6ed0e22d0d254"
+      ]
+    },
+    {
+      "target_time": 0.56,
+      "actual_times": [
+        0.56005859375,
+        0.56,
+        0.5600113896478561
+      ],
+      "input_frame_sha256": [
+        "83fc2e22144fbbc62bcd71d4bd1ce466a64ff063ad9d6f24f7c160cd568992a1",
+        "c53a17f7be01125b439e5a56a4cb92ee4b91a71ea70922a2ef472a140f8c63d2",
+        "149e30caad8134c520ce17055b03b6f999949559b90f3ec876c9cb6c4a1bd478"
+      ]
+    },
+    {
+      "target_time": 0.58,
+      "actual_times": [
+        0.580078125,
+        0.58,
+        0.5800565400603134
+      ],
+      "input_frame_sha256": [
+        "52c9b0084e7d1f832783019c4177ce4c40d2a7f935e68511b72d92268ea9e49e",
+        "2500161f09e4d3c658f0111da659364ba65028e3bfd8c542963b0ff29384712b",
+        "234aa8e30cefc17897f7b8717592c4ab7bd55497d169fc6da2cece0110164e88"
+      ]
+    },
+    {
+      "target_time": 0.6,
+      "actual_times": [
+        0.60009765625,
+        0.6,
+        0.6001016904727706
+      ],
+      "input_frame_sha256": [
+        "9d24b74978d6e82f5b39e03ff8369954df3e46aafe038734475157a21ecdda9f",
+        "b10b0d01d2429ddd01148468b824c757dca886701f1b5fcc4c4ee31530f00a36",
+        "9318e3e50c36875bc66f911ab6ccbfa10847da2cb688b5d5aac43dbecf26f9bf"
+      ]
+    },
+    {
+      "target_time": 0.62,
+      "actual_times": [
+        0.6201171875,
+        0.62,
+        0.6201468408852279
+      ],
+      "input_frame_sha256": [
+        "a1243193ebc62971d65c2afe04c4b6594f21443892331892a3d9da9cc851928e",
+        "3a4c896ea6f5822f1751eacd96ead0107677e07845790b9f08653f69a47f4a8f",
+        "bf30f7c7b13bccb7208a627b6a70bd4368db9a521238168467e5044da47fd010"
+      ]
+    },
+    {
+      "target_time": 0.64,
+      "actual_times": [
+        0.64013671875,
+        0.64,
+        0.6400353885600878
+      ],
+      "input_frame_sha256": [
+        "8b6a83e8ae1ea626751befcadef7e94dffb3222db5df4b7e02559b7c7e95465c",
+        "27a3f4dd2c6e5928bcebc104c424f0190ed44b99a8d2d66c5b878791778cb96a",
+        "f801ce1539228a5f3e8afd96dee49c4f5318e8f7d1eeace65d56f1a6bb6bd7f3"
+      ]
+    },
+    {
+      "target_time": 0.66,
+      "actual_times": [
+        0.66015625,
+        0.66,
+        0.660080538972545
+      ],
+      "input_frame_sha256": [
+        "213fa4227b7fc47b0d6d2d032f434e9a3fbd50d86f283d03969d113a11947734",
+        "70398ed6751ae2a4a5b6f024dc4a3ec100747db52d2fb295df0bf37dbb372c59",
+        "bd503e718db8c44c4f19dafc193a56aa12f637a2941bd086dcc19688106c0492"
+      ]
+    },
+    {
+      "target_time": 0.68,
+      "actual_times": [
+        0.68017578125,
+        0.68,
+        0.6801256893850023
+      ],
+      "input_frame_sha256": [
+        "8fb7aba87bd31d49d19c81e5f6ca9b8f264d0ddab9d66d305f6ee31cc140dae3",
+        "177ffd54b7656a282dc464ca357d1d383da5aa0d5a58627260a4bb59e15d241f",
+        "0acbb7240920c9c2311fdc2eec5f67865f15db9ba6b62a4eb476cfec9cdc21c9"
+      ]
+    },
+    {
+      "target_time": 0.7000000000000001,
+      "actual_times": [
+        0.7001953125,
+        0.7,
+        0.7000142370598622
+      ],
+      "input_frame_sha256": [
+        "65b912a6e18456b559a0ced0d0549c24df4b8426d7fec7bf45fea8d3b7512c55",
+        "14514f819fdabcbfa6381e6f34a7fc729289298f078c2508540dcb94fc90b9ee",
+        "79b8a490b96e6e774827a50f54fb329a99b4eeec9a0e6198f224404f28627ac2"
+      ]
+    },
+    {
+      "target_time": 0.72,
+      "actual_times": [
+        0.72021484375,
+        0.72,
+        0.7200593874723195
+      ],
+      "input_frame_sha256": [
+        "0e01888c332d496f15786659e6f412c29d98fd194526681f0a896d74351e4b55",
+        "9a85920a2537eef5997927651bd72869c5cbfa049eb47ca2aa8a8d585df6df56",
+        "b704203de439e25ce7c263319c986ce1107beb3b6008c9c594f578cd1540e1dd"
+      ]
+    },
+    {
+      "target_time": 0.74,
+      "actual_times": [
+        0.740234375,
+        0.74,
+        0.7401045378847767
+      ],
+      "input_frame_sha256": [
+        "9b673efc0acbdb9ca02abe3e97c9101ee39e5a0fe95216170854185dd90464db",
+        "715963bb2736fc2888b22a0e77a67f08eb7bed862a8d98e14a352a543d0c30ba",
+        "56bc443a20f3815b3ae4355a4eefe8b6588a06573ae39800171bb307f1b2490c"
+      ]
+    },
+    {
+      "target_time": 0.76,
+      "actual_times": [
+        0.76025390625,
+        0.76,
+        0.760149688297234
+      ],
+      "input_frame_sha256": [
+        "39e6f4c4b9460bb15babbe68d94972ae8cf0244cdd14ff21ffb087eb2c5df2a3",
+        "191e08b8f1430a9d4384965a70ae03c0a1d6c7e9a4ce4175bc82b3ed9748e99e",
+        "1551f3812e25c8284aa637ce799abda68cf789b0cb64abecf37193376729636e"
+      ]
+    },
+    {
+      "target_time": 0.78,
+      "actual_times": [
+        0.7802734375,
+        0.78,
+        0.7800382359720939
+      ],
+      "input_frame_sha256": [
+        "f783a30fbabe9c208ac6b99490f1d0cf8e55aaa2a8085eadeca8d31c72ffc7e8",
+        "e8cc95a1f6dbfd94bafaf9765612414fa5416bb7afcf5e7cb2ddc7ef3748cbea",
+        "2131ef0709f335ee0d632cef6b6de9b5ea8f53ffd0a40e288e952c773694885f"
+      ]
+    },
+    {
+      "target_time": 0.8,
+      "actual_times": [
+        0.80029296875,
+        0.8,
+        0.8000833863845511
+      ],
+      "input_frame_sha256": [
+        "c2f8d25ff2146353b7a5c561a32d4ffd816bbd1fa0fc17d88850311bd69db7a2",
+        "741a66f7d527061b9c47fa616153e5bf74e44222b0e90572b4a7e3c7d50d48d3",
+        "27146e176e23dd9647d1c134af609cc9cce1e4cab83bd8efc7d18c43680f8c55"
+      ]
+    },
+    {
+      "target_time": 0.8200000000000001,
+      "actual_times": [
+        0.8203125,
+        0.82,
+        0.8201285367970084
+      ],
+      "input_frame_sha256": [
+        "8d82ae63170ca060693648046fbb3458d812a889dacbdef722b404d786639bcd",
+        "f1d769df185f1b0581171dc6a63380894cbda4d6f1e25344cc86828e650c133b",
+        "a2418ff131f28e9e686e5382b02de73b6aee5211c1a13e40755ad9d03320e7fe"
+      ]
+    },
+    {
+      "target_time": 0.84,
+      "actual_times": [
+        0.84033203125,
+        0.84,
+        0.8400170844718683
+      ],
+      "input_frame_sha256": [
+        "9c58e53502abb6dd84b2667c97ded5e6ff2a6a93432a70253851a162a80d5f50",
+        "d3e58ad7d9e7b8e6f02fd79b77f1381521c4f201dbcc7f75de46cb4c06f0031b",
+        "972e20bd4b5b6b4b981a53f1a7b26beeeeebc28da284085c4a2ccd61debe22ca"
+      ]
+    },
+    {
+      "target_time": 0.86,
+      "actual_times": [
+        0.8603515625,
+        0.86,
+        0.8600622348843255
+      ],
+      "input_frame_sha256": [
+        "fa0ee8a04aff1240abb58b33fe971de800c065124259cecd504f3f320a322cf7",
+        "917d11768c6bc8efaa8c916f6d9822e11f9ecd373d2796ac91376846d609da99",
+        "cff157005b979d60b209d4115e6d87658df75362c7fa0a7240b67968ac736113"
+      ]
+    },
+    {
+      "target_time": 0.88,
+      "actual_times": [
+        0.88037109375,
+        0.88,
+        0.8801073852967828
+      ],
+      "input_frame_sha256": [
+        "e104d7dda260edb8921dea5904bb19d24d8c3db2bfa53d26f0ce0331ab48d8fe",
+        "e9ffa828b0aa279cefa666e8377df2234756b46c4ff988fe48daccdeacd82801",
+        "0be128d782c6a4e4ba33c90d79ab8480cf10909cc6a8420942bc3037844c29bd"
+      ]
+    },
+    {
+      "target_time": 0.9,
+      "actual_times": [
+        0.900390625,
+        0.9,
+        0.90015253570924
+      ],
+      "input_frame_sha256": [
+        "5117d8b1d3ab99ace45e137b4ba79539d5dc67d49821b21cba55df11a1346cde",
+        "816f0a382049e47fb01d08a92e2deb9c8396441f3db2e3838c1ed352beb99387",
+        "aefa0b2669367fad86c18e19df44753cd3a9a3a664c7d514d7a63f256211d985"
+      ]
+    },
+    {
+      "target_time": 0.92,
+      "actual_times": [
+        0.92041015625,
+        0.92,
+        0.9200410833841
+      ],
+      "input_frame_sha256": [
+        "4e8749667093aa51b0bd385a2149076c148a9e4460139b21706938e5621d97b0",
+        "a2d1de60d6dc972bf2ed3bac5e900f6cb722076e6c9dd0e31cb0e510e0d88390",
+        "d31d6c2dcc0ff3a4bc1e9b8ba8e1ace83d501b19fea305618700e853d2ab2e6b"
+      ]
+    },
+    {
+      "target_time": 0.9400000000000001,
+      "actual_times": [
+        0.9404296875,
+        0.94,
+        0.9400862337965572
+      ],
+      "input_frame_sha256": [
+        "e2c8711713631f5f9a111451ede278c48c2e7c07dd09c789db715f6e86427268",
+        "84a07b0bf2b6c15a4bd79421e057f141166a798e322a14599a57f32b198a53e4",
+        "7a0852fac43b0dc2cde115b6f8a0e0382f1a6e9006fe574c12b5054a08a07cd4"
+      ]
+    },
+    {
+      "target_time": 0.96,
+      "actual_times": [
+        0.96044921875,
+        0.96,
+        0.9601313842090144
+      ],
+      "input_frame_sha256": [
+        "acc91680ca9cec02ed82e35758b67adf8770fbb74b394bae2e75f743c9cacf20",
+        "e90564391c992abf06629c0565281eadc1e211da088bdc02783bef7692dd41be",
+        "4e9d851f578d1000e6b9b63e4e690b0b090cfd0537b3b6dd2674545da3048c7e"
+      ]
+    },
+    {
+      "target_time": 0.98,
+      "actual_times": [
+        0.98046875,
+        0.98,
+        0.9800199318838744
+      ],
+      "input_frame_sha256": [
+        "ea7e2cd911e5607820645ab207f150f2a83b7cb4810f0e6ce49d9048b462f85e",
+        "f551990bbada5f2157bd21749484a50a76fea2c8cf0e496fc1fcf5c7bf7da6c0",
+        "3fbd041ec400ea450a83fb644a51379dd9331bdca93e8f01580a616540985494"
+      ]
+    },
+    {
+      "target_time": 1.0,
+      "actual_times": [
+        1.00048828125,
+        1.0,
+        1.0000650822963315
+      ],
+      "input_frame_sha256": [
+        "9193836f47670f08c84ce6b929ac757dd499a7abfde1f5e665bdb8b7da83ed3c",
+        "741756c574e654161f0ec796e94c5eb34f76a9c7dfe9752dbd6fe83415ce6230",
+        "132c099d5c21b1ff55c1890392f67414cf40e2acc194cd6c92b0c90d7c1c18a1"
+      ]
+    },
+    {
+      "target_time": 1.02,
+      "actual_times": [
+        1.02001953125,
+        1.02,
+        1.0201102327087745
+      ],
+      "input_frame_sha256": [
+        "df90a8c259827a7ea1b7ede827f838837d5d833e6b8ddf8c930666b4625e3f8c",
+        "646a72ba8a7cba5451be116a61ad48878f7c5613fcd2cae02604040a2cdb22f4",
+        "c0f0a24eb1dc6709dc2aeb7850d49671c630deea5fb003b3f6dd2e24ea41ea0d"
+      ]
+    },
+    {
+      "target_time": 1.04,
+      "actual_times": [
+        1.0400390625,
+        1.04,
+        1.0401553831212176
+      ],
+      "input_frame_sha256": [
+        "91be7ea442406b5fc4822ee9164cb7204e7f99a3ec15ee4ea7a72d5af1c42300",
+        "181d74e31625f4edea6e9aa51c0810e8755eabbd761faa71b09927b2e2238627",
+        "1e4a892d6b6dca8d941c4175113463c67a4380a1238e01c964cdc9f228a0efdd"
+      ]
+    },
+    {
+      "target_time": 1.06,
+      "actual_times": [
+        1.06005859375,
+        1.06,
+        1.0600439307960634
+      ],
+      "input_frame_sha256": [
+        "a58872939ee5b20f42552646a7b3af33cbdfdc09028eb4210f63e1ba42baaa06",
+        "c305b3df1209e2dedae6fd6a2f7e270e1a89463de084fd1c4fcf6daeb0498b3b",
+        "b3a65f490c4b7d17d6724ad963e804773fd12fea25c144e0e550dc75c54260f0"
+      ]
+    },
+    {
+      "target_time": 1.08,
+      "actual_times": [
+        1.080078125,
+        1.08,
+        1.0800890812085064
+      ],
+      "input_frame_sha256": [
+        "fd15e3e4dd050c75b6984631487df128f9f51545e72d807618774c52e4d08717",
+        "095c98b9528234a2b73453ecd8dc76ebeadbe647b88b213e341a3d4c5bb12c11",
+        "09d52e7bd57ba1e46e9326ee9b1a10e9945cfa0ceae6e2b51a011fc3c64e752f"
+      ]
+    },
+    {
+      "target_time": 1.1,
+      "actual_times": [
+        1.10009765625,
+        1.1,
+        1.1001342316209495
+      ],
+      "input_frame_sha256": [
+        "057f36be337498f9e504d9ac3903e49c9038e327ec25519f0fd347789aaf4e34",
+        "d7db830ed2fee26efd34924aec9cec4a83f83bec3a6b06a2be9cc40123e6e69e",
+        "9266e03569abb7e5a66a2f791dff16b9e5c710387708a2596ebc93af5b7866f6"
+      ]
+    },
+    {
+      "target_time": 1.12,
+      "actual_times": [
+        1.1201171875,
+        1.12,
+        1.1200227792957953
+      ],
+      "input_frame_sha256": [
+        "6cee75bc4ec94d87ae36a7a71fcc125957ae471d397cc56766ebd3b7c5dbe4bc",
+        "481257e9c37d71fc16f1e24a9275cfd3fd48135f6eb375dc89771b3a8df0f4b2",
+        "93895d653bfa075e49c3fb587ad3c28d40bb12a478bd877616a4e53455177b10"
+      ]
+    },
+    {
+      "target_time": 1.1400000000000001,
+      "actual_times": [
+        1.14013671875,
+        1.14,
+        1.1400679297082383
+      ],
+      "input_frame_sha256": [
+        "9803527b7a851d19feaa7b45affae9f2a6170e7def39c517231884c8e26e69d3",
+        "db19ca057ac0feb9e44121f405ef3cf2fb88dc4ad9f0433a2992bf8ca1105865",
+        "b90acd003f5facef22f9bb0ebd9af4714b3a3599149e5e9010e5e8d36c61c347"
+      ]
+    },
+    {
+      "target_time": 1.16,
+      "actual_times": [
+        1.16015625,
+        1.16,
+        1.1601130801206814
+      ],
+      "input_frame_sha256": [
+        "f6c50ccb0252000fffa7941a5ae8a85bc4eca0ceee6c2fab3abf730133a4e0a8",
+        "895810be032fd258909ab3451854c9e1a0b3e1f73fedeaf5215e98e7ea4f455e",
+        "cfd61b0bd7bb4b267843976e5a490f939e078602726f696eb8108f865aac1d01"
+      ]
+    },
+    {
+      "target_time": 1.18,
+      "actual_times": [
+        1.18017578125,
+        1.18,
+        1.1800016277955272
+      ],
+      "input_frame_sha256": [
+        "f14784a97043d573be77ff1fea2cf5f30b9095dbb058b983d43d4b1c4a098468",
+        "b5edcb69883b78d18b6e3bcdb838ec289d0363c9ff218ca51f8ab7d6fdf30150",
+        "7ffe3d7978035b1f81766e6a5fe671559397a641991d06bd4f12a6bef659ed97"
+      ]
+    },
+    {
+      "target_time": 1.2,
+      "actual_times": [
+        1.2001953125,
+        1.2,
+        1.2000467782079702
+      ],
+      "input_frame_sha256": [
+        "74c012178c6c92d89c418b88a608a938cbcbda6dab24b42c3a5d480a4d4fd14c",
+        "434e2fbec90b2bd84ecca831fa46a24b0a68efef11a5e172cc399f73282ba6bb",
+        "5d7c1822882d191a817960d4b1fa2fc1f916b759a18910edaf8c8f3a5ca9d902"
+      ]
+    },
+    {
+      "target_time": 1.22,
+      "actual_times": [
+        1.22021484375,
+        1.22,
+        1.2200919286204133
+      ],
+      "input_frame_sha256": [
+        "a4f2ce7c9a6def542527cd2bc187435658484c146ca7be32a1b043ffcd963dd2",
+        "fb3a539b0284b46b75f0ffe6d24f72c799c2971281f4ce1d5cf1c4eeb783619a",
+        "0cea8b5c9b70219a614ca499a8b525727bf2c7af8849385db8882d00ff1e2f4e"
+      ]
+    },
+    {
+      "target_time": 1.24,
+      "actual_times": [
+        1.240234375,
+        1.24,
+        1.2401370790328563
+      ],
+      "input_frame_sha256": [
+        "196941b2a3c04f87837f17a83935ff61c9b0ca789893d338cc766f2a43692926",
+        "e6164bcb229df2943b1a1a037e5be55389ddf9e6ad03bda1d06526ad8f626da3",
+        "71dabfade148d50ba887852a3fb9cf556d8d02b2a064f65f33c82f2ed3ed4f0d"
+      ]
+    },
+    {
+      "target_time": 1.26,
+      "actual_times": [
+        1.26025390625,
+        1.26,
+        1.2600256267077021
+      ],
+      "input_frame_sha256": [
+        "c43ea1a40e4a79321d684694b4072f1affa88b9163e5bf9632a63a024ae6d75f",
+        "1484e391ef23f3e84a9695d6cbf0807ec19f9882c5963eb57e92f0c4e467ea5b",
+        "5e49d941fda03098bfcb5dc18607c9a77d4bff0f67c58c8dd50066c7b73e48e6"
+      ]
+    },
+    {
+      "target_time": 1.28,
+      "actual_times": [
+        1.2802734375,
+        1.28,
+        1.2800707771201452
+      ],
+      "input_frame_sha256": [
+        "748020c850a9b14e531e5c1345e26dc346d66d773aa9936e9b6717238b242c1a",
+        "471447ee08591fe903a1bb3b17a5d1c838a78c72339900d4b8c4138aa3646e7d",
+        "942fa5302e458a7eb1ea600655d6d0f909c5443fd3b0f033268c934db7c31bfb"
+      ]
+    },
+    {
+      "target_time": 1.3,
+      "actual_times": [
+        1.30029296875,
+        1.3,
+        1.3001159275325882
+      ],
+      "input_frame_sha256": [
+        "83595ad5b456f2531c170a71abe7e469cd90da6833cff94b299b53792d9336df",
+        "6da998ccd17150ac40659d1fb53fcf2263a93b82ca3a9d83e06fe0f7cc4b15b1",
+        "e0100a6b427bfe08cc7210058a324db656ff9e44bf82a448c260c916f49ecc6e"
+      ]
+    },
+    {
+      "target_time": 1.32,
+      "actual_times": [
+        1.3203125,
+        1.32,
+        1.320004475207434
+      ],
+      "input_frame_sha256": [
+        "62d58beae0572c1c04b4b3c0784efb0e87995ed41272d08481015fb1068a2107",
+        "adf8db3a21bd7131e96e19b7c34b1fa068f48c65b8a4f447380459a733ea6d25",
+        "be2bf1cb3f5830fc5f1ba7c22951e93f9c68252d3ee5614d301bda925276c734"
+      ]
+    },
+    {
+      "target_time": 1.34,
+      "actual_times": [
+        1.34033203125,
+        1.34,
+        1.340049625619877
+      ],
+      "input_frame_sha256": [
+        "bb2b726f67ab3ab5b41138c6f19814b4a0f4d02a698c0436d0eb6a1f4df91467",
+        "e37602c3c667d84f7b01b91d9b473a1b38869ee70bc1dd68d3ba0e728db6386c",
+        "c0993b1bf70d2ddd3f0919ca79a612874dc854028bf7fc50b6551ddd19438d2c"
+      ]
+    },
+    {
+      "target_time": 1.36,
+      "actual_times": [
+        1.3603515625,
+        1.36,
+        1.36009477603232
+      ],
+      "input_frame_sha256": [
+        "7d5e7182e46f9e1be9ae057daaaf1728f35595578c7237c88e8370e155ce4e4e",
+        "9159ad3003aa9dfa51f30e11983a9bb13858ef9a0bc7e08d9398e91da0dff205",
+        "85aa79212d15cf62b64f71856d5424be0f558587e80eaaab56e5ac1dcf8a74be"
+      ]
+    },
+    {
+      "target_time": 1.3800000000000001,
+      "actual_times": [
+        1.38037109375,
+        1.38,
+        1.3801399264447631
+      ],
+      "input_frame_sha256": [
+        "72bf9a198e20f09519325284aeaea849496e224e03c0b77e529712e5879e8d58",
+        "54d7917dc7a30fdd8c52b21a5e690318a1786cca81f463adab3e35347691c272",
+        "67541ad6dc4cb4361467997c2b3b33e3786eefd117236a88eab756c478b49798"
+      ]
+    },
+    {
+      "target_time": 1.4000000000000001,
+      "actual_times": [
+        1.400390625,
+        1.4,
+        1.400028474119609
+      ],
+      "input_frame_sha256": [
+        "3beedcc07e1a1460b62ab37b9436cc74c94c2226fd3cacf5df06e6460a4819da",
+        "ce9f83c179e392e48620a95d358e1cce19743d4edfdb01aa756a102c031ed34c",
+        "07808f7905c9dcc9b628e63b4fe25647b75c1f4bba2ff43243bc9b9a0db02a4b"
+      ]
+    },
+    {
+      "target_time": 1.42,
+      "actual_times": [
+        1.42041015625,
+        1.42,
+        1.420073624532052
+      ],
+      "input_frame_sha256": [
+        "cdcd658edf5a327cb1adbebf262cc5acab671e2dbc9a542164c4c78ffe9a54e3",
+        "b3eede404002055254b098f492f685a707994b4548e5960a8a8891e0c1ea56e3",
+        "1eb909f2a93e10de4337fa5f9e1ae960b9bb551cdbbb73c2b7a146b98714aa75"
+      ]
+    },
+    {
+      "target_time": 1.44,
+      "actual_times": [
+        1.4404296875,
+        1.44,
+        1.440118774944495
+      ],
+      "input_frame_sha256": [
+        "5331469165d57f7a0d0a7620be492a33d9724d2799e7767ee96ab50bda6464d6",
+        "ec15da3c7704a63844ce80d56dbab6aef13c4f45d78da0f1d0383a11a7b49015",
+        "30368d84b1ed5b6cad32518ba87350f0a0d478ded723bcd96add1cb6434398d5"
+      ]
+    },
+    {
+      "target_time": 1.46,
+      "actual_times": [
+        1.46044921875,
+        1.46,
+        1.4600073226193409
+      ],
+      "input_frame_sha256": [
+        "99b925f551b8b06d139998e0012571c506e85ca0b533b9e10320c2ba768cb671",
+        "9dc9f2df4f6c22720ccc66d7b4fc1ffb46ae79fe98c2352b3f26bf7d1983c9c7",
+        "2e9437ada10c91b9225101e766b4d4371243c47d618cf4987ff426c95e6ef9cb"
+      ]
+    },
+    {
+      "target_time": 1.48,
+      "actual_times": [
+        1.48046875,
+        1.48,
+        1.4800524730317839
+      ],
+      "input_frame_sha256": [
+        "ddaf04fa66d442e419ccb7b4057cfd67949ffe6be526b9d41372ce71ac384460",
+        "21c8e7ca5d4fa3a11f71427df45fe5b61bfbe4facac271a5a1b9389b75d19916",
+        "7aa2c488356b5d7707d8f0a70a7a95e98361acf2f2fd147c0a062e80e827477f"
+      ]
+    },
+    {
+      "target_time": 1.5,
+      "actual_times": [
+        1.50048828125,
+        1.5,
+        1.500097623444227
+      ],
+      "input_frame_sha256": [
+        "f875c7c20145ff46a6281dba24595dd17646f0a669761ad1fda16cf3af18a1fd",
+        "a6aa61b35dcf6c0cd1ce666cc23f16b296e7d01e1c99358e06a5c1c4bf3dafb3",
+        "a4db8a45cccd3ee5f08e7764e2bc7678bebdaa62a55defe6de8a34ee5b2bc8a5"
+      ]
+    },
+    {
+      "target_time": 1.52,
+      "actual_times": [
+        1.52001953125,
+        1.52,
+        1.52014277385667
+      ],
+      "input_frame_sha256": [
+        "499f61a649acf5af573a2ec47ff0c05559cad37bcc6f9abcab61d8d4f0e0b31e",
+        "2f6546a0f867d6b86c34719797145d32511b5b8f247ce1ddc0bbcd64a3002aaa",
+        "db839d4c0272fb70f4b2963715347cdb898d4b6ae9b3243e1f0120fca616e312"
+      ]
+    },
+    {
+      "target_time": 1.54,
+      "actual_times": [
+        1.5400390625,
+        1.54,
+        1.5400313215315158
+      ],
+      "input_frame_sha256": [
+        "ea4ee11a548df1d810b70de2563879d54e06936797bc573e6fe2216c0df46500",
+        "601b00b8e8a243a9d250f2a3b6238af61254ee88a64b0589f0c996b9bfc31a7a",
+        "f867e5e433e6d985288f2d2dbfff53d36552d08c372970ed53ab52b772200fd0"
+      ]
+    },
+    {
+      "target_time": 1.56,
+      "actual_times": [
+        1.56005859375,
+        1.56,
+        1.5600764719439588
+      ],
+      "input_frame_sha256": [
+        "eea6c91790956ecbce40fce5d86bf52d4de5836104df0453517e8ea02b9894f1",
+        "26a5697bcb475365e2ddd3173ef059532989fa2e5c7a64565e743da4b65c0377",
+        "9cebcf4b96c54b846b39ac27a8224586fa2a27ce8853ae80c167110f2e5bc8f6"
+      ]
+    },
+    {
+      "target_time": 1.58,
+      "actual_times": [
+        1.580078125,
+        1.58,
+        1.5801216223564019
+      ],
+      "input_frame_sha256": [
+        "fb54c3adc6c10ed0fbfab01ed1dcbfe3508614b71d423b16c9dcad5f4b1f13d7",
+        "a8689d038d10024d869b7e4fad15a73384ec4b01c76707254467310bb45f6083",
+        "525349d8194dbdb7ae247ea759bb781944fe94754f11cb13c2f92f66dc474bca"
+      ]
+    },
+    {
+      "target_time": 1.6,
+      "actual_times": [
+        1.60009765625,
+        1.6,
+        1.6000101700312477
+      ],
+      "input_frame_sha256": [
+        "6156bb04f1fb0d01beb9ee885bad20017ac4670289e203b597b2a6acea359660",
+        "7a3fda653408271acb414f4e40c8d7f61fafdf076905c810d3e110806d786af8",
+        "3dc80527075aa15c20fe6d2f922c7c71e457e6d1e0bc4d3a302b9a76443db293"
+      ]
+    },
+    {
+      "target_time": 1.62,
+      "actual_times": [
+        1.6201171875,
+        1.62,
+        1.6200553204436907
+      ],
+      "input_frame_sha256": [
+        "22a17af350f6b5fd7946a80d3c48b24505186fb1ac38375b2dd41b59b12e2489",
+        "93d4546041ee40319e98ab07ba12590a215b4733f14e502bd8faf516ead388b9",
+        "e8d0befaea9c9922e318da6ceecf95ebb194f44332213147bfd32863b3029162"
+      ]
+    },
+    {
+      "target_time": 1.6400000000000001,
+      "actual_times": [
+        1.64013671875,
+        1.64,
+        1.6401004708561338
+      ],
+      "input_frame_sha256": [
+        "31069842491f2df325996fdf903487fc16116d64f57ed0a07abf193cba6d5255",
+        "bd5a9402fb5b89cb28c4f23fca0ff3678755c515ae8d156b49e7b129fdd39c79",
+        "757fed4bbc54ce5698266a0097c0f5224af389e183d3e1cb99232e3d8ebf3b45"
+      ]
+    },
+    {
+      "target_time": 1.6600000000000001,
+      "actual_times": [
+        1.66015625,
+        1.66,
+        1.6601456212685768
+      ],
+      "input_frame_sha256": [
+        "2c5a8360f29f09b16929af758144a8f6cbe51203e1a8969d41f7dbdf23751734",
+        "9b5feb89abeba09fb39ec44d365b0936f85f3e00347d06db1526a2440b743ea8",
+        "52ddee9e285493ac4f7ff1fd032eb449403f9f0304348ca6e1c4ab91421883a8"
+      ]
+    },
+    {
+      "target_time": 1.68,
+      "actual_times": [
+        1.68017578125,
+        1.68,
+        1.6800341689434226
+      ],
+      "input_frame_sha256": [
+        "1dcbee49b8654404a11e9dbc3901ba3ae878028a424b202407c0e73376263bd3",
+        "452682dbd7029cedf4ac377d42fc8b62b44f643b3d6c0b8015ff5a5dd60747e3",
+        "7a11a3073d7319cb34ed1b53bfd1620d28d9385324d67ba7b64583d609d1b1c4"
+      ]
+    },
+    {
+      "target_time": 1.7,
+      "actual_times": [
+        1.7001953125,
+        1.7,
+        1.7000793193558656
+      ],
+      "input_frame_sha256": [
+        "dbe201197828541951fedd2055326bdc186266285a4dc4e2c8d203e2414d91bc",
+        "25d9b9a024ffa60b5c4e6a94427e845b17f8901579fa94ef4a520da89c4101d2",
+        "270b75b41530cc394112e79ef364ad2efbe78fc4cb4da9af6cc6dfb8d8b1b7bf"
+      ]
+    },
+    {
+      "target_time": 1.72,
+      "actual_times": [
+        1.72021484375,
+        1.72,
+        1.7201244697683087
+      ],
+      "input_frame_sha256": [
+        "5a2f75942fe0dec8836b4a56f23bd7013a59b6da02adc86ca160d49bcb447cb0",
+        "7502c1af2db3957b35d5c2a5a06e0fd3a1c764c63d10e4c1621d295b21ab5458",
+        "e579310a703992c1c1e57ed790fe0069e956c63f64c7eda1a4a9e544863b69b7"
+      ]
+    },
+    {
+      "target_time": 1.74,
+      "actual_times": [
+        1.740234375,
+        1.74,
+        1.7400130174431545
+      ],
+      "input_frame_sha256": [
+        "18f4ae14e7fb6e4ef7b56c2b5e6ff9c555d424a082edfb37eb9b03d22e51a505",
+        "52f3da054bc592765ba6c694c228dee3db9cb2d7130ccfddabae73e7d1ef4001",
+        "d2efde67ff4c0da1284643b96e4981149112052e750fb4246e92dc55118875a3"
+      ]
+    },
+    {
+      "target_time": 1.76,
+      "actual_times": [
+        1.76025390625,
+        1.76,
+        1.7600581678555975
+      ],
+      "input_frame_sha256": [
+        "0c24f47e5b42e92e02af248bb1fe9ab352d749625c895d35f2017971a7009988",
+        "bce263dc7e620b4f72b03c33b55cb3290b44050898e562f9ac8c4426089abb67",
+        "60c8a7a9234f5f84967c11d8013e96053f68cfdd823a09248c36a159397bafbc"
+      ]
+    },
+    {
+      "target_time": 1.78,
+      "actual_times": [
+        1.7802734375,
+        1.78,
+        1.7801033182680406
+      ],
+      "input_frame_sha256": [
+        "29b77c4f9a8ca59bb00969fbd9812afec59758f8b8c917c20b5d48c3dc5163a0",
+        "2b259565bb8c974ac02f9257c636a778bfa19ecb39881d68b8e6a3e47b03957d",
+        "b348c72ddcfd1b6b6b43dbf03b239d3ee7bf2774f1da8a444e5db5c7f4b00eb2"
+      ]
+    },
+    {
+      "target_time": 1.8,
+      "actual_times": [
+        1.80029296875,
+        1.8,
+        1.8001484686804836
+      ],
+      "input_frame_sha256": [
+        "34d9f1a394ee70785765d168c146aab1ef84396e6963339074a1767c9ef09054",
+        "1166617368e68477d19f3c192cba96e7814c8cf1a52bdd52fa7e93ea6546263e",
+        "4ea8c12a0acc1886da8b9bf8a96a963e8179403dfd315c3734de6410fc96097a"
+      ]
+    },
+    {
+      "target_time": 1.82,
+      "actual_times": [
+        1.8203125,
+        1.82,
+        1.8200370163553294
+      ],
+      "input_frame_sha256": [
+        "844ec5c792a978293b6ffdd1ae3a1aba57cc933a29c6c76cfc49ac979b051dba",
+        "07b413e1bd9e4f544008b581b2f8d540f7bb93b212a0254bd8db5d3f300e9ef4",
+        "ae555756ac4b8428fe2ebc6c84c185156776c576d0b57d0c9f5f6f0c01d29f24"
+      ]
+    },
+    {
+      "target_time": 1.84,
+      "actual_times": [
+        1.84033203125,
+        1.84,
+        1.8400821667677725
+      ],
+      "input_frame_sha256": [
+        "7273f8dbf0c89c2d3423b830e57f55a57c9778831322de9b0a16cb1e26e040a6",
+        "b5a33696b979a2aa93c1c1e712f85b1309a207e55d04fdd3eee7da4fb03e4b09",
+        "8291bf8d90422dcbee79284f346d5fbe0678b6d680465f36bcbdf10a91c650f4"
+      ]
+    },
+    {
+      "target_time": 1.86,
+      "actual_times": [
+        1.8603515625,
+        1.86,
+        1.8601273171802155
+      ],
+      "input_frame_sha256": [
+        "0412c649bdfba945e9b611fd0d6e66545ec95164bd92b4b5c808fb53c3825a5c",
+        "0e7220eebbbe30794d5bbf69f195d2008633b8dc0921bb8faacd93a431546bc6",
+        "0da404c5fc2f6bdb89927f1c3a5bb227918d5ee08c4e6719838d8ba74b938b8a"
+      ]
+    },
+    {
+      "target_time": 1.8800000000000001,
+      "actual_times": [
+        1.88037109375,
+        1.88,
+        1.8800158648550613
+      ],
+      "input_frame_sha256": [
+        "cf100eae5a38030d9024b1ea4b29f7b09ded2b8ede8b9746eab2938271d791fe",
+        "7b669f3c6f7f55cab79e5d5a5b55159e73d33252704cb1fd86f5de8eb0a57726",
+        "b1ce432dbfcf51630d932ebb90035911adf2b9ac22fb607609433ef2df8d73a1"
+      ]
+    },
+    {
+      "target_time": 1.9000000000000001,
+      "actual_times": [
+        1.900390625,
+        1.9,
+        1.9000610152675044
+      ],
+      "input_frame_sha256": [
+        "e659cdd7f2420148694e8195db2ef7c99a1f09c6b4ab785d115d26bcf79d0cc0",
+        "1c953212273a542c5c46d4ea26acbaab000f24948e5408228588ddfc2f12acf0",
+        "4cde39ea1e0e9c482547d4c22345e5e479b1b40d5171fb2904a1aa84498ca05c"
+      ]
+    },
+    {
+      "target_time": 1.92,
+      "actual_times": [
+        1.92041015625,
+        1.92,
+        1.9201061656799474
+      ],
+      "input_frame_sha256": [
+        "989323862c7d2cbb23dfd1429d8bda0edd7446c59170ac42acdfe50dde5c52ae",
+        "538a651950f12fcecdd2ec666ea4f617f142436024c2b84227a3c6ab480cde08",
+        "62b60c70a3fd5747701c234958c7a2d711d60ff4c2e641b051fb07802ef22717"
+      ]
+    },
+    {
+      "target_time": 1.94,
+      "actual_times": [
+        1.9404296875,
+        1.94,
+        1.9401513160923904
+      ],
+      "input_frame_sha256": [
+        "e62dea0877a4653c048eb37e81d09db9232c223a87c305e46222ca31c0e98506",
+        "f9d52c11241d51a88f8be8522ca17a60fde55cbcfbbaa677085a63152e8e6daa",
+        "530934e713b51ae9b710eb21ece11d3dc39d0b8405d511be095435d86f5a139b"
+      ]
+    },
+    {
+      "target_time": 1.96,
+      "actual_times": [
+        1.96044921875,
+        1.96,
+        1.9600398637672363
+      ],
+      "input_frame_sha256": [
+        "03596ef914e2eb65f207bf0bbf2897eb89e680822f17fc2df452992552f3ff7d",
+        "fdfe93f25cacf9ed14094e38f7efeeb995429af8372b37ebd8515dec7488edc9",
+        "57bf2f1f08371610fbff53c7c55e96758fb069d850834cf8c905e44326ec181e"
+      ]
+    },
+    {
+      "target_time": 1.98,
+      "actual_times": [
+        1.98046875,
+        1.98,
+        1.9800850141796793
+      ],
+      "input_frame_sha256": [
+        "8523596f417b3627836028e3c58ae3e6f5231c9c31981de47205e94b945f691f",
+        "0ad1c29efeea220f5556f6873e2e064cbbf9d6743422d8aefb11a45fe5f47fd9",
+        "8ea666f010e9e7f1b68c615227aad5bed60674a4fa1d4ece62038b32fd176cdd"
+      ]
+    },
+    {
+      "target_time": 2.0,
+      "actual_times": [
+        2.0,
+        2.0,
+        1.9999735618545251
+      ],
+      "input_frame_sha256": [
+        "9d0b9883a88f83ee7ef0c6a34d881954e48e58f3774ff2acc13df11ed1c2a090",
+        "56b9de72b9e15e8475a27c6d308e29d952c88584721fe2e90aae0db400183792",
+        "1519a6f96745e0bcd134a9702df274a59c14bf1748efe2ca7057fcd2998cc71f"
+      ]
+    }
+  ]
+}

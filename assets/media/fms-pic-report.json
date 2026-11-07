@@ -1,0 +1,1243 @@
+{
+  "solver": "Entity SRPIC",
+  "run_kind": "Coupled production only",
+  "simulation_validation_campaign_performed": false,
+  "frame_count": 101,
+  "first_time": 0.0,
+  "last_time": 1.9999735618545251,
+  "runtime_provenance": {
+    "additional_validation_campaign": false,
+    "build_job_id": "23860530",
+    "files": {
+      "build/src/entity.xc": "95cb3df49cd04a68e4eafeb3f2c91c8981491b39cb7f2e209934a8215556d910",
+      "source/pgens/fms_compare/common_ic.hpp": "efddb50b4764842ef045389e495a1ee04e60cb60674afba830255833a03036e7",
+      "source/pgens/fms_compare/matched_load.hpp": "4cfd885a524060320b5097031312f1a65fb1a57d627528727fdac466937c0768",
+      "source/pgens/fms_compare/pgen.hpp": "7f096325f5541fad900229c4db1314e00f2b42a9104efde397f5791521f18323",
+      "source/pgens/fms_compare/pic_fields.hpp": "841649f9d4dd6eaec6a4f63077b6adceaa0fc8421a9bbe01d7c3b00bf10d5388"
+    },
+    "gpu_architecture": "Volta70",
+    "initial_current": "Spatial force-free current of frozen B/E; exact charge/current, common E-cross-B drift, equal/opposite parallel streams; parallel number flux unconstrained",
+    "initial_loading_parameter_calculation": {
+      "current_definition": "J=rho_charge*(E cross B)/B\u00b2 + (B dot curlB - E dot curlE)*B/B\u00b2",
+      "grid": [
+        2560,
+        512
+      ],
+      "inadmissible_sample_points": 0,
+      "initial_condition_sha256": "efddb50b4764842ef045389e495a1ee04e60cb60674afba830255833a03036e7",
+      "max_current_over_capacity": 0.76207862255485,
+      "max_species_speed": 0.78321771292418,
+      "max_speed_position": [
+        1.0458984375,
+        0.8271484375
+      ],
+      "min_species_density_over_n0": 0.053501484483562,
+      "note": "Necessary initial-density/current admissibility calculation only, no solver evolution or validation campaign",
+      "reference_L_over_pair_skin_depth": 225.76450196067418,
+      "sampling": "Native-grid cell centres; production loader additionally checks every actual quiet-loading point",
+      "stream_definition": "V\u00b1=vD \u00b1 (J/C-rho_charge*vD/C)/N; N=gamma(vD)*rho/rho0; N\u00b1=(N\u00b1rho_charge/C)/2"
+    },
+    "input_sha256": "a5c0c5fa9b0a00fb24f53f3205ff1849835ff33134597c40d97b218b72561b6f",
+    "kokkos_commit": "5a000834b50891ad8caf3a52dd279879d1022b4f",
+    "mpi": false,
+    "native_basis": "(x,z,-y), right handed",
+    "node": "gpu-a5-1",
+    "node_local_directory": "/tmp/resonant-pic-23861378.499VNF",
+    "original_entity_commit": "8ff003094bdb53c12302089317187b787162592b",
+    "persistent_directory": "/scratch/zt1/project/sashaph-prj/user/siddhant/website-fms-comparison-20261106/resonant_fms03/entity/runs/coupled",
+    "physical_vector_mapping": "(native1,-native3,native2)",
+    "precision": "double",
+    "requested_local_free_bytes": 14297858048,
+    "run_job_id": "23861378",
+    "run_kind": "coupled production only"
+  },
+  "export_job_id": "23861393",
+  "initial_condition_sha256": "efddb50b4764842ef045389e495a1ee04e60cb60674afba830255833a03036e7",
+  "diagnostics_sha256": "0cccfa32bcc580641e334b14fac06faa2dc9b98a328f1e283121fac503536098",
+  "native_grid": [
+    2560,
+    512
+  ],
+  "total_pair_ppc": 32.0,
+  "current_filter_passes": 2.0,
+  "dt_omega_c": 0.39528470752104744,
+  "dx_over_de": 0.4409462928919414,
+  "magnetization_cold": 125.00000000000001,
+  "Lz_over_total_pair_skin_depth": 225.764501960674,
+  "requested_starvation_parameter": 0.5,
+  "starvation_parameter_definition": "psi_st=E_AW,st/E_F0, with E_AW,st=q*n_total*c/k_perp,ref",
+  "initial_current": "Spatial force-free current rho_q*v_D + B*(B dot curl B - E dot curl E)/B^2, with v_D=E cross B/B^2; not independent-wave phase-transport current",
+  "species_bulk_initialization": "N=gamma(v_D)*rho/rho0; N_plus/minus=(N +/- rho_q/coupling)/2; V_plus/minus=v_D +/- J_parallel/(coupling*N). Exact charge/current and ideal perpendicular drift; total parallel number flux is unconstrained.",
+  "thermal_distribution": "Maxwell-Juttner inverse radial CDF; antithetic pairs and Lorentz Jacobian weights; matched nonzero charge and current",
+  "display_compression_range": [
+    -0.29764997959136963,
+    0.371559739112854
+  ],
+  "metrics": {
+    "fast_em_lowpass": {
+      "initial": 0.01111671837789052,
+      "final": 0.004282572285513627,
+      "minimum": 0.004282572285513627,
+      "maximum": 0.01111671837789052
+    },
+    "compressive_em_lowpass": {
+      "initial": 0.01111671837789052,
+      "final": 0.004282572285513627,
+      "minimum": 0.004282572285513627,
+      "maximum": 0.01111671837789052
+    },
+    "alfven_em_lowpass": {
+      "initial": 0.0009938525286344565,
+      "final": 0.0012560591730843907,
+      "minimum": 0.0009040744452128575,
+      "maximum": 0.00215807800352036
+    },
+    "coherent_fast_em": {
+      "initial": 0.011116716701428131,
+      "final": 0.0035721967623091096,
+      "minimum": 0.0035721967623091096,
+      "maximum": 0.011116716701428131
+    },
+    "perturbation_em": {
+      "initial": 0.012116258416041796,
+      "final": 0.005749444546720545,
+      "minimum": 0.005749444546720545,
+      "maximum": 0.012116258416041796
+    },
+    "total_em": {
+      "initial": 0.512116258416042,
+      "final": 0.5057494445467208,
+      "minimum": 0.5057494445467208,
+      "maximum": 0.512116258416042
+    },
+    "particle_T00": {
+      "initial": 0.009688340406272634,
+      "final": 0.016142387507931802,
+      "minimum": 0.009688340406272634,
+      "maximum": 0.016142387507931802
+    },
+    "particle_kinetic": {
+      "initial": 0.0016842064715083746,
+      "final": 0.008138253573167543,
+      "minimum": 0.0016842064715083746,
+      "maximum": 0.008138253573167543
+    },
+    "field_energy_native": {
+      "initial": 0.5121586839593737,
+      "final": 0.5057734228379058,
+      "minimum": 0.5057734228379058,
+      "maximum": 0.5121586839593737
+    },
+    "total_energy": {
+      "initial": 0.5218470243656463,
+      "final": 0.5219158103458377,
+      "minimum": 0.5218470243656463,
+      "maximum": 0.5219158103458377
+    },
+    "N_over_n0": {
+      "initial": 1.0005167418455323,
+      "final": 1.0005167418455323,
+      "minimum": 1.0005167418455323,
+      "maximum": 1.0005167418455325
+    },
+    "e_parallel_rms": {
+      "initial": 5.301647368033175e-05,
+      "final": 0.01521280588941764,
+      "minimum": 5.301647368033175e-05,
+      "maximum": 0.019848916209120583
+    },
+    "e_parallel_max": {
+      "initial": 0.00038557449881728134,
+      "final": 0.14155715792373055,
+      "minimum": 0.00038557449881728134,
+      "maximum": 0.2533624383587687
+    },
+    "max_e_over_b": {
+      "initial": 0.4406401981750005,
+      "final": 0.26707480195387057,
+      "minimum": 0.26059110534267,
+      "maximum": 0.4406401981750005
+    },
+    "divB_rms": {
+      "initial": 1.2013449444168436e-16,
+      "final": 7.973833485216016e-12,
+      "minimum": 1.2013449444168436e-16,
+      "maximum": 7.973833485216016e-12
+    },
+    "gauss_residual_rms": {
+      "initial": 0.02147274420195024,
+      "final": 1.9825530527815372,
+      "minimum": 0.02147274420195024,
+      "maximum": 2.040150758052615
+    },
+    "charge_rms": {
+      "initial": 4.201884195507931,
+      "final": 3.6162381354300774,
+      "minimum": 3.6162381354300774,
+      "maximum": 5.886539373502262
+    },
+    "net_charge_mean": {
+      "initial": -5.377432575831911e-14,
+      "final": -5.3712376637881044e-14,
+      "minimum": -5.412967827195551e-14,
+      "maximum": -5.330464353267106e-14
+    }
+  },
+  "energy_drift_absolute_max": 6.878598019133264e-05,
+  "energy_drift_relative_to_initial_perturbation_em_max": 0.005677163512810253,
+  "initial_native_constraints": {
+    "ampere_consistency": {
+      "full": {
+        "condition_flags": [
+          "negligible_normalization_scale",
+          "zero_elapsed_time"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.9867179507560353,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": false,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 0.0,
+        "normalized_residual": null,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.2018841955079065,
+        "rms": 0.0,
+        "rms_per_time": null
+      },
+      "lowpass": {
+        "condition_flags": [
+          "negligible_normalization_scale",
+          "zero_elapsed_time"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.986717776421521,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": false,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 0.0,
+        "normalized_residual": null,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.201883841114228,
+        "rms": 0.0,
+        "rms_per_time": null
+      }
+    },
+    "current_filter_passes": 2,
+    "definitions": {
+      "ampere_consistency": "divE_t-divE_0+(integral_divJf_t-integral_divJf_0)",
+      "filter": "F=cos^(2*nfilter)(pi*nx/Nx)*cos^(2*nfilter)(pi*ny/Ny)",
+      "filtered_continuity": "F(rho_t-rho_0)+(integral_divJf_t-integral_divJf_0)",
+      "filtered_gauss": "divE-F(rho_CIC)",
+      "filtered_gauss_drift": "[divE-F(rho)]_t-[divE-F(rho)]_0",
+      "raw_gauss": "divE-rho_CIC"
+    },
+    "domain_lengths": [
+      5.0,
+      1.0
+    ],
+    "elapsed_time": 0.0,
+    "filtered_continuity": {
+      "full": {
+        "condition_flags": [
+          "negligible_normalization_scale",
+          "zero_elapsed_time"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.9867179507560353,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": false,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 0.0,
+        "normalized_residual": null,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.2018841955079065,
+        "rms": 0.0,
+        "rms_per_time": null
+      },
+      "lowpass": {
+        "condition_flags": [
+          "negligible_normalization_scale",
+          "zero_elapsed_time"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.986717776421521,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": false,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 0.0,
+        "normalized_residual": null,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.201883841114228,
+        "rms": 0.0,
+        "rms_per_time": null
+      }
+    },
+    "filtered_gauss": {
+      "full": {
+        "condition_flags": [
+          "zero_elapsed_time",
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.9867179507560353,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(filtered CIC charge)",
+        "normalization_scale": 3.9867179507560353,
+        "normalized_residual": 0.0622783527391088,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.2018841955079065,
+        "rms": 0.24828622680852133,
+        "rms_per_time": null
+      },
+      "lowpass": {
+        "condition_flags": [
+          "zero_elapsed_time",
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.986717776421521,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(filtered CIC charge)",
+        "normalization_scale": 3.986717776421521,
+        "normalized_residual": 0.0622781362095153,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.201883841114228,
+        "rms": 0.24828535270887545,
+        "rms_per_time": null
+      }
+    },
+    "filtered_gauss_drift": {
+      "full": {
+        "condition_flags": [
+          "negligible_normalization_scale",
+          "zero_elapsed_time"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.9867179507560353,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": false,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 0.0,
+        "normalized_residual": null,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.2018841955079065,
+        "rms": 0.0,
+        "rms_per_time": null
+      },
+      "lowpass": {
+        "condition_flags": [
+          "negligible_normalization_scale",
+          "zero_elapsed_time"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.986717776421521,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": false,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 0.0,
+        "normalized_residual": null,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.201883841114228,
+        "rms": 0.0,
+        "rms_per_time": null
+      }
+    },
+    "initial_time": 0.0,
+    "lowpass_cycles_per_L": 64.0,
+    "lowpass_includes_zero_mode": true,
+    "mean_raw_charge": -5.376387269412364e-14,
+    "mean_raw_charge_change": 0.0,
+    "native_nx": 2560,
+    "native_nz": 512,
+    "normalization_floor": 4.2018841955079064e-10,
+    "raw_gauss": {
+      "full": {
+        "condition_flags": [
+          "zero_elapsed_time",
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.9867179507560353,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(raw CIC charge)",
+        "normalization_scale": 4.2018841955079065,
+        "normalized_residual": 0.005110265586306523,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.2018841955079065,
+        "rms": 0.021472744201949327,
+        "rms_per_time": null
+      },
+      "lowpass": {
+        "condition_flags": [
+          "zero_elapsed_time",
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 0.0,
+        "filtered_charge_rms": 3.986717776421521,
+        "integrated_div_current_rms": 0.0,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(raw CIC charge)",
+        "normalization_scale": 4.201883841114228,
+        "normalized_residual": 0.005110197901749095,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 4.201883841114228,
+        "rms": 0.021472457988255353,
+        "rms_per_time": null
+      }
+    },
+    "time": 0.0
+  },
+  "final_native_constraints": {
+    "ampere_consistency": {
+      "full": {
+        "condition_flags": [],
+        "filtered_charge_change_rms": 4.880368272122112,
+        "filtered_charge_rms": 2.750010741693704,
+        "integrated_div_current_rms": 4.8803682721192185,
+        "normalization_defined": true,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 4.880368272122112,
+        "normalized_residual": 4.894624869767587e-14,
+        "normalized_residual_per_time": 2.44734478651254e-14,
+        "raw_charge_rms": 3.616238135430148,
+        "rms": 2.388757191835356e-13,
+        "rms_per_time": 1.1943943847039264e-13
+      },
+      "lowpass": {
+        "condition_flags": [],
+        "filtered_charge_change_rms": 4.840736233361526,
+        "filtered_charge_rms": 2.6790472285405986,
+        "integrated_div_current_rms": 4.8407362333611506,
+        "normalization_defined": true,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 4.840736233361526,
+        "normalized_residual": 3.2489482206975708e-15,
+        "normalized_residual_per_time": 1.6244955846740808e-15,
+        "raw_charge_rms": 2.793506022232748,
+        "rms": 1.572730137224619e-14,
+        "rms_per_time": 7.86375463766764e-15
+      }
+    },
+    "current_filter_passes": 2,
+    "definitions": {
+      "ampere_consistency": "divE_t-divE_0+(integral_divJf_t-integral_divJf_0)",
+      "filter": "F=cos^(2*nfilter)(pi*nx/Nx)*cos^(2*nfilter)(pi*ny/Ny)",
+      "filtered_continuity": "F(rho_t-rho_0)+(integral_divJf_t-integral_divJf_0)",
+      "filtered_gauss": "divE-F(rho_CIC)",
+      "filtered_gauss_drift": "[divE-F(rho)]_t-[divE-F(rho)]_0",
+      "raw_gauss": "divE-rho_CIC"
+    },
+    "domain_lengths": [
+      5.0,
+      1.0
+    ],
+    "elapsed_time": 1.9999735618545251,
+    "filtered_continuity": {
+      "full": {
+        "condition_flags": [],
+        "filtered_charge_change_rms": 4.880368272122112,
+        "filtered_charge_rms": 2.750010741693704,
+        "integrated_div_current_rms": 4.8803682721192185,
+        "normalization_defined": true,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 4.880368272122112,
+        "normalized_residual": 3.4630725196948024e-09,
+        "normalized_residual_per_time": 1.731559149453747e-09,
+        "raw_charge_rms": 3.616238135430148,
+        "rms": 1.6901069249176492e-08,
+        "rms_per_time": 8.450646334296818e-09
+      },
+      "lowpass": {
+        "condition_flags": [],
+        "filtered_charge_change_rms": 4.840736233361526,
+        "filtered_charge_rms": 2.6790472285405986,
+        "integrated_div_current_rms": 4.8407362333611506,
+        "normalization_defined": true,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 4.840736233361526,
+        "normalized_residual": 6.884321238913539e-10,
+        "normalized_residual_per_time": 3.4422061222298767e-10,
+        "raw_charge_rms": 2.793506022232748,
+        "rms": 3.3325183263309082e-09,
+        "rms_per_time": 1.666281189857704e-09
+      }
+    },
+    "filtered_gauss": {
+      "full": {
+        "condition_flags": [
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 4.880368272122112,
+        "filtered_charge_rms": 2.750010741693704,
+        "integrated_div_current_rms": 4.8803682721192185,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(filtered CIC charge)",
+        "normalization_scale": 2.750010741693704,
+        "normalized_residual": 0.09028554799573892,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 3.616238135430148,
+        "rms": 0.24828622680798446,
+        "rms_per_time": null
+      },
+      "lowpass": {
+        "condition_flags": [
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 4.840736233361526,
+        "filtered_charge_rms": 2.6790472285405986,
+        "integrated_div_current_rms": 4.8407362333611506,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(filtered CIC charge)",
+        "normalization_scale": 2.6790472285405986,
+        "normalized_residual": 0.09267673599155217,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 2.793506022232748,
+        "rms": 0.24828535270835658,
+        "rms_per_time": null
+      }
+    },
+    "filtered_gauss_drift": {
+      "full": {
+        "condition_flags": [],
+        "filtered_charge_change_rms": 4.880368272122112,
+        "filtered_charge_rms": 2.750010741693704,
+        "integrated_div_current_rms": 4.8803682721192185,
+        "normalization_defined": true,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 4.880368272122112,
+        "normalized_residual": 3.4630725099477804e-09,
+        "normalized_residual_per_time": 1.7315591445801715e-09,
+        "raw_charge_rms": 3.616238135430148,
+        "rms": 1.6901069201607436e-08,
+        "rms_per_time": 8.450646310511975e-09
+      },
+      "lowpass": {
+        "condition_flags": [],
+        "filtered_charge_change_rms": 4.840736233361526,
+        "filtered_charge_rms": 2.6790472285405986,
+        "integrated_div_current_rms": 4.8407362333611506,
+        "normalization_defined": true,
+        "normalization_reference": "max(RMS(filtered charge change), RMS(integrated div filtered current))",
+        "normalization_scale": 4.840736233361526,
+        "normalized_residual": 6.884321342983023e-10,
+        "normalized_residual_per_time": 3.442206174265307e-10,
+        "raw_charge_rms": 2.793506022232748,
+        "rms": 3.3325183767082006e-09,
+        "rms_per_time": 1.666281215046683e-09
+      }
+    },
+    "initial_time": 0.0,
+    "lowpass_cycles_per_L": 64.0,
+    "lowpass_includes_zero_mode": true,
+    "mean_raw_charge": -5.376423048084056e-14,
+    "mean_raw_charge_change": 3.035766082959412e-19,
+    "native_nx": 2560,
+    "native_nz": 512,
+    "normalization_floor": 4.880368272119218e-10,
+    "raw_gauss": {
+      "full": {
+        "condition_flags": [
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 4.880368272122112,
+        "filtered_charge_rms": 2.750010741693704,
+        "integrated_div_current_rms": 4.8803682721192185,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(raw CIC charge)",
+        "normalization_scale": 3.616238135430148,
+        "normalized_residual": 0.5482363103683371,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 3.616238135430148,
+        "rms": 1.9825530527814994,
+        "rms_per_time": null
+      },
+      "lowpass": {
+        "condition_flags": [
+          "absolute_constraint_not_a_time_difference"
+        ],
+        "filtered_charge_change_rms": 4.840736233361526,
+        "filtered_charge_rms": 2.6790472285405986,
+        "integrated_div_current_rms": 4.8407362333611506,
+        "normalization_defined": true,
+        "normalization_reference": "RMS(raw CIC charge)",
+        "normalization_scale": 2.793506022232748,
+        "normalized_residual": 0.11159113273979702,
+        "normalized_residual_per_time": null,
+        "raw_charge_rms": 2.793506022232748,
+        "rms": 0.31173050133639696,
+        "rms_per_time": null
+      }
+    },
+    "time": 1.9999735618545251
+  },
+  "gpu_memory_measurement": {
+    "allocation_events": 3693,
+    "cuda_memory_samples": 7386,
+    "cuda_query_failures": 0,
+    "device_total_bytes": 34072559616,
+    "method": "cudaMemGetInfo sampled at every Kokkos CUDA allocation and deallocation; includes CUDA context and particle-clearing temporary buffers",
+    "minimum_device_free_bytes": 30214455296,
+    "particle_clear_buffer_events": 3302,
+    "peak_device_used_bytes": 3858104320,
+    "peak_kokkos_device_bytes": 3402112656
+  },
+  "interpretation": [
+    "Fast/Alfven energies are linear electromagnetic polarization projections of the actual nonlinear fields.",
+    "Particle kinetic energy includes thermal, bulk, and current-carrying drift energy; it is not a standalone heating measurement.",
+    "No background subtraction, pulse-only control, equilibrium control, or grid-convergence claim is made for this revised production.",
+    "The finite initial filtered Gauss offset is reported separately from its evolution and charge-continuity residual."
+  ],
+  "em_polarization_endpoint_ratios": {
+    "compressive_em_lowpass": 0.38523709425175495,
+    "alfven_em_lowpass": 1.2638285227388852,
+    "coherent_fast_em": 0.32133559379544147,
+    "perturbation_em": 0.47452310352743404
+  },
+  "em_polarization_endpoint_ratio_definition": "Each ratio above divides the final value by the initial value of the same named observable.",
+  "alfven_final_over_initial_compressive_em": 0.1129883055760865,
+  "resolved_e_parallel": {
+    "definition": "Circular Fourier low-pass of the native cell-centered scalar (E dot B)/|B|; the scalar is formed before filtering, not from separately filtered vectors.",
+    "cutoff_cycles_per_reference_L": 64.0,
+    "zero_mode_included": true,
+    "field_units": "B0",
+    "time_units": "Lz/c",
+    "native_grid": [
+      2560,
+      512
+    ],
+    "domain_lengths": [
+      5.0,
+      1.0
+    ],
+    "first": {
+      "frame": 0,
+      "time": 0.0,
+      "maximum_absolute": 0.0003956842313008983,
+      "rms": 5.2923137189514877e-05
+    },
+    "last": {
+      "frame": 100,
+      "time": 1.9999735618545251,
+      "maximum_absolute": 0.13970732625898977,
+      "rms": 0.015153005030279963
+    },
+    "maximum_absolute": 0.25118280062789794,
+    "maximum_absolute_time": 0.8201285367970084,
+    "maximum_absolute_frame": 41,
+    "maximum_rms": 0.019809634722459835,
+    "maximum_rms_time": 0.8000833863845511,
+    "postprocess_job_id": "23864332",
+    "postprocess_source_sha256": "4b34ee163ed0ff1d6e40edb5c2e122c3a03dafd6222bfd552f7162eab4099f06",
+    "frame_metrics": [
+      {
+        "frame": 0,
+        "time": 0.0,
+        "maximum_absolute": 0.0003956842313008983,
+        "rms": 5.2923137189514877e-05
+      },
+      {
+        "frame": 1,
+        "time": 0.02004515041245147,
+        "maximum_absolute": 0.030851789455201447,
+        "rms": 0.005067484687550124
+      },
+      {
+        "frame": 2,
+        "time": 0.040090300824902746,
+        "maximum_absolute": 0.029740137119280786,
+        "rms": 0.004684051604549217
+      },
+      {
+        "frame": 3,
+        "time": 0.060135451237353775,
+        "maximum_absolute": 0.035255581636330004,
+        "rms": 0.004969466256309904
+      },
+      {
+        "frame": 4,
+        "time": 0.08002399891220831,
+        "maximum_absolute": 0.04918772630435546,
+        "rms": 0.0040812564347122195
+      },
+      {
+        "frame": 5,
+        "time": 0.10006914932466023,
+        "maximum_absolute": 0.06650730683848774,
+        "rms": 0.006295041714029076
+      },
+      {
+        "frame": 6,
+        "time": 0.12011429973711214,
+        "maximum_absolute": 0.07531646585363201,
+        "rms": 0.005231496500668501
+      },
+      {
+        "frame": 7,
+        "time": 0.14000284741196545,
+        "maximum_absolute": 0.062019728123278606,
+        "rms": 0.006646302131194832
+      },
+      {
+        "frame": 8,
+        "time": 0.1600479978244156,
+        "maximum_absolute": 0.07911505596418354,
+        "rms": 0.007239055732577344
+      },
+      {
+        "frame": 9,
+        "time": 0.18009314823686573,
+        "maximum_absolute": 0.10019599923868608,
+        "rms": 0.007691663938493517
+      },
+      {
+        "frame": 10,
+        "time": 0.20013829864931587,
+        "maximum_absolute": 0.09569184077216975,
+        "rms": 0.007639418775850519
+      },
+      {
+        "frame": 11,
+        "time": 0.22002684632416875,
+        "maximum_absolute": 0.09053980940328606,
+        "rms": 0.008290108881629144
+      },
+      {
+        "frame": 12,
+        "time": 0.2400719967366189,
+        "maximum_absolute": 0.13854414698511136,
+        "rms": 0.00908165627836799
+      },
+      {
+        "frame": 13,
+        "time": 0.26011714714906903,
+        "maximum_absolute": 0.14103390585277634,
+        "rms": 0.009878007335168344
+      },
+      {
+        "frame": 14,
+        "time": 0.2800056948239219,
+        "maximum_absolute": 0.13986442207436325,
+        "rms": 0.010067677131842857
+      },
+      {
+        "frame": 15,
+        "time": 0.30005084523637204,
+        "maximum_absolute": 0.14517659634528307,
+        "rms": 0.010714525918298488
+      },
+      {
+        "frame": 16,
+        "time": 0.3200959956488222,
+        "maximum_absolute": 0.1643490187172401,
+        "rms": 0.011563676933324647
+      },
+      {
+        "frame": 17,
+        "time": 0.3401411460612723,
+        "maximum_absolute": 0.1589948219637345,
+        "rms": 0.012058097379101707
+      },
+      {
+        "frame": 18,
+        "time": 0.3600296937361252,
+        "maximum_absolute": 0.1721132266499745,
+        "rms": 0.012315891194737584
+      },
+      {
+        "frame": 19,
+        "time": 0.38007484414857534,
+        "maximum_absolute": 0.16029477752817878,
+        "rms": 0.012657306568830356
+      },
+      {
+        "frame": 20,
+        "time": 0.4001199945610255,
+        "maximum_absolute": 0.16774519375335567,
+        "rms": 0.013424827675064357
+      },
+      {
+        "frame": 21,
+        "time": 0.42000854223587836,
+        "maximum_absolute": 0.1820376835117025,
+        "rms": 0.013745577189494464
+      },
+      {
+        "frame": 22,
+        "time": 0.4400536926483285,
+        "maximum_absolute": 0.16708803830253532,
+        "rms": 0.013742362727953362
+      },
+      {
+        "frame": 23,
+        "time": 0.46009884306077864,
+        "maximum_absolute": 0.17621563985745103,
+        "rms": 0.014464799967564093
+      },
+      {
+        "frame": 24,
+        "time": 0.4801439934732288,
+        "maximum_absolute": 0.18291418898427503,
+        "rms": 0.015265612428242778
+      },
+      {
+        "frame": 25,
+        "time": 0.5000325411480817,
+        "maximum_absolute": 0.17737949503139552,
+        "rms": 0.0149161846089042
+      },
+      {
+        "frame": 26,
+        "time": 0.520077691560539,
+        "maximum_absolute": 0.19955623243985632,
+        "rms": 0.015430059877548323
+      },
+      {
+        "frame": 27,
+        "time": 0.5401228419729962,
+        "maximum_absolute": 0.2448902750919718,
+        "rms": 0.01580845337429922
+      },
+      {
+        "frame": 28,
+        "time": 0.5600113896478561,
+        "maximum_absolute": 0.1663162369764124,
+        "rms": 0.015969045026228125
+      },
+      {
+        "frame": 29,
+        "time": 0.5800565400603134,
+        "maximum_absolute": 0.18631459203520448,
+        "rms": 0.01646245818380059
+      },
+      {
+        "frame": 30,
+        "time": 0.6001016904727706,
+        "maximum_absolute": 0.16820962854496596,
+        "rms": 0.017114970837207595
+      },
+      {
+        "frame": 31,
+        "time": 0.6201468408852279,
+        "maximum_absolute": 0.1870419826810497,
+        "rms": 0.017025218206388606
+      },
+      {
+        "frame": 32,
+        "time": 0.6400353885600878,
+        "maximum_absolute": 0.18132842459801568,
+        "rms": 0.017460132932812417
+      },
+      {
+        "frame": 33,
+        "time": 0.660080538972545,
+        "maximum_absolute": 0.2101732826317969,
+        "rms": 0.017889913790791412
+      },
+      {
+        "frame": 34,
+        "time": 0.6801256893850023,
+        "maximum_absolute": 0.21226886120133537,
+        "rms": 0.01801167131215199
+      },
+      {
+        "frame": 35,
+        "time": 0.7000142370598622,
+        "maximum_absolute": 0.2083493596850321,
+        "rms": 0.01796080617942303
+      },
+      {
+        "frame": 36,
+        "time": 0.7200593874723195,
+        "maximum_absolute": 0.2371370676142126,
+        "rms": 0.019058930632197237
+      },
+      {
+        "frame": 37,
+        "time": 0.7401045378847767,
+        "maximum_absolute": 0.24455595596715024,
+        "rms": 0.018762310735044193
+      },
+      {
+        "frame": 38,
+        "time": 0.760149688297234,
+        "maximum_absolute": 0.20504232990707366,
+        "rms": 0.018106686108570545
+      },
+      {
+        "frame": 39,
+        "time": 0.7800382359720939,
+        "maximum_absolute": 0.2075615432820418,
+        "rms": 0.01881764576403882
+      },
+      {
+        "frame": 40,
+        "time": 0.8000833863845511,
+        "maximum_absolute": 0.21900224149425657,
+        "rms": 0.019809634722459835
+      },
+      {
+        "frame": 41,
+        "time": 0.8201285367970084,
+        "maximum_absolute": 0.25118280062789794,
+        "rms": 0.01901887094863859
+      },
+      {
+        "frame": 42,
+        "time": 0.8400170844718683,
+        "maximum_absolute": 0.1998705158078972,
+        "rms": 0.018240863160793257
+      },
+      {
+        "frame": 43,
+        "time": 0.8600622348843255,
+        "maximum_absolute": 0.20987218864593704,
+        "rms": 0.019301929982165397
+      },
+      {
+        "frame": 44,
+        "time": 0.8801073852967828,
+        "maximum_absolute": 0.20594397293376981,
+        "rms": 0.018881113518719413
+      },
+      {
+        "frame": 45,
+        "time": 0.90015253570924,
+        "maximum_absolute": 0.2215421889603237,
+        "rms": 0.01847119458588918
+      },
+      {
+        "frame": 46,
+        "time": 0.9200410833841,
+        "maximum_absolute": 0.21096931873052027,
+        "rms": 0.01867723739416401
+      },
+      {
+        "frame": 47,
+        "time": 0.9400862337965572,
+        "maximum_absolute": 0.23881791290275742,
+        "rms": 0.018594211153767887
+      },
+      {
+        "frame": 48,
+        "time": 0.9601313842090144,
+        "maximum_absolute": 0.17998184211564164,
+        "rms": 0.017967681823528855
+      },
+      {
+        "frame": 49,
+        "time": 0.9800199318838744,
+        "maximum_absolute": 0.18781925624296802,
+        "rms": 0.018269392807159297
+      },
+      {
+        "frame": 50,
+        "time": 1.0000650822963315,
+        "maximum_absolute": 0.17794458302671945,
+        "rms": 0.01788434393174127
+      },
+      {
+        "frame": 51,
+        "time": 1.0201102327087745,
+        "maximum_absolute": 0.17110630902829638,
+        "rms": 0.01764276952834183
+      },
+      {
+        "frame": 52,
+        "time": 1.0401553831212176,
+        "maximum_absolute": 0.18547472829284237,
+        "rms": 0.017914505492331277
+      },
+      {
+        "frame": 53,
+        "time": 1.0600439307960634,
+        "maximum_absolute": 0.1526002570603386,
+        "rms": 0.017525180989506776
+      },
+      {
+        "frame": 54,
+        "time": 1.0800890812085064,
+        "maximum_absolute": 0.16935966531654967,
+        "rms": 0.01727684155051912
+      },
+      {
+        "frame": 55,
+        "time": 1.1001342316209495,
+        "maximum_absolute": 0.16347849453184093,
+        "rms": 0.01755305429304701
+      },
+      {
+        "frame": 56,
+        "time": 1.1200227792957953,
+        "maximum_absolute": 0.18517057269549222,
+        "rms": 0.017272472996352466
+      },
+      {
+        "frame": 57,
+        "time": 1.1400679297082383,
+        "maximum_absolute": 0.19149902123865725,
+        "rms": 0.01695565283652035
+      },
+      {
+        "frame": 58,
+        "time": 1.1601130801206814,
+        "maximum_absolute": 0.15977477356038497,
+        "rms": 0.017060265055478432
+      },
+      {
+        "frame": 59,
+        "time": 1.1800016277955272,
+        "maximum_absolute": 0.1671166778358087,
+        "rms": 0.017115939066810495
+      },
+      {
+        "frame": 60,
+        "time": 1.2000467782079702,
+        "maximum_absolute": 0.14952796352809253,
+        "rms": 0.016526927595636867
+      },
+      {
+        "frame": 61,
+        "time": 1.2200919286204133,
+        "maximum_absolute": 0.16784173970742855,
+        "rms": 0.01702682337830796
+      },
+      {
+        "frame": 62,
+        "time": 1.2401370790328563,
+        "maximum_absolute": 0.15117668808558646,
+        "rms": 0.01694109619051241
+      },
+      {
+        "frame": 63,
+        "time": 1.2600256267077021,
+        "maximum_absolute": 0.18948197405189676,
+        "rms": 0.016560223590047406
+      },
+      {
+        "frame": 64,
+        "time": 1.2800707771201452,
+        "maximum_absolute": 0.20044593563926397,
+        "rms": 0.017344895497886283
+      },
+      {
+        "frame": 65,
+        "time": 1.3001159275325882,
+        "maximum_absolute": 0.18177808044049795,
+        "rms": 0.016746761664035395
+      },
+      {
+        "frame": 66,
+        "time": 1.320004475207434,
+        "maximum_absolute": 0.15457428826143527,
+        "rms": 0.016440300782689207
+      },
+      {
+        "frame": 67,
+        "time": 1.340049625619877,
+        "maximum_absolute": 0.1965196032205989,
+        "rms": 0.01743647769188904
+      },
+      {
+        "frame": 68,
+        "time": 1.36009477603232,
+        "maximum_absolute": 0.20450041996828175,
+        "rms": 0.016931503564362193
+      },
+      {
+        "frame": 69,
+        "time": 1.3801399264447631,
+        "maximum_absolute": 0.14294368981471936,
+        "rms": 0.016767757986469192
+      },
+      {
+        "frame": 70,
+        "time": 1.400028474119609,
+        "maximum_absolute": 0.20012060048597027,
+        "rms": 0.017531511258627494
+      },
+      {
+        "frame": 71,
+        "time": 1.420073624532052,
+        "maximum_absolute": 0.16736241359433224,
+        "rms": 0.016897213795755855
+      },
+      {
+        "frame": 72,
+        "time": 1.440118774944495,
+        "maximum_absolute": 0.17064544227859782,
+        "rms": 0.016659679900378966
+      },
+      {
+        "frame": 73,
+        "time": 1.4600073226193409,
+        "maximum_absolute": 0.19585782196983192,
+        "rms": 0.017141443778459966
+      },
+      {
+        "frame": 74,
+        "time": 1.4800524730317839,
+        "maximum_absolute": 0.21418782701611294,
+        "rms": 0.016936925564934674
+      },
+      {
+        "frame": 75,
+        "time": 1.500097623444227,
+        "maximum_absolute": 0.17318205871570364,
+        "rms": 0.01686509970349045
+      },
+      {
+        "frame": 76,
+        "time": 1.52014277385667,
+        "maximum_absolute": 0.1679296813036738,
+        "rms": 0.01700742985642286
+      },
+      {
+        "frame": 77,
+        "time": 1.5400313215315158,
+        "maximum_absolute": 0.1714064071749034,
+        "rms": 0.016691338066282865
+      },
+      {
+        "frame": 78,
+        "time": 1.5600764719439588,
+        "maximum_absolute": 0.14596100182793023,
+        "rms": 0.016494704312296868
+      },
+      {
+        "frame": 79,
+        "time": 1.5801216223564019,
+        "maximum_absolute": 0.20703576354975084,
+        "rms": 0.017108638899384788
+      },
+      {
+        "frame": 80,
+        "time": 1.6000101700312477,
+        "maximum_absolute": 0.16663105015681504,
+        "rms": 0.016566605213350093
+      },
+      {
+        "frame": 81,
+        "time": 1.6200553204436907,
+        "maximum_absolute": 0.16475339005659848,
+        "rms": 0.016421471684897104
+      },
+      {
+        "frame": 82,
+        "time": 1.6401004708561338,
+        "maximum_absolute": 0.14618808931996474,
+        "rms": 0.016591489646355054
+      },
+      {
+        "frame": 83,
+        "time": 1.6601456212685768,
+        "maximum_absolute": 0.17130141042975794,
+        "rms": 0.016498365795314784
+      },
+      {
+        "frame": 84,
+        "time": 1.6800341689434226,
+        "maximum_absolute": 0.1524364443959852,
+        "rms": 0.01644928805818763
+      },
+      {
+        "frame": 85,
+        "time": 1.7000793193558656,
+        "maximum_absolute": 0.138876085970703,
+        "rms": 0.016114374163188675
+      },
+      {
+        "frame": 86,
+        "time": 1.7201244697683087,
+        "maximum_absolute": 0.1689311845534015,
+        "rms": 0.0166622532304958
+      },
+      {
+        "frame": 87,
+        "time": 1.7400130174431545,
+        "maximum_absolute": 0.14476406913828374,
+        "rms": 0.01604429287764459
+      },
+      {
+        "frame": 88,
+        "time": 1.7600581678555975,
+        "maximum_absolute": 0.17925553806060945,
+        "rms": 0.015910241670308953
+      },
+      {
+        "frame": 89,
+        "time": 1.7801033182680406,
+        "maximum_absolute": 0.1430611289225516,
+        "rms": 0.016063357693064027
+      },
+      {
+        "frame": 90,
+        "time": 1.8001484686804836,
+        "maximum_absolute": 0.14106047925762608,
+        "rms": 0.015659059240012367
+      },
+      {
+        "frame": 91,
+        "time": 1.8200370163553294,
+        "maximum_absolute": 0.14831930787155204,
+        "rms": 0.01622234922181105
+      },
+      {
+        "frame": 92,
+        "time": 1.8400821667677725,
+        "maximum_absolute": 0.12827392268123924,
+        "rms": 0.015641595447267793
+      },
+      {
+        "frame": 93,
+        "time": 1.8601273171802155,
+        "maximum_absolute": 0.14259519754905056,
+        "rms": 0.015530457254175687
+      },
+      {
+        "frame": 94,
+        "time": 1.8800158648550613,
+        "maximum_absolute": 0.16280348259392743,
+        "rms": 0.015875689192822808
+      },
+      {
+        "frame": 95,
+        "time": 1.9000610152675044,
+        "maximum_absolute": 0.1285506495934449,
+        "rms": 0.015771795416051473
+      },
+      {
+        "frame": 96,
+        "time": 1.9201061656799474,
+        "maximum_absolute": 0.15891746880974417,
+        "rms": 0.015485104979422022
+      },
+      {
+        "frame": 97,
+        "time": 1.9401513160923904,
+        "maximum_absolute": 0.15719676678763184,
+        "rms": 0.01522584706839142
+      },
+      {
+        "frame": 98,
+        "time": 1.9600398637672363,
+        "maximum_absolute": 0.14579282646633726,
+        "rms": 0.015613566779977635
+      },
+      {
+        "frame": 99,
+        "time": 1.9800850141796793,
+        "maximum_absolute": 0.145194382437248,
+        "rms": 0.015441982831974198
+      },
+      {
+        "frame": 100,
+        "time": 1.9999735618545251,
+        "maximum_absolute": 0.13970732625898977,
+        "rms": 0.015153005030279963
+      }
+    ]
+  }
+}

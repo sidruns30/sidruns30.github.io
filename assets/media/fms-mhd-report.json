@@ -1,0 +1,122 @@
+{
+  "solver": "Athena++ SRMHD",
+  "original_repository": "/scratch/zt1/project/sashaph-prj/user/siddhant/athena",
+  "original_revision": "a0a112fa517cf05106837fde51e663ba8774b6a9",
+  "original_worktree_clean": false,
+  "original_tracked_changes": [
+    "D inputs/hydro/athinput.disk_sph",
+    "M src/hydro/srcterms/hydro_srcterms.cpp",
+    "M src/pgen/disk.cpp"
+  ],
+  "original_untracked_files_present": true,
+  "inherited_compiled_change": "hydro_srcterms.cpp adds coordinate-system text to an existing incompatible-point-mass-gravity fatal error only; point-mass gravity is disabled in this run. Other original tracked changes concern unused disk initialization/input.",
+  "inherited_compiled_file_sha256": "0aeb88d452de5a87f7977858381e7729a7033596c5b882e1833f0df50d879e8f",
+  "isolated_source_parent": "website-fms-comparison-20261106/athena, previously built isolated HLLE SRMHD source; copied to new resonant_fms03/athena; originals not modified",
+  "configuration": "--prob=fms_comparison -s -b -mpi -hdf5 --cxx=g++ --mpiccmd=mpicxx --flux=hlle --nghost=3",
+  "build": "No rebuild necessary: byte-identical previous executable copied; sigma, theta, gamma are read at runtime from explicit new deck.",
+  "compiler": "g++ (Spack GCC)11.3.0; -O3 -std=c++11",
+  "modules": [
+    "gcc/11.3.0",
+    "openmpi/gcc/11.3.0/zen2/4.1.5",
+    "hdf5/gcc/11.3.0/openmpi/4.1.5/zen2/1.14.0"
+  ],
+  "binary_sha256": "f37e30b7f4a20d57ae25835cb5fe8d12f3a93b7df83141f3c87360ec1a3b77ea",
+  "defs_hpp_sha256": "dfed8e4914e36a6c7c8053d19d358804253ceb0f88c6c559aed9c07c9c4942db",
+  "makefile_sha256": "78f161cb18a9da37d977db5f86ea681e9613c6aa5f6079a0a8b1b497e0e6c3fe",
+  "header_sha256": "efddb50b4764842ef045389e495a1ee04e60cb60674afba830255833a03036e7",
+  "input_sha256": "42245aa2f72978f22f2696acb3a316d805b88fe9637472bb880828ce9a36f54b",
+  "initializer_sha256": "7215d87fb4e8e6d014212465564657720d5df9436b9b8d3fd777bbcc3db319c0",
+  "native_grid": [
+    2560,
+    512,
+    1
+  ],
+  "meshblock": [
+    64,
+    64,
+    1
+  ],
+  "mpi_ranks": 64,
+  "allocated_memory_GB": 32,
+  "wall_limit_minutes": 40,
+  "domain": [
+    5,
+    1
+  ],
+  "native_basis": [
+    "x",
+    "z",
+    "-y"
+  ],
+  "physical_output_basis": [
+    "x",
+    "y",
+    "z"
+  ],
+  "controls_or_validation_runs": false,
+  "source_reference": "Preserved resonant_fms03/athena source tree; algorithm and initializer unchanged.",
+  "production_slurm_sha256": "2bcc4182d23d4114094ee2ccb98caacdcd44f243c956662edbb2b5eb028a55d6",
+  "physics": {
+    "cold_sigma": 10.0,
+    "plasma_beta": 0.1,
+    "gamma": 1.3333333333333333,
+    "rho0": 0.1,
+    "p0": 0.05,
+    "enthalpy_density": 0.3,
+    "sigma_hot": 3.3333333333333335,
+    "theta": 0.5,
+    "alfven_speed": 0.8770580193070292,
+    "linear_perpendicular_fast_speed": 0.9058216273156766
+  },
+  "production_status": "COMPLETED",
+  "previous_MHD_run_preserved": "../athena; jobs23860523/23860524; frames/mhd",
+  "production_slurm_job": 23863186,
+  "export_slurm_job": 23863187,
+  "export_status": "COMPLETED",
+  "export_directory": "resonant_fms03/frames/mhd_sigma10_beta01",
+  "production_elapsed": "00:12:14",
+  "production_exit_code": "0:0",
+  "final_simulation_time": 2.0,
+  "final_cycle": 4096,
+  "fixed_time_step": 0.00048828125,
+  "export_elapsed": "00:03:02",
+  "export_exit_code": "0:0",
+  "exported_frames": 101,
+  "export_diagnostics_sha256": "0cccfa32bcc580641e334b14fac06faa2dc9b98a328f1e283121fac503536098",
+  "production_summary": {
+    "cold_sigma": 10.0,
+    "plasma_beta": 0.1,
+    "frames": 101,
+    "time_end": 2.0,
+    "initial_compressive_em": 0.010055389275643312,
+    "initial_alfven_em": 0.0008846153844770627,
+    "final_compressive_fraction": 0.09428949935645695,
+    "min_compressive_fraction": 0.09428949935645695,
+    "min_compressive_time": 2.0,
+    "initial_alfven_over_initial_compressive": 0.08797425541941217,
+    "final_alfven_over_initial_compressive": 0.13650187842674186,
+    "max_alfven_over_initial_compressive": 0.20417854211144248,
+    "max_alfven_time": 0.68017578125,
+    "min_rho": 0.06510314345359802,
+    "min_pressure": 0.028173262253403664,
+    "max_density_floor_fraction": 0.0,
+    "max_pressure_floor_fraction": 0.0,
+    "initial_total_T00": 0.762996581881741,
+    "final_total_T00": 0.7629965798798999,
+    "initial_matter_T00": 0.25205098744883003,
+    "final_matter_T00": 0.26062833986843337,
+    "max_timestamp_offset": 0.00048828125,
+    "native_conserved_total_energy_relative_change": -2.372366622625712e-13,
+    "native_conserved_mass_relative_change": -2.7522533783138475e-13,
+    "diagnostics_sha256": [
+      "0cccfa32bcc580641e334b14fac06faa2dc9b98a328f1e283121fac503536098"
+    ],
+    "metadata_cold_sigma": [
+      10.0
+    ],
+    "metadata_plasma_beta": [
+      0.1
+    ],
+    "note": "Descriptive diagnostics from the requested production run; no controls/convergence. Compressive EM includes fast and slow MHD polarizations and is not a direct heating measurement."
+  }
+}
