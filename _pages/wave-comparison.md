@@ -34,7 +34,11 @@ For PIC, the input starvation parameter is **ψ<sub>st</sub> = 0.5**, using the 
 
 ## Reading the movies
 
-The upper maps show the magnetic compression δ<i>B</i><sub>z</sub>/<i>B</i><sub>0</sub>; the lower maps show the Alfvén component <i>B</i><sub>y</sub>/<i>B</i><sub>0</sub>. Both rows and all three models share one fixed magnetic-amplitude color scale. The maps use actual saved solver fields, averaged onto a common 640 × 128 display grid.
+Three wide panels show MHD, FFE, and PIC on the same physical clock. Each shows **electromagnetic wave energy** with the uniform guide field removed. Low amplitudes fade to transparency. The still preview is monochrome; the movie uses the palette sampled from Figure 1 of the [ApJ paper](https://arxiv.org/pdf/2606.19450v1), with a fixed scale shared by every model and frame.
+
+The displayed energy follows the paper's wave-energy definition: <i>u</i><sub>w</sub> = (&#124;<i>E</i>&#124;² + &#124;<i>B</i> − <i>B</i>₀&#124;²)/2 in the normalized units above. The guide field is removed **before** squaring. This positive quantity differs from subtracting the uniform background energy from the total electromagnetic energy.
+
+The movie uses the existing completed production runs. It shows electromagnetic energy only. All energy scalars are calculated on the native grid before averaging onto the common 640 × 128 display grid. The energy-density unit is <i>U</i>₀ = <i>B</i>₀²/(4π). Color is linear from 0 to 0.39<i>U</i>₀. Values below 0.0005<i>U</i>₀ are transparent, with a smooth transition to full opacity at 0.012<i>U</i>₀. These display thresholds also fade real weak seed waves; the downloadable energies retain them.
 
 | Model | Native grid (x × z) | Plasma regime |
 | --- | --- | --- |
@@ -44,15 +48,13 @@ The upper maps show the magnetic compression δ<i>B</i><sub>z</sub>/<i>B</i><sub
 
 Frames are saved every 0.02<i>L</i>/<i>c</i>, from <i>t</i> = 0 to 2<i>L</i>/<i>c</i>. The renderer matches actual saved times to within 0.001<i>L</i>/<i>c</i> without interpolating the evolved fields.
 
-The curves retain wavelengths with &#124;<i>k</i>&#124;<i>L</i>/(2π) ≤ 64. Each model's curves are normalized to its own initial compressive electromagnetic polarization norm, since the initial electric fields differ. Spectral diagnostics are computed at native resolution before display averaging. Modes with <i>k</i><sub>x</sub> = 0 have degenerate transverse polarizations and are recorded separately. The metadata records the actual times selected for each panel.
-
-The curves are linear electromagnetic polarization diagnostics about the guide field: compressive (solid) and Alfvén-polarized (dashed). In MHD, the compressive projection includes both fast and slow magnetosonic modes. The curves help track conversion and spectral redistribution, but do not measure the complete wave energy in MHD or PIC, or directly measure plasma heating. Finite-amplitude steepening can also change the MHD pulse. These production runs do not establish numerical convergence or a universal damping rate.
+The downloadable energy data contain spatial means of electromagnetic wave energy and the separate signed total-EM energy excess at each saved time. The metadata records the actual times, source hashes, energy definitions, palettes, opacity thresholds, and fixed color scales. Separate solver reports retain the electromagnetic polarization diagnostics and energy balances. Their compressive projection can include both fast and slow magnetosonic modes in MHD; it does not measure the complete wave energy or plasma heating. These production runs do not establish numerical convergence or a universal damping rate.
 
 Over the full interval, FFE's total electromagnetic energy decreases by 0.255%, equivalent to 10.74% of its initial perturbation energy. Its exchange between polarizations therefore should not be read as exactly conservative. The solver reports below retain the measured energy balances and constraint residuals.
 
-PIC uses 32 particles per cell in total and two current-filter passes. The metadata retains its finite initial discrete Gauss-law residual and the separate offset relative to filtered charge, alongside their subsequent evolution. A small change in a constraint residual does not imply its initial value was zero.
+PIC uses 32 particles per cell in total and two current-filter passes. The PIC solver report retains its finite initial discrete Gauss-law residual and the separate offset relative to filtered charge, alongside their subsequent evolution. A small change in a constraint residual does not imply its initial value was zero.
 
-[Download the movie]({{ site.data.wave_comparison.movie | relative_url }}) · [Curve data (CSV)]({{ site.data.wave_comparison.curve_data | relative_url }}) · [Setup, timing, and diagnostics (JSON)]({{ site.data.wave_comparison.metadata | relative_url }})
+[Download the movie]({{ site.data.wave_comparison.movie | relative_url }}) · [Energy data (CSV)]({{ site.data.wave_comparison.energy_data | relative_url }}) · [Setup, timing, and diagnostics (JSON)]({{ site.data.wave_comparison.metadata | relative_url }})
 
 Solver reports: [MHD]({{ site.data.wave_comparison.mhd_report | relative_url }}) · [FFE]({{ site.data.wave_comparison.ffe_report | relative_url }}) · [PIC]({{ site.data.wave_comparison.pic_report | relative_url }})
 

@@ -1,8 +1,8 @@
 ready: true
-movie: /assets/media/fms-resonant-decay.mp4?v=sigma10-beta01-full
-poster: /assets/media/fms-resonant-decay.jpg?v=sigma10-beta01-full
-curve_data: /assets/media/fms-resonant-decay.csv?v=sigma10-beta01-full
-metadata: /assets/media/fms-resonant-decay.json?v=sigma10-beta01-full
+movie: /assets/media/fms-resonant-decay.mp4?v=energy-minimal-v1
+poster: /assets/media/fms-resonant-decay.jpg?v=energy-minimal-v1
+energy_data: /assets/media/fms-resonant-decay.csv?v=energy-minimal-v1
+metadata: /assets/media/fms-resonant-decay.json?v=energy-minimal-v1
 mhd_report: /assets/media/fms-mhd-report.json
 ffe_report: /assets/media/fms-ffe-report.json
 pic_report: /assets/media/fms-pic-report.json
