@@ -1732,7 +1732,7 @@ body.gravity-mode #gravity-controls {
 }
 .simulation-comparison .simulation-copy h3 { text-wrap:balance; margin:0; font-size:clamp(25px,3vw,36px); line-height:1.2; }
 .comparison-player { background:#fff; }
-.comparison-player video { display:block; width:100%; height:auto; aspect-ratio:320/247; }
+.comparison-player video { display:block; width:100%; height:auto; aspect-ratio:1600/741; object-fit:fill; }
 @media (max-width:620px) {
   .simulation-comparison .simulation-copy { padding:24px; }
 }
