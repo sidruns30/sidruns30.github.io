@@ -782,6 +782,7 @@ body.gravity-mode #gravity-controls {
 }
 
 .page-heading h1 {
+  text-wrap:balance;
   font-size:76px;
   line-height:1.05;
   letter-spacing:-.035em;
@@ -1520,7 +1521,7 @@ body.gravity-mode #gravity-controls {
     padding-block:42px 60px;
   }
   .page-heading h1 {
-    font-size:57px;
+    font-size:clamp(42px,12vw,57px);
   }
   .page-heading>p:not(.eyebrow) {
     font-size:14px;
@@ -1729,9 +1730,9 @@ body.gravity-mode #gravity-controls {
   display:block;
   padding:28px 32px;
 }
-.simulation-comparison .simulation-copy h3 { margin:0; font-size:clamp(25px,3vw,36px); line-height:1.2; }
-.comparison-player { background:#000; }
-.comparison-player video { display:block; width:100%; height:auto; aspect-ratio:8/5; }
+.simulation-comparison .simulation-copy h3 { text-wrap:balance; margin:0; font-size:clamp(25px,3vw,36px); line-height:1.2; }
+.comparison-player { background:#fff; }
+.comparison-player video { display:block; width:100%; height:auto; aspect-ratio:320/247; }
 @media (max-width:620px) {
   .simulation-comparison .simulation-copy { padding:24px; }
 }

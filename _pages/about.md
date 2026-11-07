@@ -12,7 +12,7 @@ redirect_from:
     <p class="eyebrow"><span class="small-rule"></span> Plasma astrophysics · Stanford University</p>
     <h1 id="hero-title">Siddhant<br> Solanki<span class="name-period">.</span></h1>
     <p class="hero-role">PhD student in Physics</p>
-    <p class="hero-description">Exploring the physics of extreme environments.</p>
+    <p class="hero-description">Studying relativistic magnetized plasmas in space.</p>
     <p class="hero-detail">I use theory and large-scale simulations to study waves, turbulence, and energy release around neutron stars and black holes.</p>
     <div class="button-group"><a class="button button-primary" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="button button-text" href="{{ '/files/Siddhant_Solanki_CV.pdf' | relative_url }}">Download CV <span aria-hidden="true">↓</span></a></div>
   </div>

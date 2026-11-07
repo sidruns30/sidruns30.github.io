@@ -1,9 +1,9 @@
 ready: true
-movie: /assets/media/fms-resonant-decay.mp4?v=energy-hot-v1
-poster: /assets/media/fms-resonant-decay.jpg?v=energy-hot-v1
-energy_data: /assets/media/fms-resonant-decay.csv?v=energy-hot-v1
-metadata: /assets/media/fms-resonant-decay.json?v=energy-hot-v1
-mhd_report: /assets/media/fms-mhd-report.json
+movie: /assets/media/fms-resonant-decay.mp4?v=energy-white-v1
+poster: /assets/media/fms-resonant-decay.jpg?v=energy-white-v1
+energy_data: /assets/media/fms-resonant-decay.csv?v=energy-white-v1
+metadata: /assets/media/fms-resonant-decay.json?v=energy-white-v1
+mhd_report: /assets/media/fms-mhd-report.json?v=sigma100-beta001
 ffe_report: /assets/media/fms-ffe-report.json
 pic_report: /assets/media/fms-pic-report.json
 methods: /research/wave-comparison/
@@ -11,5 +11,6 @@ description: >-
   An FMS pulse with peak magnetic amplitude δB/B₀ = 0.3 travels along +x
   through 40 weak Alfvén-wave pairs, each wave at 0.005 B₀, with the guide
   field along +z. The magnetic pulse and seed pattern are shared.
-  MHD has cold magnetization 10 and plasma beta 0.1; FFE neglects matter inertia;
+  MHD has cold magnetization 100 and plasma beta 0.01, approaching the
+  force-free regime while retaining finite matter inertia; FFE neglects matter inertia;
   PIC follows a pair plasma with input starvation parameter 0.5.

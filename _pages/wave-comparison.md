@@ -1,6 +1,6 @@
 ---
 layout: academic-page
-title: "Escape of Fast Radio Burst Propagation"
+title: "Dissipation of Electromagnetic Waves in Neutron Star Magnetospheres"
 permalink: /research/wave-comparison/
 description: "A strong fast magnetosonic pulse interacting with weak resonant Alfvén waves in MHD, force-free electrodynamics, and kinetic pair plasma."
 published: true
@@ -8,7 +8,7 @@ published: true
 
 A strong fast magnetosonic pulse travels through weak Alfvén-wave seeds. The comparison uses **Athena++** for relativistic MHD, **Einstein Toolkit / FFEvolve** for force-free electrodynamics, and **Entity** for particle-in-cell evolution.
 
-The magnetic pulse, seed wavevectors, phases, domain, and physical clock are shared. The MHD case deliberately has greater plasma inertia and pressure, while PIC can develop charge starvation. Each model evolves its own equations.
+The magnetic pulse, seed wavevectors, phases, domain, and physical clock are shared. The MHD case approaches the force-free regime while retaining finite matter inertia and pressure; PIC can develop charge starvation. Each model evolves its own equations.
 
 ## Geometry and pulse
 
@@ -22,11 +22,13 @@ This 2D comparison uses periodic boundaries in both directions and a periodicall
 
 The background contains **40 counterpropagating Alfvén-wave pairs**, or 80 traveling waves, each with peak magnetic amplitude **0.005<i>B</i><sub>0</sub>**. Their combined RMS magnetic amplitude is approximately 0.0316<i>B</i><sub>0</sub>.
 
-Each pair's wavevectors add to the FMS carrier. The common spectrum includes parallel mode numbers 7, 8, and 9, covering the force-free resonance and the shifted resonances of warm MHD and kinetic plasma. A given pair need not be exactly resonant in all three models: their dispersion relations differ.
+Each pair's wavevectors add to the FMS carrier. The common spectrum includes parallel mode numbers 7, 8, and 9, covering the force-free resonance and allowing for finite-inertia and kinetic effects. A given pair need not be exactly resonant in all three models: their dispersion relations differ.
 
 ## Plasma regimes
 
-The MHD background uses **cold magnetization σ = 10** and **β = 0.1**, where σ = <i>B</i>₀²/(4πρ<i>c</i>²) and β = 8π<i>p</i>/<i>B</i>₀². With adiabatic index 4/3, the normalized density is 0.1, pressure is 0.05, and enthalpy-based magnetization is approximately 3.33. Its initial pulse follows the finite-amplitude perpendicular relativistic-MHD simple-wave relation.
+The MHD background uses **cold magnetization σ = 100** and **β = 0.01**, where σ = <i>B</i>₀²/(4πρ<i>c</i>²) and β = 8π<i>p</i>/<i>B</i>₀². With adiabatic index 4/3, the normalized density is 0.01, pressure is 0.005, and enthalpy-based magnetization is approximately 33.33. Its initial pulse follows the finite-amplitude perpendicular relativistic-MHD simple-wave relation. This magnetically dominated regime brings the initial propagation speeds close to the force-free limit.
+
+The MHD run uses HLLE fluxes, piecewise-parabolic reconstruction, third-order Runge–Kutta integration, and CFL number 0.25. Its build includes a local primitive-recovery safeguard. Recovery starts from the previous integration stage's pressure and allows up to 100 iterations; an unrecoverable state stops the production run and records its conserved variables. The solver report records the build and input hashes, floor-cell counts, and conserved mass and total-energy changes.
 
 FFE neglects matter inertia and pressure. Its isolated pulse has <i>E</i><sub>y</sub> = δ<i>B</i><sub>z</sub>. PIC uses the same electromagnetic pulse in a highly magnetized electron–positron plasma, with cold σ = 125 and initial dimensionless temperature 0.1. The electric and velocity fields therefore reflect each model's plasma regime; matching the magnetic pulse does not imply identical electric fields or matter thermodynamics.
 
@@ -34,15 +36,17 @@ For PIC, the input starvation parameter is **ψ<sub>st</sub> = 0.5**, using the 
 
 ## Reading the movies
 
-Three wide panels show MHD, FFE, and PIC on the same physical clock. Each shows **electromagnetic wave energy** with the uniform guide field removed. Low amplitudes fade to transparency against a black background. The still preview uses the maximum RGB channel as monochrome intensity; the movie uses a black–red–yellow palette following Figure 1 of the [ApJL paper](https://arxiv.org/pdf/2606.19448v1), with a fixed scale shared by every model and frame.
+Three wide panels show MHD, FFE, and PIC on the same physical clock. Each shows **electromagnetic wave energy** with the uniform guide field removed. Low amplitudes fade to transparency against a white background. The still preview is monochrome; the movie uses an ordered white–blue–cyan–green–yellow–red palette, with a fixed scale shared by every model and frame.
 
 The displayed energy follows the paper's wave-energy definition: <i>u</i><sub>w</sub> = (&#124;<i>E</i>&#124;² + &#124;<i>B</i> − <i>B</i>₀&#124;²)/2 in the normalized units above. The guide field is removed **before** squaring. This positive quantity differs from subtracting the uniform background energy from the total electromagnetic energy.
 
-The movie uses the existing completed production runs. It shows electromagnetic energy only. All energy scalars are calculated on the native grid before averaging onto the common 640 × 128 display grid. The energy-density unit is <i>U</i>₀ = <i>B</i>₀²/(4π). The shared energy normalization spans 0 to 0.39<i>U</i>₀ linearly. Black marks zero; the palette reaches red at 0.0468<i>U</i>₀ and yellow at the upper bound. Values below 0.0005<i>U</i>₀ are transparent, with a smooth transition to full opacity at 0.012<i>U</i>₀. These display thresholds also fade real weak seed waves; the downloadable energies retain them.
+The movie combines the magnetically dominated MHD run with the existing FFE and PIC production outputs. It shows electromagnetic energy only. All energy scalars are calculated on the native grid before averaging onto the common 640 × 128 display grid. The energy-density unit is <i>U</i>₀ = <i>B</i>₀²/(4π). The shared energy normalization spans 0 to 0.39<i>U</i>₀ linearly. Values below 0.0005<i>U</i>₀ are transparent, with a smooth transition to full opacity at 0.012<i>U</i>₀. These display thresholds also fade real weak seed waves; the downloadable energies retain them.
+
+For presentation, each energy map receives a light Gaussian smoothing with standard deviation 0.5 display pixels (approximately 0.0039<i>L</i>). The same fixed crop, 0 ≤ x/<i>L</i> ≤ 4, fills every panel while retaining the full transverse extent and physical aspect ratio. This removes part of the weak downstream wave bath from view. Smoothing is applied to the periodic full-domain scalar map before cropping; the downloadable energy diagnostics retain the unsmoothed full domain.
 
 | Model | Native grid (x × z) | Plasma regime |
 | --- | --- | --- |
-| Relativistic MHD | 2560 × 512 | Cold σ = 10; β = 0.1 |
+| Relativistic MHD | 2560 × 512 | Cold σ = 100; β = 0.01 |
 | Force-free electrodynamics | 1920 × 384 | Negligible matter inertia |
 | Pair-plasma PIC | 2560 × 512 | Cold σ = 125; ψ<sub>st</sub> = 0.5 |
 
