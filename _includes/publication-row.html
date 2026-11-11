@@ -5,6 +5,6 @@
     {% if post.authors %}<p class="publication-authors">{{ post.authors | replace: 'Solanki, S.', '<strong>Solanki, S.</strong>' }}</p>{% endif %}
     <p class="publication-venue">{{ post.venue }}</p>
     {% if include.summary %}<p class="publication-summary">{{ post.excerpt | strip_html }}</p>{% endif %}
-    <div class="publication-links"><a href="{{ post.paperurl }}">{% if post.paperurl contains 'arxiv.org' %}Read on arXiv{% else %}Read paper{% endif %} <span aria-hidden="true">↗</span></a>{% if post.arxivurl %}<a href="{{ post.arxivurl }}">Read on arXiv <span aria-hidden="true">↗</span></a>{% endif %}<a href="{{ post.url | relative_url }}">Details <span aria-hidden="true">→</span></a></div>
+    <div class="publication-links"><a href="{{ post.paperurl }}">{% if post.paperurl contains 'arxiv.org' %}Read on arXiv{% else %}Read paper{% endif %} <span aria-hidden="true">↗</span></a><a href="{{ post.url | relative_url }}">Details <span aria-hidden="true">→</span></a></div>
   </div>
 </article>

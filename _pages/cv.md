@@ -8,7 +8,6 @@ redirect_from:
 ---
 <div class="container page-content">
   <header class="page-heading cv-heading"><div><p class="eyebrow">Academic background</p><h1>Curriculum vitae<span class="name-period">.</span></h1><p>Siddhant Solanki · Physics, Stanford University</p></div><a class="button button-primary" href="{{ '/files/Siddhant_Solanki_CV.pdf' | relative_url }}">Download CV (PDF) <span aria-hidden="true">↓</span></a></header>
-  <section class="notice" aria-labelledby="research-documents-title"><h2 id="research-documents-title">Research statement &amp; application materials</h2><p>Updated November 2026. The CV includes six refereed publications and three preprints, with links to arXiv.</p><div class="button-group"><a class="button button-text" href="{{ '/files/Siddhant_Solanki_Research_Statement_2027.pdf' | relative_url }}">Research statement (PDF) <span aria-hidden="true">↓</span></a><a class="button button-text" href="{{ '/files/Jane_Street_Fellowship_2027_Siddhant_Solanki.pdf' | relative_url }}">2027 Jane Street application materials (PDF) <span aria-hidden="true">↓</span></a></div></section>
   <div class="cv-layout">
     <nav class="cv-nav" aria-label="CV sections"><a href="#education">Education</a><a href="#interests">Research interests</a><a href="#methods">Methods &amp; skills</a><a href="#publications">Publications</a><a href="#awards">Awards</a><a href="#teaching">Teaching &amp; outreach</a><a href="#talks">Talks &amp; visits</a><a href="#schools">Schools &amp; workshops</a><a href="#news">In the news</a></nav>
     <div class="cv-body">
