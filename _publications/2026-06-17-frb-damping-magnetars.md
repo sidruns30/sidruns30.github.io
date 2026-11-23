@@ -4,7 +4,7 @@ collection: publications
 layout: research-paper
 status: preprint
 publication_year: "2026"
-authors: "Solanki, S., Mahlmann, J., Philippov, A., & Beloborodov, A."
+authors: "Solanki, S., Mahlmann, J. F., Philippov, A., & Beloborodov, A. M."
 featured: true
 category: manuscripts
 permalink: /publication/2026-06-17-frb-damping-magnetars
@@ -12,6 +12,6 @@ excerpt: 'Study of how fast radio burst emission is damped as it propagates thro
 date: 2026-06-17
 venue: 'arXiv preprint'
 paperurl: 'https://arxiv.org/abs/2606.19448'
-citation: 'Solanki, S., Mahlmann, J., Philippov, A., &amp; Beloborodov, A. (2026). &quot;Damping of Fast Radio Bursts in the Inner Magnetospheres of Magnetars.&quot; <i>arXiv:2606.19448</i>.'
+citation: 'Solanki, S., Mahlmann, J. F., Philippov, A., &amp; Beloborodov, A. M. (2026). &quot;Damping of Fast Radio Bursts in the Inner Magnetospheres of Magnetars.&quot; <i>arXiv:2606.19448</i>.'
 ---
 This paper studies the damping mechanisms that fast radio burst emission undergoes while propagating through the inner magnetosphere of a magnetar.

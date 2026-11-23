@@ -30,19 +30,19 @@ redirect_from:
   </div>
   <div class="research-figures" id="research-figures">
     <figure>
-      <a href="{{ '/assets/plots/fms_wave_decay/electric-field-evolution.webp' | relative_url }}" aria-label="Enlarge the three wave-decay snapshots"><img src="{{ '/assets/plots/fms_wave_decay/electric-field-evolution.webp' | relative_url }}" alt="Three volumes of electric-field strength. The initially parallel wavefronts become distorted after 20 and 40 wave periods." width="2027" height="662" loading="lazy"></a>
+      <a href="{{ '/assets/plots/frb_damping/wave-energy-volume.webp' | relative_url }}" aria-label="Enlarge the three snapshots of a fast magnetosonic pulse"><img src="{{ '/assets/plots/frb_damping/wave-energy-volume.webp' | relative_url }}" alt="Three successive views of wave energy. The front of the pulse moves to the right while the trailing wavefronts break up." width="1439" height="1188" loading="lazy"></a>
       <figcaption>
-        <h3>How a fast magnetosonic wave breaks up</h3>
-        <p>The same region is shown at the start and after 20 and 40 wave periods. As the wave interacts with Alfvén waves, it transfers energy to waves on other scales.</p>
-        <p><a href="https://arxiv.org/html/2606.19450v1#S2.F1">Solanki, Mahlmann &amp; Philippov (2026), Fig. 1</a> · Top panels · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+        <h3>How a radio pulse loses energy near a magnetar</h3>
+        <p>Read the snapshots from top to bottom. The front of the pulse keeps moving to the right, while its tail transfers energy to Alfvén waves. The colors trace the electromagnetic energy in the waves.</p>
+        <p><a href="https://arxiv.org/pdf/2606.19448#page=4">Solanki, Mahlmann, Philippov &amp; Beloborodov (2026), Fig. 1</a> · Left column · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
       </figcaption>
     </figure>
     <figure>
-      <a href="{{ '/assets/plots/sgra_inner_2pc/gas-volume-rendering.jpg' | relative_url }}" aria-label="Enlarge the gas rendering around Sagittarius A*"><img src="{{ '/assets/plots/sgra_inner_2pc/gas-volume-rendering.jpg' | relative_url }}" alt="Gray gas forms a dense disk around the Galactic Center, with hotter orange gas visible inside and around it." width="1750" height="1547" loading="lazy"></a>
+      <a href="{{ '/assets/plots/m87_flares/emission-region.webp' | relative_url }}" aria-label="Enlarge the rendering of the flare emission region around M87*"><img src="{{ '/assets/plots/m87_flares/emission-region.webp' | relative_url }}" alt="Purple and cyan magnetic field lines curve through a red and yellow emission region near M87*." width="1464" height="1404" loading="lazy"></a>
       <figcaption>
-        <h3>Gas around Sagittarius A*</h3>
-        <p>This volume spans five parsecs around the black hole at the center of the Milky Way. After 350,000 years in the simulation, the cold disk appears gray and hotter gas appears orange.</p>
-        <p><a href="https://doi.org/10.3847/1538-4357/acdb6f">Solanki et al. (2023), Fig. 5</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+        <h3>Where gamma rays originate near M87*</h3>
+        <p>The red and yellow region shows where the simulation produces very-high-energy gamma rays during a magnetic eruption. Purple field lines point toward the black hole and cyan lines point away.</p>
+        <p><a href="https://iopscience.iop.org/article/10.3847/1538-4357/adcba9/pdf#page=7">Solanki, Davelaar, Ripperda &amp; Philippov (2025), Fig. 4</a> · Cropped · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
       </figcaption>
     </figure>
   </div>
