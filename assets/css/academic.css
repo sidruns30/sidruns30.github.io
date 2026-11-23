@@ -1731,6 +1731,7 @@ body.gravity-mode #gravity-controls {
 }
 
 .research-figures img {
+  mix-blend-mode:darken;
   width:100%;
   height:auto;
 }
