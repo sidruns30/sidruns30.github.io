@@ -10,7 +10,7 @@ redirect_from:
 <section class="hero container" aria-labelledby="hero-title">
   <div class="hero-copy">
     <p class="eyebrow"><span class="small-rule"></span> Plasma astrophysics · Stanford University</p>
-    <h1 id="hero-title">Siddhant<br> Solanki<span class="name-period">.</span></h1>
+    <h1 id="hero-title">Siddhant Solanki</h1>
     <p class="hero-role">PhD student in Physics</p>
     <p class="hero-description">Studying relativistic magnetized plasmas in space.</p>
     <p class="hero-detail">I use theory and large-scale simulations to study waves, turbulence, and energy release around neutron stars and black holes.</p>
@@ -28,13 +28,30 @@ redirect_from:
     <article class="research-card"><span class="research-number">02</span><h3>Black holes &amp;<br> their environments</h3><p>Multiphase accretion onto Sagittarius A*, magnetic reconnection, and the very high-energy flares and variability of supermassive black holes.</p><a href="{{ '/publication/2025-05-21-m87-flares-lightcurves' | relative_url }}">Reconnection-powered flares <span aria-hidden="true">↗</span></a></article>
     <article class="research-card"><span class="research-number">03</span><h3>Computational<br> astrophysics</h3><p>Particle-in-cell, force-free, and general relativistic magnetohydrodynamic simulations, alongside analytic theory, to understand relativistic plasma.</p><a href="{{ '/publication/2025-11-21-entity-pic-code' | relative_url }}">The Entity PIC code <span aria-hidden="true">↗</span></a></article>
   </div>
-  {% if site.data.wave_comparison.ready %}{% include wave-comparison.html %}{% else %}<figure class="simulation-feature"><div class="simulation-copy"><p class="eyebrow">A closer look</p><h3>Theory meets<br> computation.</h3><p>From plasma waves to black hole accretion, I use kinetic and fluid simulations to investigate how energy moves through extreme astrophysical systems.</p><span class="method-list">PIC <span>·</span> Force-free <span>·</span> GRMHD</span></div><div class="simulation-image"><img src="{{ '/images/jdote_homepage.jpg' | relative_url }}" alt="Simulation visualization of J dot E, the rate of energy exchange between electromagnetic fields and plasma" loading="lazy"><figcaption>Simulation snapshot <span>J · E</span></figcaption></div></figure>{% endif %}
+  <div class="research-figures" id="research-figures">
+    <figure>
+      <a href="{{ '/assets/plots/fms_wave_decay/electric-field-evolution.webp' | relative_url }}" aria-label="Enlarge the three wave-decay snapshots"><img src="{{ '/assets/plots/fms_wave_decay/electric-field-evolution.webp' | relative_url }}" alt="Three volumes of electric-field strength. The initially parallel wavefronts become distorted after 20 and 40 wave periods." width="2027" height="662" loading="lazy"></a>
+      <figcaption>
+        <h3>How a fast magnetosonic wave breaks up</h3>
+        <p>The same region is shown at the start and after 20 and 40 wave periods. As the wave interacts with Alfvén waves, it transfers energy to waves on other scales.</p>
+        <p><a href="https://arxiv.org/html/2606.19450v1#S2.F1">Solanki, Mahlmann &amp; Philippov (2026), Fig. 1</a> · Top panels · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+      </figcaption>
+    </figure>
+    <figure>
+      <a href="{{ '/assets/plots/sgra_inner_2pc/gas-volume-rendering.jpg' | relative_url }}" aria-label="Enlarge the gas rendering around Sagittarius A*"><img src="{{ '/assets/plots/sgra_inner_2pc/gas-volume-rendering.jpg' | relative_url }}" alt="Gray gas forms a dense disk around the Galactic Center, with hotter orange gas visible inside and around it." width="1750" height="1547" loading="lazy"></a>
+      <figcaption>
+        <h3>Gas around Sagittarius A*</h3>
+        <p>This volume spans five parsecs around the black hole at the center of the Milky Way. After 350,000 years in the simulation, the cold disk appears gray and hotter gas appears orange.</p>
+        <p><a href="https://doi.org/10.3847/1538-4357/acdb6f">Solanki et al. (2023), Fig. 5</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+      </figcaption>
+    </figure>
+  </div>
 </section>
 <section class="section selected-section container" aria-labelledby="selected-title">
-  <div class="section-heading"><div><p class="eyebrow">02 / Selected work</p><h2 id="selected-title">Recent publications.</h2></div><a class="text-link" href="{{ '/publications/' | relative_url }}">All publications <span aria-hidden="true">↗</span></a></div>
+  <div class="section-heading"><div><p class="eyebrow">02 / Selected work</p><h2 id="selected-title">Recent publications</h2></div><a class="text-link" href="{{ '/publications/' | relative_url }}">All publications <span aria-hidden="true">↗</span></a></div>
   <div class="publication-list">{% assign selected = site.publications | where: 'featured', true | sort: 'date' | reverse %}{% for post in selected %}{% include publication-row.html summary=true %}{% endfor %}</div>
 </section>
 <section class="about-section section container" aria-labelledby="about-title">
-  <div><p class="eyebrow">03 / Background</p><h2 id="about-title">A little about me.</h2><a class="text-link" href="{{ '/cv/' | relative_url }}">Full academic CV <span aria-hidden="true">↗</span></a></div>
+  <div><p class="eyebrow">03 / Background</p><h2 id="about-title">A little about me</h2><a class="text-link" href="{{ '/cv/' | relative_url }}">Full academic CV <span aria-hidden="true">↗</span></a></div>
   <div class="about-copy"><p>I’m a graduate student in Stanford’s Physics Department, working in plasma and high-energy astrophysics. I grew up in India and earned my bachelor’s in Physics at UC Santa Barbara, followed by a master’s in Astronomy at the University of Maryland. I transferred to Stanford in 2026 to continue my PhD.</p><p>I also enjoy teaching and mentorship. If you’re an undergraduate considering graduate school in physics or astronomy, I’m happy to talk.</p></div>
 </section>

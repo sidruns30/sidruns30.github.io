@@ -1,17 +1,8 @@
 ---
 layout: academic-page
-title: "Miscellaneous Things"
+title: "Outside of physics"
 permalink: /misc-things/
-author_profile: true
+description: "Siddhant Solanki’s interests outside of physics."
 ---
 
-Outside of physics, here's what I spend my time on.
-
-## Biking
-<!-- Add your biking content here: favorite routes, races, distances, photos, etc. -->
-
-## Running
-<!-- Add your running content here: races, PRs, favorite routes, photos, etc. -->
-
-## Chess
-<!-- Add your chess content here: rating, favorite openings, memorable games, links to Lichess/Chess.com profile, etc. -->
+Outside of physics, I like biking, running, and playing chess.

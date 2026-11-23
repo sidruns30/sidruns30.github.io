@@ -2,27 +2,11 @@
 layout: academic-page
 title: "Fun with Physics"
 permalink: /fun-with-physics/
-author_profile: true
+description: "How interacting waves can change a radio signal near a magnetar."
 ---
 
-This page collects side projects, research notes, and simulations I've built outside of formal publications — things I find fun to explore even when they don't (yet) turn into a paper.
+## What happens to a radio burst near a magnetar?
 
-## Research notes
-Short write-ups on physics topics or techniques I've dug into.
+A magnetar is a neutron star with an exceptionally strong magnetic field. As a radio pulse travels through the surrounding plasma, it can excite other waves that carry energy away from the pulse. My collaborators and I simulated this process to understand how far from the star a bright burst might have to originate for us to see it.
 
-<!-- Example entry format:
-### [Title of the note](link-or-file)
-*Date*
-
-A sentence or two describing what the note covers.
--->
-
-## Simulation projects
-Personal or side simulation projects, demos, and visualizations.
-
-<!-- Example entry format:
-### [Project name](link-to-code-or-demo)
-*Tools: e.g. Python, C++, PIC code*
-
-A short description of the project and what it explores. Include a plot, GIF, or link to code/notebook if you have one.
--->
+[Read our study of fast radio bursts in magnetar magnetospheres]({{ '/publication/2026-06-17-frb-damping-magnetars' | relative_url }}).

@@ -4,9 +4,9 @@
 # relative to assets/plots/ (e.g. "hp_librae/plot_1.jpg").
 
 
-fms_wave_decay/plot_1.jpg: "3D snapshot of electromagnetic field magnitude in a magnetar-magnetosphere simulation."
-fms_wave_decay/plot_2.jpg: "Fast magnetosonic wave structure partway through its nonlinear decay."
-fms_wave_decay/plot_3.jpg: "Later-time snapshot showing the wave pattern after further decay."
+fms_wave_decay/plot_1.jpg: "Current and electric field versus time, comparing the simulation with the analytical solution."
+fms_wave_decay/plot_2.jpg: "Electric-field magnitude after 20 fast magnetosonic wave periods."
+fms_wave_decay/plot_3.jpg: "Electric-field magnitude at the start of the fast magnetosonic wave simulation."
 
 frb_damping/plot_1.jpg: "Simulated electric and magnetic field waveforms as an FRB-like pulse propagates through a magnetar's magnetosphere."
 frb_damping/plot_2.jpg: "Comparison of wave amplitudes at the start and end of the simulation."
